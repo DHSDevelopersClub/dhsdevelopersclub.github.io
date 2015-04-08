@@ -1,4 +1,19 @@
 body {
   background:green;
   font-family: arial;
+  margin: 0;
 }
+
+header {
+  background: #999;
+  color: white;
+}
+
+header h1 {
+  margin: 0;
+}
+
+nav ul {
+  margin: 0;
+}
+
