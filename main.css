@@ -1,12 +1,11 @@
 body {
-  background:green;
   font-family: arial;
   margin: 0;
+  text-align: center;
 }
 
 header {
-  background: #999;
-  color: white;
+  
 }
 
 header h1 {
@@ -14,6 +13,10 @@ header h1 {
 }
 
 nav ul {
-  margin: 0;
+  margin: 0;:w
+}
+
+#center_marker{
+  width:960px /*centering the webpage*/
 }
 
