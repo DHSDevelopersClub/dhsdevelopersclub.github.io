@@ -1,0 +1,64 @@
+@import url(http://fonts.googleapis.com/css?family=Ubuntu:400,500);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans&subset=latin,cyrillic-ext);
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  margin: 20;
+  text-align: center;
+  background-color: grey;
+}
+
+p {
+  font-size: 24px;
+}
+
+h3 {
+  font-size: 32px;
+}
+
+.headerContent {
+
+  width: 1024px;
+  height: auto;
+  margin: 0 auto;
+
+}
+.nav {
+  margin-top: 20px;
+  height: 40px;
+  background: #4e4e4e;
+
+}
+.nav ul {
+  margin: 0;
+  padding: 0;
+}
+
+.nav ul li {
+  list-style: none;
+}
+
+.nav ul li a {
+  text-decoration: none;
+  float: left;
+  display: block;
+  padding: 10px 20px;
+  color: black;
+}
+
+.nav ul li a:hover {
+  color: white;
+}
+
+.drake a {
+  padding: 10px 20px;
+  text-decoration: none;
+}
+.drake:hover {
+  color: white;
+}
+
+
+#center_marker{
+  width:960px /*centering the webpage*/
+}
