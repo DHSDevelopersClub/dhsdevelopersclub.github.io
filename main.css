@@ -5,15 +5,29 @@ body {
   font-family: 'Open Sans', sans-serif;
   margin: 20;
   text-align: center;
-  background-color: grey;
+  background-color: white;
 }
 
+.welcome a:visited{
+  text-decoration: none;
+}
+
+.welcome a:hover{
+  text-decoration: none;
+  color: #2DCCA7;
+}
+
+.welcome a:focus{
+  text-decoration: none;
+}
+
+
 p {
-  font-size: 24px;
+  font-size: 16px;
 }
 
 h3 {
-  font-size: 32px;
+  font-size: 20px;
 }
 
 .headerContent {
@@ -26,7 +40,7 @@ h3 {
 .nav {
   margin-top: 20px;
   height: 40px;
-  background: #4e4e4e;
+  background: #2DCCA7;
 
 }
 .nav ul {
