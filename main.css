@@ -8,20 +8,6 @@ body {
   background-color: white;
 }
 
-.welcome a:visited{
-  text-decoration: none;
-}
-
-.welcome a:hover{
-  text-decoration: none;
-  color: #2DCCA7;
-}
-
-.welcome a:focus{
-  text-decoration: none;
-}
-
-
 p {
   font-size: 16px;
 }
@@ -70,6 +56,23 @@ h3 {
 }
 .drake:hover {
   color: white;
+}
+
+.welcome a:visited {
+  text-decoration: none;
+}
+
+.welcome a:hover {
+  text-decoration: none;
+  color: #2DCCA7;
+}
+
+.welcome a:focus {
+  text-decoration: none;
+}
+
+.email a:hover {
+  color: #2DCCA7;
 }
 
 
