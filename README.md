@@ -1,2 +1,2 @@
 # duncangrubbs.git.io
-DHS Developers Club
+DHS Developers Club Website
