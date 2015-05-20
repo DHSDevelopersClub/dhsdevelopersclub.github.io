@@ -32,7 +32,7 @@ class RosterListHandler(webapp2.RequestHandler):
             if not dir_str[0] == '.':
                 member = {
                     'name': format_name(dir_str),
-                    'page': '/roster/member/{}'.format(dir_str),
+                    'page': '/roster/member/{}/index.html'.format(dir_str),
                 }
                 members.append(member)
                 
@@ -42,17 +42,6 @@ class RosterListHandler(webapp2.RequestHandler):
         template = JINJA_ENVIRONMENT.get_template('roster.html')
         self.response.write(template.render(template_values))
 
-class MemberPageHandler(webapp2.RequestHandler):
-    def get(self, name):
-        try:
-            f = open(CURRENT_DIR + '/club-members/{}/index.html'.format(name), 'r')
-        except IOError:
-            self.abort(404)
-        out = ' '.join(f.readlines())
-        f.close()
-        self.response.write(out)
-        
 app = webapp2.WSGIApplication([
     (r'/roster/all', RosterListHandler),
-    (r'/roster/member/(\w+)', MemberPageHandler),
 ], debug=True)

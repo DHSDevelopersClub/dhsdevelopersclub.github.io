@@ -11,9 +11,13 @@ handlers:
 - url: /
   static_files: index.html
   upload: index.html
-  
-- url: /roster/.*
+
+- url: /roster/all
   script: roster.app
+
+- url: /roster/member/(.*)/(.*)
+  static_files: club-members/\1/\2
+  upload: club-members/.*
 
 - url: /(.*)
   static_files: site/\1
