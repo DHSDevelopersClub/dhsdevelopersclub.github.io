@@ -1,0 +1,21 @@
+application: dhs-devclub-website
+
+# Version 0.0.0
+version: v0-0-0
+api_version: 1
+runtime: python27
+threadsafe: true
+
+
+handlers:
+- url: /
+  static_files: index.html
+  upload: index.html
+
+- url: /(.*)
+  static_files: site/\1
+  upload: site/.*
+
+libraries:
+- name: webapp2
+  version: latest
