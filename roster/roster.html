@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/main.css">
+    </head>
+    
+    <body>
+        {% for member in members %}
+            <a href="{{ member.page }}">{{ member.name }}</a>
+        {% endfor %}
+    </body>
+</html>

@@ -11,6 +11,9 @@ handlers:
 - url: /
   static_files: index.html
   upload: index.html
+  
+- url: /roster/.*
+  script: roster.app
 
 - url: /(.*)
   static_files: site/\1
@@ -18,4 +21,6 @@ handlers:
 
 libraries:
 - name: webapp2
+  version: latest
+- name: jinja2
   version: latest
