@@ -1,2 +1,3 @@
-# clubwebsite
-I website for the Drake High School's Development Club! 
+# club-website
+
+Instructions for new members coming soon.
