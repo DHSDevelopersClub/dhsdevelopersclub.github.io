@@ -12,7 +12,7 @@ handlers:
   static_files: index.html
   upload: index.html
 
-- url: /roster/all
+- url: /about.html
   script: roster.app
 
 - url: /roster/member/(.*)/(.*)

@@ -1,38 +1,37 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <title>About</title>
-        <link rel="stylesheet" type="text/css" href="/main.css">
-    </head>
-    
-    <body>
-        <div class="header">
-            <div class="headerContent">
-                <h1>
-                    The Drake Devolopers Club
-                </h1>
+  <head>
+    <title>About</title>
+    <link rel="stylesheet" type="text/css" href="/main.css">
+  </head>
 
-                <div class="nav">
-                    <ul>
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/roster/all">About</a></li>
-                        <li><a href="page3.html">Contact</a></li>
-                    </ul>
-                </div>
+  <body>
+    <div class="header">
+      <div class="headerContent">
+        <h1>
+          The Drake Devolopers Club
+        </h1>
 
-            </div>
-
+        <div class="nav">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about.html">About</a></li>
+            <li><a href="page3.html">Contact</a></li>
+          </ul>
         </div>
-    <p> 
-    We meet most Wednesdays in room 107 (Mr. Milstead's room).
+      </div>
+    </div>
+
+    <p>
+      We meet most Wednesdays in room 107 (Mr. Milstead's room).
     </p>
-      
+
     <h3>Club Members</h3>
-        {% for member in members %}
-            <div>
-                <a href="{{ member.page }}">{{ member.name }}</a>
-            </div>
-        {% endfor %}
-    </body>
+    {% for member in members %}
+    <div>
+      <a href="{{ member.page }}">{{ member.name }}</a>
+    </div>
+    {% endfor %}
+  </body>
 </html>

@@ -36,6 +36,7 @@ class RosterListHandler(webapp2.RequestHandler):
                 }
                 members.append(member)
                 
+        members = sorted(members)
         template_values = {
             'members': members
         }
@@ -43,5 +44,5 @@ class RosterListHandler(webapp2.RequestHandler):
         self.response.write(template.render(template_values))
 
 app = webapp2.WSGIApplication([
-    (r'/roster/all', RosterListHandler),
+    ('/about.html', RosterListHandler),
 ], debug=True)
