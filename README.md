@@ -77,7 +77,9 @@ You will be prompted to enter a commit message.  A commit message should be one 
 ```
   Completely redesign my home page.
   
-  I added a header bar, replaced the logo, and changed up the color scheme.  I also added a link to another page with a list of projects I have completed.
+  I added a header bar, replaced the logo, and changed up the color 
+  scheme.  I also added a link to another page with a list of 
+  projects I have completed.
 ```
 
 Once you are done with your commit message, save and close the text editor you were using to edit the message.
