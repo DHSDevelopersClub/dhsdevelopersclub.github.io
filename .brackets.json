@@ -1,0 +1,19 @@
+{
+    "language": {
+        "html": {
+            "spaceUnits": 2
+        },
+        "css": {
+            "spaceUnits": 2
+        },
+        "less": {
+            "spaceUnits": 2
+        },
+        "javascript": {
+            "spaceUnits": 2
+        },
+        "python": {
+            "spaceUnits": 4
+        }
+    }
+}
