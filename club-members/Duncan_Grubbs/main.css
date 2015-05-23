@@ -1,0 +1,51 @@
+a:link {
+  color: black;
+}
+
+.headerContent {
+  width: 1024px;
+  height: auto;
+  margin: 0 auto;
+}
+
+h1 {
+  color: #3385D6;
+}
+
+body {
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  padding-bottom: 10px;
+}
+
+.body a {
+  color: black;
+  text-decoration: none;
+}
+
+.body a:hover{
+  color: #3385D6;
+}
+
+.line {
+  background-color: #3385D6;
+  height: 5px;
+  margin-bottom: 10px;
+}
+
+.nav {
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.nav a {
+  color: black;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding: 10px 20px;
+  text-decoration: none;
+}
+
+.nav a:hover {
+  color: #3385D6;
+}
