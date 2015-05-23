@@ -39,7 +39,7 @@ class RosterListHandler(webapp2.RequestHandler):
         template_values = {
             'members': members
         }
-        template = JINJA_ENVIRONMENT.get_template('roster.html')
+        template = JINJA_ENVIRONMENT.get_template('about.html')
         self.response.write(template.render(template_values))
 
 app = webapp2.WSGIApplication([
