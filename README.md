@@ -39,6 +39,7 @@ For example, someone named "Bobby Smith-Rogers" would make a folder titled `Bobb
 
 Now open the folder with your name on it and make a new file inside it called `index.html`.  Open `index.html` with your favorite code editor, and use your HTML skills to make whatever kind of home page you want for yourself.[*](#restrictions)  If you have no HTML skills, copy and paste this example code into the file.  We will teach you to use HTML later so you can make something more orignal.
 
+```
   <!DOCTYPE html>
   
   <html>
@@ -49,6 +50,7 @@ Now open the folder with your name on it and make a new file inside it called `i
       Hi I'm --Your Name Here-- and I am a member of the Drake Developer's Club.
     </body>
   </html>
+```
 
 When you're done, save the file.
 
@@ -72,9 +74,11 @@ When you are finished, it is time to commit.  "Commit" is an action you can do w
 
 You will be prompted to enter a commit message.  A commit message should be one sentence.  Keep it short, less than sixty letters, and use the imperative form for verbs.  Eg. `Add some images to my home page.` or `Update my index.html.` or `Completely redesign my home page.`  Make it descriptive.  **Do NOT do anything like this:** `Changed stuff` or `i added a title bar and then i added an image of a cat and then i added another image of a cat`.  If you need to add extra description, you can add it below the message.  For example:
 
+```
   Completely redesign my home page.
   
   I added a header bar, replaced the logo, and changed up the color scheme.  I also added a link to another page with a list of projects I have completed.
+```
 
 Once you are done with your commit message, save and close the text editor you were using to edit the message.
 
