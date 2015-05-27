@@ -32,10 +32,10 @@ class RosterListHandler(webapp2.RequestHandler):
             if not dir_str[0] == '.':
                 member = {
                     'name': format_name(dir_str),
-                    'page': '/roster/member/{}/index.html'.format(dir_str),
+                    'page': '/roster/{}/index.html'.format(dir_str),
                 }
                 members.append(member)
-                
+
         members = sorted(members)
         template_values = {
             'members': members
@@ -44,5 +44,5 @@ class RosterListHandler(webapp2.RequestHandler):
         self.response.write(template.render(template_values))
 
 app = webapp2.WSGIApplication([
-    ('/about.html', RosterListHandler),
+    ('/angular/templates/about.html', RosterListHandler),
 ], debug=True)

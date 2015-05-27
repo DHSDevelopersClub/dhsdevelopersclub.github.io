@@ -12,16 +12,18 @@ handlers:
   static_files: index.html
   upload: index.html
 
-- url: /about.html
+- url: /angular/templates/about.html
   script: roster.app
 
-- url: /roster/member/(.*)/(.*)
-  static_files: club-members/\1/\2
-  upload: club-members/.*
+- url: /roster/(.*)/(.*)
+  static_files: roster/club-members/\1/\2
+  upload: roster/club-members/.*
 
-- url: /(.*)
-  static_files: site/\1
-  upload: site/.*
+- url: /angular
+  static_dir: angular
+
+- url: /res
+  static_dir: res
 
 libraries:
 - name: webapp2

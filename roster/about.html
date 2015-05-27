@@ -1,0 +1,12 @@
+<h3>About</h3>
+
+<p>
+  We meet most Wednesdays in room 107 (Mr. Milstead's room).
+</p>
+
+<h4>Club Members</h4>
+{% for member in members %}
+<div>
+  <a href="{{ member.page }}">{{ member.name }}</a>
+</div>
+{% endfor %}
