@@ -72,7 +72,7 @@ body {
   }
 }
 
-#pageTitle {
+.section-title {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -84,21 +84,25 @@ body {
   vertical-align: bottom;
   .gradient-bg;
 
+  .section-title-text {
+    padding: @dimen_padding_desktop;
+  }
+
   .heading {
     font-size: 1.9rem;
     color: white;
-    padding: 0 @dimen_padding_desktop;
+    padding: 0;
   }
 
   .subtitle {
     color: darken(white, 10%);
     font-size: 1.2rem;
     font-style: italic;
-    padding: 2px 0 @dimen_padding_desktop @dimen_padding_desktop;
+    padding: 0;
   }
 }
 
-.text-content {
+.content-area {
   height: 100%;
   padding: @dimen_padding_desktop;
   background: @color_window_bg;
