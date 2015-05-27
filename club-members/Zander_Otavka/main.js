@@ -41,7 +41,7 @@ $(function() {
 
     $.each($('.background-image'), function(i, el) {
       var img = $(el).children('img')[0];
-      var parallaxDist = ($(img).height() - $(el).height()) * 2;
+      var parallaxDist = ($(img).height() - $(el).height()) * 1;
       var elTop = $(el).offset().top;
       var scrollBottom = scrollTop - (elTop - $(window).height());
       if (scrollBottom < 0) { return; }
