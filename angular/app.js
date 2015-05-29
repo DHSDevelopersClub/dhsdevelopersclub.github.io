@@ -5,7 +5,7 @@
 angular.module('clubwebsite', [
   'ngRoute'
 ])
-// Creates nav element.
+  // Creates nav element.
   .directive('nav', function () {
     'use strict';
     return {
@@ -14,14 +14,18 @@ angular.module('clubwebsite', [
       templateUrl: '/angular/templates/nav.html'
     };
   })
+<<<<<<< HEAD
 // The controller for the nav bar. Switches the active class for each page.
+=======
+  // The controller for the nav bar. Switches the active class for ach page.
+>>>>>>> origin/master
   .controller('navCtrl', ['$scope', '$location', function ($scope, $location) {
     'use strict';
     $scope.isActive = function (viewLocation) {
       return viewLocation === $location.path();
     };
   }])
-// Routes the nav buttons to pages. Loads the pages through ajax.
+  // Routes the nav buttons to pages. Loads the pages through ajax.
   .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
     'use strict';
     $routeProvider
