@@ -30,6 +30,15 @@ angular.module('clubwebsite', [
       .when('/', {
         templateUrl: '/angular/templates/home.html'
       })
+      .when('/references', {
+        templateUrl: '/angular/templates/references.html'
+      })
+      .when('/contact', {
+        templateUrl: '/angular/templates/projects.html'
+      })
+      .when('/contact', {
+        templateUrl: '/angular/templates/gallery.html'
+      })
       .when('/about', {
         templateUrl: '/angular/templates/about.html'
       })
