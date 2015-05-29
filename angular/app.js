@@ -14,7 +14,7 @@ angular.module('clubwebsite', [
       templateUrl: '/angular/templates/nav.html'
     };
   })
-// The controller for the nav bar. Switches the active class for ach page.
+// The controller for the nav bar. Switches the active class for each page.
   .controller('navCtrl', ['$scope', '$location', function ($scope, $location) {
     'use strict';
     $scope.isActive = function (viewLocation) {
