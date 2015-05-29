@@ -27,16 +27,16 @@ angular.module('clubwebsite', [
   .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
     'use strict';
     $routeProvider
-      .when('/', {
+      .when('/home', {
         templateUrl: '/angular/templates/home.html'
       })
       .when('/references', {
         templateUrl: '/angular/templates/references.html'
       })
-      .when('/contact', {
+      .when('/projects', {
         templateUrl: '/angular/templates/projects.html'
       })
-      .when('/contact', {
+      .when('/gallery', {
         templateUrl: '/angular/templates/gallery.html'
       })
       .when('/about', {
