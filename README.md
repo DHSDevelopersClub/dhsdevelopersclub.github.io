@@ -64,7 +64,7 @@ Now open up your favorite web browser and got to [http://localhost:8080](http://
 
 ### Step 6: Experiment
 
-Mess around with your code.  If you are new to HTML, ask a fellow club member for help, or check out [http://www.w3schools.com/](http://www.w3schools.com/) for reference or some tutorials.  Feel free to check out other people's pages to see how their code works and manifests into a webpage.  Just don't mess with their files: it's rude, and we can all see if you do.  You can, however copy bits of their code (with their permission) and experiement with it on your own page.
+Mess around with your code.  If you are new to HTML, ask a fellow club member for help, or check out [http://www.w3schools.com/](http://www.w3schools.com/) for reference or some tutorials.  Feel free to check out other people's pages to see how their code works and manifests into a webpage.  Just don't mess with their files: it's rude, and we can all see if you do.  You can, however copy bits of their code (with their permission) and experiement with it on your own page. For some more in depth tutorials and advanced techniques, check out [http://www.codecademy.com/](http://www.codecademy.com/).
 
 When you are done, you will be ready to upload your changes to GitHub.
 
