@@ -24,10 +24,10 @@ angular.module('clubwebsite', [
     };
   }])
   // Routes the nav buttons to pages. Loads the pages through ajax.
-  .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
+  .config(['$routeProvider', function ($routeProvider) {
     'use strict';
     $routeProvider
-      .when('/home', {
+      .when('/', {
         templateUrl: '/angular/templates/home.html'
       })
       .when('/references', {
