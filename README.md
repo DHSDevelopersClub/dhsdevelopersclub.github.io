@@ -39,7 +39,7 @@ For example, someone named "Bobby Smith-Rogers" would make a folder titled `Bobb
 
 Now open the folder with your name on it and make a new file inside it called `index.html`.  Open `index.html` with your favorite code editor, and use your HTML skills to make whatever kind of home page you want for yourself.[*](#restrictions)  If you have no HTML skills, copy and paste this example code into the file.  We will teach you to use HTML later so you can make something more orignal.
 
-```
+```html
   <!DOCTYPE html>
   
   <html>
