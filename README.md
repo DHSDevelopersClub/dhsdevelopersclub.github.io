@@ -86,6 +86,8 @@ Once you are done with your commit message, save and close the text editor you w
 
 Now that you have made your commit, it is time to upload your changes.  In the terminal type `git push`.  That should synchronize your changes with this repository.
 
+If you're not comfortable with console commands or prefer a GUI, check out [https://git-scm.com/downloads/guis](https://git-scm.com/downloads/guis) and find one that works for you.
+
 ### Step 8: Edit the README.md File
 
 Make sure to improve this file if you run into any problems.  You can edit this file in much the same way that you edit your index.html.  You can also edit it from the GitHub website.
