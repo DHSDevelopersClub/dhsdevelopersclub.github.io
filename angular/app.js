@@ -3,7 +3,8 @@
  */
 // Creates app.
 angular.module('clubwebsite', [
-  'ngRoute'
+  'ngRoute',
+  'ui.bootstrap'
 ])
   // Creates nav element.
   .directive('nav', function () {
@@ -14,6 +15,22 @@ angular.module('clubwebsite', [
       templateUrl: '/angular/templates/nav.html'
     };
   })
+
+    .controller('CarouselDemoCtrl', ['$scope', function ($scope) {
+      $scope.myInterval = 5000;
+      var slides = $scope.slides = [];
+      $scope.addSlide = function() {
+        var newWidth = 800 + slides.length + 1;
+        slides.push({
+          image: 'http://placekitten.com/' + newWidth + '/600',
+          text: ['More','Extra','Lots of','Surplus'][slides.length % 4] + ' ' +
+          ['Cats', 'Kittys', 'Felines', 'Cutes'][slides.length % 4]
+        });
+      };
+      for (var i=0; i<4; i++) {
+        $scope.addSlide();
+      }
+    }])
 
 // The controller for the nav bar. Switches the active class for each page.
     
