@@ -1,9 +1,8 @@
 <h3>
   Gallery
 </h3>
-
 <div ng-controller="CarouselDemoCtrl">
-  <div style="height: 605px">
+  <div class="carousel">
     <carousel interval="myInterval">
       <slide ng-repeat="slide in slides" active="slide.active">
         <img ng-src="{{slide.image}}" style="margin:auto;">
