@@ -23,11 +23,13 @@ Development requires software to edit and test your code.  Make sure you have al
 
 Open up a terminal and type in `mkdir github` (you are making a folder called "github") press enter, then type `cd github` (you are opening that folder).  If you already have a folder where you keep your projects, `cd` to that folder instead.
 
+If you are using Windows and do not have access to a terminal, you can create a folder normally by right clicking in the directory you would like, and clicking create folder. Then skip the next to steps and see **.
+
 Type in `git clone https://github.com/DHSDevelopersClub/club-website.git` and press enter.  (you can use SSH too, if you like, it doesn't matter)
 
 If you type in `ls` you should see a folder called `club-website`.  If so, you can close your terminal, you are done with step #2!
 
-If you are on Windows or Mac, all of this can also be done through the user interface of the GitHub client you downloaded in step #1.
+** If you are on Windows or Mac, all of this can also be done through the user interface of the GitHub client you downloaded in step #1.
 
 ### Step 3: Make Your Very Own Folder
 
