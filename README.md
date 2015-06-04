@@ -56,7 +56,7 @@ When you're done, save the file.
 
 ### Step 5: Testing Your Home Page
 
-Open up a terminal again.  Type in `dev_appserver.py /path/to/project` where `/path/to/project` is the location of the project.  If you followed step #2, the project should be at `~/github/club-website`.  If it complains and says `dev_appserver.py: command not found`, `cd` to the folder where you installed the GAE SDK and try again.
+Open up a terminal/command line again.  Type in `dev_appserver.py /path/to/project` where `/path/to/project` is the location of the project.  If you followed step #2, the project should be at `~/github/club-website`.  If it complains and says `dev_appserver.py: command not found`, `cd` to the folder where you installed the GAE SDK and try again.
 
 If it works, you should see something along the lines of `dev server serving at localhost:8080`.
 
@@ -70,7 +70,7 @@ When you are done, you will be ready to upload your changes to GitHub.
 
 ### Step 7: Upload Your Changes to GitHub
 
-When you are finished, it is time to commit.  "Commit" is an action you can do with Git, it is a way to wrap up your changes into one tidy package with a message to describe what the changes are.  To commit, open a terminal and type in `git add --all` (this flags all of your changes so the commit can scoop them up) then type in `git commit`.
+When you are finished, it is time to commit.  "Commit" is an action you can do with Git, it is a way to wrap up your changes into one tidy package with a message to describe what the changes are.  To commit, open a terminal/command line and type in `git add --all` (this flags all of your changes so the commit can scoop them up) then type in `git commit`.
 
 You will be prompted to enter a commit message.  A commit message should be one sentence.  Keep it short, less than sixty letters, and use the imperative form for verbs.  Eg. `Add some images to my home page.` or `Update my index.html.` or `Completely redesign my home page.`  Make it descriptive.  **Do NOT do anything like this:** `Changed stuff` or `i added a title bar and then i added an image of a cat and then i added another image of a cat`.  If you need to add extra description, you can add it below the message.  For example:
 
@@ -84,7 +84,7 @@ You will be prompted to enter a commit message.  A commit message should be one 
 
 Once you are done with your commit message, save and close the text editor you were using to edit the message.
 
-Now that you have made your commit, it is time to upload your changes.  In the terminal type `git push`.  That should synchronize your changes with this repository.
+Now that you have made your commit, it is time to upload your changes.  In the terminal/command line type `git push`.  That should synchronize your changes with this repository.
 
 If you're not comfortable with console commands or prefer a GUI, check out [https://git-scm.com/downloads/guis](https://git-scm.com/downloads/guis) and find one that works for you.
 
