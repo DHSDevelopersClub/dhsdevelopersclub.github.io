@@ -1,0 +1,5 @@
+var input = "";
+
+function output() {
+  
+}
