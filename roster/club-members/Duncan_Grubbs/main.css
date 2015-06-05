@@ -3,6 +3,10 @@ a:link {
 }
 
 body {
+  background-image: url(background.jpg)
+}
+
+body {
   margin: 0px;
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
@@ -25,7 +29,7 @@ body {
 }
 
 .line {
-  background-color: #3385D6;
+  background-image: url(background_two.jpg);
   color: white;
   padding-bottom: 16px;
   padding-top: 16px;
@@ -45,7 +49,7 @@ body {
 }
 
 .line a:hover {
-  color: black;
+  color: blue;
 }
 
 form {
