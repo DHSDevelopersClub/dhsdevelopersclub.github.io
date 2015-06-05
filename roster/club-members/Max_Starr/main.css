@@ -19,4 +19,5 @@ main{
 }
 .fixed{
     position: fixed;
+    background-color: white;
 }
