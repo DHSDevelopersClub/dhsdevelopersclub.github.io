@@ -1,0 +1,26 @@
+body{
+
+}
+
+
+.header {
+  font-family: 'Open Sans',monospace;
+  text-align: center;
+  font-size: 25px;
+}
+
+.paragraph{
+  text-align: center;
+  font-family: 'Open Sans',inherit;
+  font-size: 20px;
+}
+
+.picture{
+  text-align: center;
+}
+
+.Paragraph{
+  text-align: center;
+  font-family: 'Open Sans',inherit;
+  font-size: 20px;
+}

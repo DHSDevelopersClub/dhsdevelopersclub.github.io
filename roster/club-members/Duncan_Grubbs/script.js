@@ -1,5 +1,5 @@
 var input = "";
 
 function output() {
-  
+
 }
