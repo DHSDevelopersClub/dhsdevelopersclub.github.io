@@ -4,10 +4,11 @@ html{
 body{
     height: 100%;
     background-size: cover;
+    padding-top: 50px;
 }
 main{
     position: relative;
-    padding: 10px;
+    padding-top: 10px;
 }
 .content{
     margin-left: auto;
@@ -15,7 +16,6 @@ main{
     width: 50%;
     background: #fff;
     border-radius: 10px;
-    padding: 10px;
 }
 .fixed{
     position: fixed;
