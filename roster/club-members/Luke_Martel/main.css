@@ -1,5 +1,5 @@
 body{
-
+  background-image: url(http://www.psdgraphics.com/file/colorful-triangles-background.jpg)
 }
 
 
@@ -23,4 +23,29 @@ body{
   text-align: center;
   font-family: 'Open Sans',inherit;
   font-size: 20px;
+}
+
+.header_2{
+  text-align: center;
+  font-family: 'Open Sans',monospace;
+  font-size: 22px;
+}
+
+.line {
+  background-image: url(header_image.jpg);
+  color: white;
+  padding-bottom: 16px;
+  padding-top: 16px;
+}
+
+.line a {
+  text-align: center;
+  font-size: 20px;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+}
+
+.line a:hover {
+  color: teal;
 }
