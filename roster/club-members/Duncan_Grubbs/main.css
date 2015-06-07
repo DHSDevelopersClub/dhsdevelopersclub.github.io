@@ -3,10 +3,6 @@ a:link {
 }
 
 body {
-  background-image: url(background.jpg)
-}
-
-body {
   margin: 0px;
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
@@ -29,15 +25,10 @@ body {
 }
 
 .line {
-  background-image: url(background_two.jpg);
+  background-color: #3385D6;
   color: white;
   padding-bottom: 16px;
   padding-top: 16px;
-}
-
-.line h1 {
-  text-align: left;
-  padding-right: 20px;
 }
 
 .line a {
@@ -49,12 +40,61 @@ body {
 }
 
 .line a:hover {
-  color: blue;
+  color: black;
 }
 
 form {
   width: 200px;
   height: 75px;
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.skull {
+  text-align: center;
+}
+
+.skull img {
+  width: 650px;
+  height: 860px;
+  padding-top: 30px;
+  padding-bottom: 7px;
+}
+
+.skull p {
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.sheet {
+  text-align: center;
+}
+
+.sheet img {
+  width: 580px;
+  height: 850px;
+  padding-top: 25px;
+  padding-bottom: 7px;
+}
+
+.sheet p {
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+}
+
+
+.shadow {
+  text-align: center;
+  padding-top: 25px;
+  padding-bottom: 7px;
+}
+
+.shadow img {
+  width: 850px;
+  hieght: 580px;
+}
+
+.shadow p {
   text-align: center;
   font-family: 'Open Sans', sans-serif;
 }
