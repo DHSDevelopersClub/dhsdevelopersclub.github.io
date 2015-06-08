@@ -50,6 +50,10 @@ form {
   font-family: 'Open Sans', sans-serif;
 }
 
+.title {
+  text-align: center;
+}
+
 .skull {
   text-align: center;
 }
@@ -95,6 +99,56 @@ form {
 }
 
 .shadow p {
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.logs {
+  text-align: center;
+  padding-top: 25px;
+  padding-bottom: 7px;
+}
+
+.logs img {
+  width: 850px;
+  hieght: 580px;
+}
+
+.logs p {
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+}
+
+
+.counter {
+  text-align: center;
+  padding-top: 25px;
+  padding-bottom: 7px;
+}
+
+.counter img {
+  width: 580px;
+  hieght: 850px;
+}
+
+.counter p {
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+}
+
+
+.hole-cover {
+  text-align: center;
+  padding-top: 25px;
+  padding-bottom: 7px;
+}
+
+.hole-cover img {
+  width: 850px;
+  hieght: 580px;
+}
+
+.hole-cover p {
   text-align: center;
   font-family: 'Open Sans', sans-serif;
 }
