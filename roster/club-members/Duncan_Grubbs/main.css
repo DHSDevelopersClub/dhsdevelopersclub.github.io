@@ -9,9 +9,14 @@ body {
   padding-bottom: 10px;
 }
 
-.body {
-  padding-top: 20px;
+.name {
   padding-left: 20px;
+}
+
+.body {
+  padding-top: 5px;
+  padding-left: 20px;
+  font-size: 18px;
 }
 
 .body a {
@@ -35,7 +40,7 @@ body {
   text-align: left;
   font-size: 20px;
   color: white;
-  padding: 10px 20px;
+  padding: 10px 15px;
   text-decoration: none;
 }
 
@@ -54,101 +59,50 @@ form {
   text-align: center;
 }
 
-.skull {
+.vertical-images {
   text-align: center;
 }
 
-.skull img {
+.vertical-images img {
   width: 650px;
   height: 860px;
   padding-top: 30px;
   padding-bottom: 7px;
 }
 
-.skull p {
+.vertical-images p {
   text-align: center;
   font-family: 'Open Sans', sans-serif;
 }
 
-.sheet {
+.horizontal-images {
   text-align: center;
 }
 
-.sheet img {
-  width: 580px;
-  height: 850px;
-  padding-top: 25px;
+.horizontal-images img {
+  width: 900px;
+  height: 600px;
+  padding-top: 30px;
   padding-bottom: 7px;
 }
 
-.sheet p {
+.horizontal-images p {
   text-align: center;
   font-family: 'Open Sans', sans-serif;
 }
-
-
-.shadow {
-  text-align: center;
-  padding-top: 25px;
-  padding-bottom: 7px;
-}
-
-.shadow img {
-  width: 850px;
-  hieght: 580px;
-}
-
-.shadow p {
-  text-align: center;
-  font-family: 'Open Sans', sans-serif;
-}
-
-.logs {
-  text-align: center;
-  padding-top: 25px;
-  padding-bottom: 7px;
-}
-
-.logs img {
-  width: 850px;
-  hieght: 580px;
-}
-
-.logs p {
-  text-align: center;
-  font-family: 'Open Sans', sans-serif;
-}
-
 
 .counter {
   text-align: center;
-  padding-top: 25px;
-  padding-bottom: 7px;
 }
 
 .counter img {
-  width: 580px;
-  hieght: 850px;
-}
-
-.counter p {
-  text-align: center;
-  font-family: 'Open Sans', sans-serif;
-}
-
-
-.hole-cover {
-  text-align: center;
-  padding-top: 25px;
+  width: 950px;
+  height: 550px;
+  padding-top: 30px;
   padding-bottom: 7px;
 }
 
-.hole-cover img {
-  width: 850px;
-  hieght: 580px;
-}
-
-.hole-cover p {
+.counter p {
   text-align: center;
   font-family: 'Open Sans', sans-serif;
 }
