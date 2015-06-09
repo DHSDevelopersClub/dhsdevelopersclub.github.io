@@ -17,6 +17,9 @@
         },
         "yaml": {
             "spaceUnits": 2
+        },
+        "json": {
+            "spaceUnits": 2
         }
     }
 }
