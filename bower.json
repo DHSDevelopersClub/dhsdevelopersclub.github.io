@@ -1,0 +1,13 @@
+{
+  "name": "dhs-devclub-website",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~1.0.3"
+  }
+}

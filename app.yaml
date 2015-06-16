@@ -25,6 +25,9 @@ handlers:
 - url: /res
   static_dir: res
 
+- url: /bower_components
+  static_dir: bower_components
+
 libraries:
 - name: webapp2
   version: latest
