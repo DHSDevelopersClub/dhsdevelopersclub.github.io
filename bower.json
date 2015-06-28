@@ -8,6 +8,7 @@
     "tests"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#~1.0.3"
+    "polymer": "Polymer/polymer#~1.0.3",
+    "parallax-container": "~0.0.3"
   }
 }
