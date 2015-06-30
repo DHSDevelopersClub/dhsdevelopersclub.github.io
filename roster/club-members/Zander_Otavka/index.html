@@ -29,9 +29,9 @@ Zander's main page.
           Home
         </a>
 
-        <a is="smooth-a" href="#top" id="headerTitle" class="header-item heading">
-          <span id="titleText" hidden>Zander Otavka</span>
-        </a>
+        <div id="headerTitle">
+          <a is="smooth-a" href="#top" class="header-item heading" id="titleText" hidden>Zander Otavka</a>
+        </div>
 
         <a is="smooth-a" href="#about" class="header-item heading">
           About
@@ -116,10 +116,5 @@ Zander's main page.
       </parallax-container>
 
       <script src="main.js"></script>
-      <script>
-        document.querySelector("parallax-container")
-          .addEventListener("scroll", SmoothA.updateHash);
-        SmoothA.updateHash();
-      </script>
     </body>
 </html>
