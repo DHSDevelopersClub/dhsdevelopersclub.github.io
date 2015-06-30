@@ -13,37 +13,30 @@ Zander's main page.
 <html>
     <head>
       <meta charset="utf-8">
+      <!-- TODO: add support for mobile browsers. -->
       <title>Zander Otavka</title>
 
-      <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>-->
-      <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
-      <link rel="import" href="/bower_components/polymer/polymer.html">
-      <link 
-        rel="stylesheet" type="text/css"
-        href="http://fonts.googleapis.com/css?family=Roboto+Slab|Roboto:300,300italic,400">
+      <link rel="import" href="elements/elements.html">
 
       <link rel="import" href="main-style.html">
-      <!--<script src="main.js"></script>-->
 
-      <link rel="import" href="/bower_components/parallax-container/parallax-container.html">
-      <link rel="import" href="/bower_components/parallax-container/parallax-group.html">
-      <link rel="import" href="/bower_components/parallax-container/parallax-layer.html">
+      <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>-->
     </head>
 
     <body>
       <div id="header">
-        <a id="home" href="/" class="header-item heading">
+        <a is="smooth-a" id="home" href="/" class="header-item heading">
           Home
         </a>
 
-        <div id="headerTitle" class="header-item heading">
+        <a is="smooth-a" href="#top" id="headerTitle" class="header-item heading">
           <span id="titleText" hidden>Zander Otavka</span>
-        </div>
+        </a>
 
-        <a href="#about" class="header-item heading no-bg">
+        <a is="smooth-a" href="#about" class="header-item heading">
           About
         </a>
-        <a href="#portfolio" class="header-item heading no-bg">
+        <a is="smooth-a" href="#portfolio" class="header-item heading">
           Portfolio
         </a>
       </div>
@@ -56,8 +49,7 @@ Zander's main page.
             </parallax-layer>
 
             <parallax-layer>
-              <a name="about"> </a>
-
+              <a is="smooth-a" name="top"> </a>
               <div class="section-title">
                 <div class="section-title-text">
                   <div class="heading"> Zander Otavka </div>
@@ -69,6 +61,9 @@ Zander's main page.
         </div>
 
         <parallax-group z="2" class="content-wrapper">
+          <a is="smooth-a" id="mainImageEnd"> </a>
+          <a is="smooth-a" name="about"> </a>
+
           <parallax-layer class="content-area">
             <p>
               Zander is a young programmer with great potential.  He enjoys making cool websites and long walks on the beach.
@@ -91,7 +86,7 @@ Zander's main page.
             </parallax-layer>
 
             <parallax-layer>
-              <a name="portfolio"> </a>
+              <a is="smooth-a" name="portfolio"> </a>
 
               <div class="section-title">
                 <div class="section-title-text">
@@ -119,5 +114,12 @@ Zander's main page.
           </parallax-layer>
         </parallax-group>
       </parallax-container>
+
+      <script src="main.js"></script>
+      <script>
+        document.querySelector("parallax-container")
+          .addEventListener("scroll", SmoothA.updateHash);
+        SmoothA.updateHash();
+      </script>
     </body>
 </html>

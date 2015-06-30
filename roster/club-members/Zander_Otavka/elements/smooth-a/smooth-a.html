@@ -1,0 +1,110 @@
+<!--
+@license
+Copyright (C) 2015 Alexander Otavka.  All rights reserved.
+-->
+<!-- 
+smooth-a.html
+
+@author Alexander Otavka (zotavka@gmail.com)
+
+An anchor element that improves hash scrolling.
+-->
+
+<dom-module id="smooth-a">
+  <template>
+    <style>
+      :host {
+        display: inline;
+      }
+    </style>
+    <content></content>
+  </template>
+  <script>
+    (function() {
+      var anchors = {};
+
+      function smoothScroll(scrollPos) {
+        // $("parallax-container").animate({
+        //   scrollTop: scrollPos
+        // }, 1000);
+      }
+
+      function updateHash() {
+        var scrollTop = document.querySelector("parallax-container").scrollTop;
+        var maxScroll = 0;
+        var href = window.location.href.split("#");
+        var newHash;
+        var newHref = href[0];
+
+        for (var aName in anchors) {
+          if (anchors.hasOwnProperty(aName)) {
+            var aTop = anchors[aName].getTop();
+            if (aTop <= scrollTop && aTop >= maxScroll) {
+              newHash = aName;
+              maxScroll = aTop;
+            }
+          }
+        }
+
+        if (href[1] !== newHash) {
+          console.log("newHash: " + newHash);
+          if (newHash !== undefined) {
+            href[1] = newHash;
+            newHref = href.join("#");
+          }
+          history.replaceState({}, "", newHref);
+        }
+      }
+
+      SmoothA = Polymer({
+        is: "smooth-a",
+        extends: "a",
+        listeners: {
+          tap: "goToTarget"
+        },
+
+        attached: function() {
+          if (this.name) {
+            anchors[this.name] = this;
+            console.log(anchors);
+          }
+          console.log("smooth-a attached");
+        },
+        detached: function() {
+          if (this.name) {
+            delete anchors[this.name];
+          }
+        },
+
+        goToTarget: function() {
+          var href = this.href.split("#");
+          var target = anchors[href[1]];
+          if (href.length > 1 && 
+              window.location.href.split("#")[0] === href[0] && 
+              target !== undefined) {
+            var targetTop = target.getTop();
+            smoothScroll(targetTop);
+            var parallaxContainer = document.querySelector("parallax-container");
+            // console.log("$('parallax-container').scrollTop(): " + $('parallax-container').scrollTop());
+            console.log("parallaxContainer.scrollTop: " + parallaxContainer.scrollTop);
+          } else {
+            window.location.href = this.href;
+          }
+        },
+
+        getTop: function() {
+          var obj = this;
+          var curtop = 0;
+          if (obj.offsetParent) {
+            do {
+              curtop += obj.offsetTop;
+            } while (obj = obj.offsetParent);
+            return curtop;
+          }
+        }
+      });
+      
+      SmoothA.updateHash = updateHash;
+    }());
+  </script>
+</dom-module>

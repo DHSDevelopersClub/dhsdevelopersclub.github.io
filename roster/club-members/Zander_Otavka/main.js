@@ -1,58 +1,22 @@
-$(function() {
-  'use strict';
+(function() {
+  "use strict";
+  var parallaxContainer = document.querySelector("parallax-container");
+  var mainImageEnd = document.querySelector("a#mainImageEnd");
+  var titleText = document.querySelector("#titleText");
 
-  var changeHeaderOpacity = function(opacity) {
-    if (opacity < 0.3) {
-      opacity = 0.3;
-    }
-    if (changeHeaderOpacity.old === opacity) {
-      return;
-    }
-    changeHeaderOpacity.old = opacity;
-    $('#header').css('background-color', 'rgba(255,255,255,' + opacity + ')');
-  };
-
-  var setTitleVisibility = function(visibility) {
-    if (visibility !== setTitleVisibility.current) {
-      setTitleVisibility.current = visibility;
-      if (visibility) {
-        $('#titleText').removeAttr('hidden');
-      } else {
-        $('#titleText').attr('hidden', '');
+  parallaxContainer.addEventListener("scroll", function() {
+    if (parallaxContainer.scrollTop >= mainImageEnd.getTop()) {
+      console.log(titleText.getAttribute('hidden'));
+      if (titleText.getAttribute("hidden") !== null) {
+        titleText.removeAttribute("hidden");
+        header.classList.add("dark");
+      }
+    } else {
+      console.log(titleText.getAttribute('hidden'));
+      if (titleText.getAttribute("hidden") === null) {
+        titleText.setAttribute("hidden", "");
+        header.classList.remove("dark");
       }
     }
-  };
-
-  var mainImg = $('#mainImage');
-  var header = $('#header');
-  var mainImgBottom = mainImg.offset().top + mainImg.height();
-  var headerColor = header.css('background-color');
-  // var totalDist = function(el) { return $(window).height() + $(el).height(); };
-  $('parallax-container').scroll(function() {
-    var scrollTop = $(window).scrollTop() + header.height();
-    if (scrollTop <= mainImgBottom) {
-      setTitleVisibility(false);
-      var ratio = scrollTop / mainImgBottom;
-      console.log(ratio);
-      changeHeaderOpacity(ratio);
-    } else {
-      setTitleVisibility(true);
-      changeHeaderOpacity(1);
-    }
-    console.log(header.css('background-color'));
-
-    // $.each($('.background-image'), function(i, el) {
-    //   var img = $(el).children('img')[0];
-    //   var parallaxDist = ($(img).height() - $(el).height()) * 1;
-    //   var elTop = $(el).offset().top;
-    //   var scrollBottom = scrollTop - (elTop - $(window).height());
-    //   if (scrollBottom < 0) { return; }
-    //   var ratio = scrollBottom / totalDist(el);
-    //   if (ratio > 1) { return; }
-    //   var topOffset = String((1 - ratio) * -parallaxDist) + 'px';
-    //   $(img).css('top', topOffset);
-    // });
-  });
-  $('parallax-container').scroll();
-  console.log(header.css('background-color'));
-});
+  })
+}());
