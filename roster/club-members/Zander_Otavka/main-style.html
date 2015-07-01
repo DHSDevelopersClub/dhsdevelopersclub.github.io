@@ -77,6 +77,10 @@ body {
   @apply(--gradient-bg-reversed);
 }
 
+#header.hidden {
+  display: none;
+}
+
 #header.dark {
   @apply(--gradient-bg-reversed-dark);
 }
@@ -129,6 +133,8 @@ body {
   position: absolute;
   top: 0;
   height: 100%;
+  
+  @apply(--gradient-bg);
 }
 
 .parallax-image img {
@@ -156,6 +162,10 @@ body {
   font-size: 1.9rem;
   color: #fff;
   padding: 0;
+}
+
+#mainHeading {
+  font-size: 4.5rem;
 }
 
 .section-title .subtitle {
