@@ -17,7 +17,3 @@ main{
     background: #fff;
     border-radius: 10px;
 }
-.fixed{
-    position: fixed;
-    background-color: white;
-}

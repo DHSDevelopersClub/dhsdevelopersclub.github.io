@@ -43,7 +43,7 @@ angular.module('clubwebsite', [
   // Routes the nav buttons to pages. Loads the pages through ajax.
   .config(['$routeProvider', function ($routeProvider) {
     'use strict';
-    $routeProvider
+      $routeProvider
       .when('/', {
         templateUrl: '/angular/templates/home.html'
       })
