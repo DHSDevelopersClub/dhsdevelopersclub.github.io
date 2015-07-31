@@ -1,44 +1,12 @@
-body {
-  margin: 0px;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 16px;
-  padding-bottom: 10px;
+.body {
+  padding-top: 15px;
+  font-size: 30px;
 }
 
-a:link {
-  color: black;
-}
-
-.content {
-  /* Set margin-top to 55px because the header is exactly 55px tall. */
-  margin-top: 55px;
-  padding: 5px 20px;
-  font-size: 18px;
-}
-
-.content a {
-  text-align: left;
-  color: black;
-  text-decoration: none;
-}
-
-.content a:hover{
-  color: #3385D6;
-}
-
-form {
-  width: 200px;
-  height: 75px;
-  text-align: center;
-  font-family: 'Open Sans', sans-serif;
-}
-
-.title {
-  text-align: center;
-}
-
-.vertical-images {
-  text-align: center;
+.nav {
+  background-color: black;
+  height: 50px;
+  width: 2000px;
 }
 
 .vertical-images img {
@@ -48,15 +16,6 @@ form {
   padding-bottom: 7px;
 }
 
-.vertical-images p {
-  text-align: center;
-  font-family: 'Open Sans', sans-serif;
-}
-
-.horizontal-images {
-  text-align: center;
-}
-
 .horizontal-images img {
   width: 900px;
   height: 600px;
@@ -64,23 +23,9 @@ form {
   padding-bottom: 7px;
 }
 
-.horizontal-images p {
-  text-align: center;
-  font-family: 'Open Sans', sans-serif;
-}
-
-.counter {
-  text-align: center;
-}
-
 .counter img {
   width: 950px;
   height: 550px;
   padding-top: 30px;
   padding-bottom: 7px;
-}
-
-.counter p {
-  text-align: center;
-  font-family: 'Open Sans', sans-serif;
 }
