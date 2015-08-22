@@ -57,7 +57,7 @@ angular.module('clubwebsite', [
         templateUrl: '/angular/templates/gallery.html'
       })
       .when('/about', {
-        templateUrl: '/roster/about.html'
+        templateUrl: '/angular/templates/about.html'
       })
       .when('/contact', {
         templateUrl: '/angular/templates/contact.html'
