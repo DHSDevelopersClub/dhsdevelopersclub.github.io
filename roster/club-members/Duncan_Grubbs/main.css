@@ -2,29 +2,7 @@ body {
   background-color: darkgrey;
 }
 
-.nav {
-  background-color: black;
-  height: 50px;
-  width: 2000px;
-}
-
-.vertical-images img {
-  width: 650px;
-  height: 860px;
-  padding-top: 30px;
-  padding-bottom: 7px;
-}
-
-.horizontal-images img {
-  width: 900px;
-  height: 600px;
-  padding-top: 30px;
-  padding-bottom: 7px;
-}
-
-.counter img {
-  width: 950px;
-  height: 550px;
-  padding-top: 30px;
-  padding-bottom: 7px;
+.content {
+  padding-left: 25px;
+  font-size: 20px;
 }
