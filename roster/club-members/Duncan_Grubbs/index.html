@@ -4,55 +4,59 @@
 
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">   
     <link rel="stylesheet" type="text/css" href="main.css">
-    <script src="script.js"></script>
-
+    
     <title>Duncan Grubbs</title>
   </head>
 
   <body>
-
-    <div class="navbar navbar-inverse navbar-static-top">
-       
-      <div class="container">
+    
+    <div class="demo-layout-transparent mdl-layout mdl-js-layout">
+     
+      <header class="mdl-layout__header mdl-layout__header--transparent">
+        <div class="mdl-layout__header-row">
+          <!-- Title -->
+          <span class="mdl-layout-title">Duncan Grubbs</span>
           
-        <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
+          <!-- Add spacer, to align navigation to the right -->
+          <div class="mdl-layout-spacer"></div>
           
-        <div class="collapse navbar-collapse navHeaderCollapse">
-         
-          <ul class="nav navbar-nav navbar-left">
-            <li class="active"><a href="index.html">HOME</a></li>
-            <li><a href="/#/about">ABOUT</a></li>
-            <li><a href="/#/contact">CONTACT</a></li>
-            <li><a href="spring-2015.html">PORTFOLIO</a></li>
-          </ul>
+          <!-- Navigation -->
+          <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="">Home</a>
+            <a class="mdl-navigation__link" href="">About</a>
+            <a class="mdl-navigation__link" href="">Contact</a>
+            <a class="mdl-navigation__link" href="">Resources</a>
+          </nav>
           
         </div>
-          
-      </div>
+      
+      </header>
+    
+      <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">More Links</span>
         
-    </div>
-
-    <div class="container body">
-
-      <div class="row">
-        <div class="border col-md-12">
-          Duncan Grubbs
-        </div>
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="">Home</a>
+          <a class="mdl-navigation__link" href="">About</a>
+          <a class="mdl-navigation__link" href="">Contact</a>
+          <a class="mdl-navigation__link" href="">Resources</a>
+        </nav>
+        
       </div>
-
-      <div class="row logo">
-        <div class="well"></div>
-      </div>
-
+      
+      <main class="mdl-layout__content content">
+       
+      </main>
+      
     </div>
-
+    
+    <script src="script.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
     
   </body>
 

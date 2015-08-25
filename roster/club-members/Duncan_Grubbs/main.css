@@ -1,6 +1,5 @@
-.body {
-  padding-top: 15px;
-  font-size: 30px;
+body {
+  background-color: darkgrey;
 }
 
 .nav {
