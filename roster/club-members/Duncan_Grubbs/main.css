@@ -1,8 +1,17 @@
 body {
-  background-color: darkgrey;
+  background-image: url("background.jpg");
 }
 
-.content {
-  padding-left: 25px;
-  font-size: 20px;
+.text {
+  font-size: 25px;
+  color: white;
+}
+
+.me {
+  height: 70%;
+  width: 70%;
+}
+
+.home-content {
+  margin-left: 25px;
 }
