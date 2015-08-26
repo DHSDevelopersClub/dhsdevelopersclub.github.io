@@ -3,13 +3,17 @@ body {
 }
 
 .text {
-  font-size: 20px;
-  color: white;
+  color: #484848;
+  text-align: left;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .text-essay {
-  font-size: 18px;
-  color: white;
+  color: #484848;
+  text-align: left;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .me {
@@ -18,5 +22,15 @@ body {
 }
 
 .home-content {
-  margin-left: 25px;
+  margin-left: 60px;
+}
+
+.white-background {
+  border-radius: 4px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
