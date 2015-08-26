@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-
+<link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.indigo-pink.min.css">
+<script src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <html>
     <head>
       <script src="script.js"></script>
@@ -8,34 +10,44 @@
     </head>
 
     <body>
-        <div class="header_2">
-
-          <div class="headerContent">
-
-            <div class="line">
-
-            <a href="/">Home</a>
-            <a href="page2.html.html">About</a>
-            <a href="page3.html">Contact</a>
-          
-            </div>
-      
+      <div class="demo-layout-transparent mdl-layout mdl-js-layout">
+        <header class="mdl-layout__header mdl-layout__header--transparent">
+          <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <span class="mdl-layout-title">Title</span>
+            <!-- Add spacer, to align navigation to the right -->
+            <div class="mdl-layout-spacer"></div>
+            <!-- Navigation -->
+            <nav class="mdl-navigation">
+              <a class="mdl-navigation__link" href="">Link</a>
+              <a class="mdl-navigation__link" href="">Link</a>
+              <a class="mdl-navigation__link" href="">Link</a>
+              <a class="mdl-navigation__link" href="">Link</a>
+            </nav>
           </div>
-
+        </header>
+        <div class="mdl-layout__drawer">
+          <span class="mdl-layout-title">Title</span>
+          <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="">Link</a>
+            <a class="mdl-navigation__link" href="">Link</a>
+            <a class="mdl-navigation__link" href="">Link</a>
+            <a class="mdl-navigation__link" href="">Link</a>
+          </nav>
         </div>
- 
-       <div class= "header">
-         <h2>Luke Martel</h2>
-       </div>
-       <div class="paragraph">
-        <p>My name is Luke Martel, and I am a member of the DHS Developers Club.<br> I am still learning how to do a lot of this stuff.</p>
-       </div>
-       <div class="picture">
-         <img src="http://shotrockers.com/wp-content/uploads/2014/09/TMP_1496.jpg" style="height: 600px; width: 800px">
-       </div>
-       <div class="Paragraph"
-        <p>This is a picture of the Matterhorn in Switzerland. It is my favorite mountain in the entire world.<br> I hope to see it in person some day.</p>
-      </div>
+        <main class="mdl-layout__content">
+          <div class="paragraph">
+           <p>My name is Luke Martel, and I am a member of the DHS Developers Club.<br> I am still learning how to do a lot of this stuff.</p>
+          </div>
+          <div class="picture">
+            <img src="http://shotrockers.com/wp-content/uploads/2014/09/TMP_1496.jpg" style="height: 600px; width: 800px">
+          </div>
+          <div class="Paragraph"
+           <p>This is a picture of the Matterhorn in Switzerland. It is my favorite mountain in the entire world.<br> I hope to see it in person some day.</p>
+         </div>
+        </main>
+</div>
+
 
     </body>
   </html>
