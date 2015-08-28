@@ -1,32 +1,62 @@
   <!DOCTYPE html>
-
   <html>
-    <head>
-      <title>Jessica Gerwin</title>
-      <link rel="stylesheet" type="text/css" href="main.css"/>
-    </head>
-    <body>
-      <div class="header"></div>
-      <h1>
-      Jessica Gerwin
-      </h1>
-      <h2>
-         Welcome to my Page!
-      </h2>
-      <h3>
-        Student, 17.
-      </h3>
-    <p>
-      <img src="http://3.bp.blogspot.com/-VC0BY7Yc77c/T4cug70e1CI/AAAAAAAAAaU/jHiQXo90cuU/s1600/IslandParadise4.jpg"
-           width="400">
-      </img>
-    </p>
-    <div class="nav">
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="page2.html">About</a></li>
-          <li><a href="page3.html">Contact</a></li>
-        </ul>
-    </div>
-    </body>
-  </html>
+<head>
+  <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.indigo-pink.min.css">
+  <script src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <title>Jessica Gerwin</title>
+  <link rel="stylesheet" type="text/css" href="main.css"/>
+  <!--starting to add elevator.js element-->
+  <script>
+  window.onload = function() {
+    var elevator = new Elevator({
+      mainAudio: '/src/to/elevatormusic.mp3',
+      endAudio: '/src/to/end-audio.mp3'
+    });
+  }
+  </script>
+
+</head>
+
+  <body>
+
+      <div class="demo-layout-transparent mdl-layout mdl-js-layout">
+        <header class="mdl-layout__header mdl-layout__header--transparent">
+          <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <span class="mdl-layout-title">Title</span>
+            <!-- Add spacer, to align navigation to the right -->
+            <div class="mdl-layout-spacer"></div>
+            <!-- Navigation -->
+            <nav class="mdl-navigation">
+              <a class="mdl-navigation__link" href="">Link</a>
+              <a class="mdl-navigation__link" href="">Link</a>
+              <a class="mdl-navigation__link" href="">Link</a>
+              <a class="mdl-navigation__link" href="">Link</a>
+            </nav>
+          </div>
+
+        </header>
+
+        <div class="mdl-layout__drawer">
+          <span class="mdl-layout-title">Title</span>
+          <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="">Link</a>
+            <a class="mdl-navigation__link" href="">Link</a>
+            <a class="mdl-navigation__link" href="">Link</a>
+            <a class="mdl-navigation__link" href="">Link</a>
+          </nav>
+        </div>
+
+        <main class="mdl-layout__content">
+
+        </main>
+
+      </div>
+
+      <!--adding text and button-->
+      <div class="fixed buttons"</div>
+
+  </body>
+
+</html>
