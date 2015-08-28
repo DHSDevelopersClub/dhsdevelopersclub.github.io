@@ -16,11 +16,6 @@ body {
   margin-right: 10px;
 }
 
-.me {
-  height: 70%;
-  width: 70%;
-}
-
 .home-content {
   margin-left: 60px;
 }
@@ -33,4 +28,12 @@ body {
     position: absolute;
     bottom: 0;
     width: 100%;
+}
+
+.button1 {
+  margin-left: 60px;
+}
+
+.emailForm {
+  padding-left: 15px;
 }
