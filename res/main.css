@@ -32,3 +32,14 @@ h3 {
 .transparent{
   background-color: transparent;
 }
+
+#mainHeaderImage {
+  height: 80vh;
+}
+
+#scrollDownButton {
+  position: relative;
+  top: -30px;
+  z-index: 3;
+  background-color: #444;
+}
