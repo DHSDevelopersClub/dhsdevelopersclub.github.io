@@ -1,15 +1,15 @@
-@import url(http://fonts.googleapis.com/css?family=Ubuntu:400,500);
-@import url(http://fonts.googleapis.com/css?family=Open+Sans&subset=latin,cyrillic-ext);
-
 body {
-  font-family: 'Open Sans', sans-serif;
-  margin: 20px;
-  text-align: center;
+  font-family: 'Helvetica', sans-serif;
   background-color: white;
 }
 
 p {
   font-size: 16px;
+}
+
+h1 {
+  font-weight: 300;
+  margin-top: 30px;
 }
 
 h3 {
@@ -31,6 +31,10 @@ h3 {
 }
 .transparent{
   background-color: transparent;
+}
+
+.content {
+  margin: 15px calc(15px + 10%);
 }
 
 #mainHeaderImage {
