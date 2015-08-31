@@ -1,0 +1,150 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="/bower_components/paper-material/paper-material.html">
+<link rel="import" href="/bower_components/paper-ripple/paper-ripple.html">
+
+<dom-module id="user-card">
+  <style>
+    :host {
+      display: inline-block;
+      text-align: center;
+      margin: 10px;
+    }
+
+    div {
+      font-weight: 300;
+    }
+
+    paper-material {
+      width: 150px;
+      height: 250px;
+      padding: 10px;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: black;
+    }
+
+    #profileImage, #profileImage img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+    }
+
+    #name {
+      margin: 10px 0;
+      font-size: 1rem;
+    }
+
+    #blurb {
+      font-style: italic;
+      font-size: .8rem;
+    }
+  </style>
+
+  <template>
+    <a href="{{userWebpageURI}}">
+      <paper-material
+          id="material"
+          elevation="0"
+          animated
+          on-mouseover="_onHover"
+          on-mouseout="_onUnhover">
+        <object id="profileImage" data="{{profileImageURI}}" type="image/jpg">
+          <img src="default-profile.jpg">
+        </object>
+        <div id="name">{{formattedUserName}}</div>
+        <div id="blurb">{{userBlurb}}</div>
+      </paper-material>
+    </a>
+
+    <iron-ajax
+      auto
+      url="{{userBlurbURI}}"
+      handle-as="text"
+      on-response="_handleBlurbResponse"
+      on-error="_handleBlurbError">
+    </iron-ajax>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'user-card',
+
+      properties: {
+        userName: String,
+
+        formattedUserName: {
+          type: String,
+          computed: '_getFormattedUserName(userName)'
+        },
+
+        profileImageURI: {
+          type: String,
+          computed: '_getProfileImageURI(userName)'
+        },
+
+        userBlurbURI: {
+          type: String,
+          computed: '_getUserBlurbURI(userName)'
+        },
+
+        userWebpageURI: {
+          type: String,
+          computed: '_getUserWebpageURI(userName)'
+        },
+
+        userBlurb: {
+          type: String,
+          readOnly: true
+        }
+      },
+
+      _onHover: function() {
+        this.$.material.elevation = 1;
+      },
+
+      _onUnhover: function() {
+        this.$.material.elevation = 0;
+      },
+
+      _getFormattedUserName: function(userName) {
+        var formatted = '';
+        console.log("userName: " + userName);
+        for (var i = 0; i < userName.length; i++) {
+          if (userName[i] === '_') {
+            formatted += ' ';
+          } else {
+            formatted += userName[i];
+          }
+        }
+        console.log("formatted: " + formatted);
+        return formatted;
+      },
+
+      _getProfileImageURI: function(userName) {
+        return '/roster/' + userName + '/profile.jpg';
+      },
+
+      _getUserBlurbURI: function(userName) {
+        return '/roster/' + userName + '/blurb.txt';
+      },
+
+      _getUserWebpageURI: function(userName) {
+        return '/roster/' + userName + '/index.html';
+      },
+
+      _handleBlurbResponse: function(resp) {
+        this._setUserBlurb(resp.detail.response);
+      },
+
+      _handleBlurbError: function(error) {
+        var DEFAULT_BLURB = 'A member of the Drake Developers Club.';
+        this._setUserBlurb(DEFAULT_BLURB);
+      }
+    });
+  </script>
+</dom-module>
