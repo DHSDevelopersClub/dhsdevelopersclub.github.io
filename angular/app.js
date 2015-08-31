@@ -4,7 +4,8 @@
 // Creates app.
 angular.module('clubwebsite', [
   'ngRoute',
-  'ui.bootstrap'
+  'ui.bootstrap',
+    'ngMaterial'
 ])
   // Creates nav element.
   .directive('nav', function () {
@@ -15,7 +16,11 @@ angular.module('clubwebsite', [
       templateUrl: '/angular/templates/nav.html'
     };
   })
-
+    .controller('mainCtrl', ['$scope', '$mdSidenav', function($scope, $mdSidenav) {
+        $scope.toggleSidenav = function (menuId) {
+            $mdSidenav(menuId).toggle();
+        };
+    }])
     .controller('CarouselDemoCtrl', ['$scope', function ($scope) {
       $scope.myInterval = 5000;
       var slides = $scope.slides = [];

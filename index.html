@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html>
+<html ng-app="clubwebsite">
   <head>
     <title>Drake Developers Club</title>
     <link rel="stylesheet" type="text/css" href="/res/main.css">
@@ -10,19 +10,34 @@
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-route.js"></script>
     <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.js"></script>
     <script src="/angular/app.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
+    <meta name="viewport" content="initial-scale=1" />
   </head>
 
-  <body ng-app="clubwebsite">
-    <header>
-      <div class="headerContent">
-        <h1>
-          The Drake Developers Club
-        </h1>
+  <body ng-controller="mainCtrl">
+  <div layout="column" layout-fill>
+      <md-toolbar>
+          <div class="md-toolbar-tools transparent">
+              <span>Drake Developers Club</span>
+              <!-- fill up the space between left and right area -->
+              <span flex></span>
+              <md-button>
+                  Right Bar Button
+              </md-button>
+          </div>
+      </md-toolbar>
+      <md-content>
+          <ng-view></ng-view>
+      </md-content>
+  </div>
 
-        <nav></nav>
-      </div>
-    </header>
+  <!-- Angular Material Dependencies -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.min.js"></script>
 
-    <ng-view></ng-view>
+  <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.js"></script>
+
   </body>
 </html>
