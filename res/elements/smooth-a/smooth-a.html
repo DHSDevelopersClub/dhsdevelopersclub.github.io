@@ -9,17 +9,20 @@ smooth-a.html
 
 An anchor element that improves hash scrolling.
 -->
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 
 <dom-module id="smooth-a">
+  <style>
+    :host {
+      display: inline;
+    }
+  </style>
+
   <template>
-    <style>
-      :host {
-        display: inline;
-      }
-    </style>
     <content></content>
   </template>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
   <script>
     (function() {
       var anchors = {};
