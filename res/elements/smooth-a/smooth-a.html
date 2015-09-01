@@ -30,18 +30,18 @@ An anchor element that improves hash scrolling.
       function smoothScroll(scrollPos) {
         $("body").animate({
           scrollTop: scrollPos
-        }, 1000);
+        }, 600);
       }
 
       function updateHash() {
-        var scrollTop = document.querySelector("parallax-container").scrollTop;
+        var scrollTop = document.querySelector("body").scrollTop;
         var maxScroll = 0;
         var href = window.location.href.split("#");
         var newHash;
         var newHref = href[0];
 
         for (var aName in anchors) {
-          if (anchors.hasOwnProperty(aName)) {
+          if (anchors.hasOwnProperty(aName) && !anchors[aName].noHash) {
             var aTop = anchors[aName].getTop();
             if (aTop <= scrollTop && aTop >= maxScroll) {
               newHash = aName;
@@ -51,7 +51,6 @@ An anchor element that improves hash scrolling.
         }
 
         if (href[1] !== newHash) {
-          // console.log("newHash: " + newHash);
           if (newHash !== undefined) {
             href[1] = newHash;
             newHref = href.join("#");
@@ -67,13 +66,12 @@ An anchor element that improves hash scrolling.
           tap: "goToTarget"
         },
         properties: {
-          useHash: Boolean
+          noHash: Boolean
         },
 
         attached: function() {
           if (this.name) {
             anchors[this.name] = this;
-            console.log(anchors);
           }
 
           this.onclick = function() { return false; };
