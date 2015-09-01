@@ -6,7 +6,6 @@ angular.module('clubwebsite', [
   'ngRoute',
   'ui.bootstrap'
 ])
-  .controller('mainCtrl', ['$scope', function($scope) {}])
   // Routes the nav buttons to pages. Loads the pages through ajax.
   .config(['$routeProvider', function ($routeProvider) {
     'use strict';
