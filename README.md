@@ -68,9 +68,15 @@ Now open up your favorite web browser and got to [http://localhost:8080](http://
 
 Mess around with your code.  If you are new to HTML, ask a fellow club member for help, or check out [http://www.w3schools.com/](http://www.w3schools.com/) for reference or some tutorials.  Feel free to check out other people's pages to see how their code works and manifests into a webpage.  Just don't mess with their files: it's rude, and we can all see if you do.  You can, however copy bits of their code (with their permission) and experiement with it on your own page. For some more in depth tutorials and advanced techniques, check out [http://www.codecademy.com/](http://www.codecademy.com/).
 
+### Step 7: Add your profile Info
+
+Once you're satisfied with your homepage, it's time to let the club know who you are. 
+In the top level of your folder add an image called `profile.jpg` this is what will show up above your name so keep it clean!
+Next add a `blurb.txt` with a little info about yourself, again, school appropriate.
+
 When you are done, you will be ready to upload your changes to GitHub.
 
-### Step 7: Upload Your Changes to GitHub
+### Step 8: Upload Your Changes to GitHub
 
 When you are finished, it is time to commit.  "Commit" is an action you can do with Git, it is a way to wrap up your changes into one tidy package with a message to describe what the changes are.  To commit, open a terminal/command line and type in `git add --all` (this flags all of your changes so the commit can scoop them up) then type in `git commit`.
 
@@ -90,7 +96,7 @@ Now that you have made your commit, it is time to upload your changes.  In the t
 
 If you're not comfortable with console commands or prefer a GUI, check out [https://git-scm.com/downloads/guis](https://git-scm.com/downloads/guis) and find one that works for you.
 
-### Step 8: Edit the README.md File
+### Step 9: Edit the README.md File
 
 Make sure to improve this file if you run into any problems.  You can edit this file in much the same way that you edit your index.html.  You can also edit it from the GitHub website.
 
