@@ -15,5 +15,16 @@
 <h1 class="content">Club Roster</h1>
 
 <section class="content">
-  <user-card user-name="Zander_Otavka"></user-card>
-</section>
+  <template is="dom-bind">
+    <member-card-group
+      names='{{clubMemberNames}}'>
+    </member-card-group>
+
+    <iron-ajax
+       auto
+       url="/roster/listmembers"
+       handle-as="json"
+       last-response="{{clubMemberNames}}">
+    </iron-ajax>
+  </template>
+<section>

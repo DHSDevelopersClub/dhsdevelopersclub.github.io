@@ -1,15 +1,17 @@
 <link rel="import" href="/bower_components/polymer/polymer.html">
 <link rel="import" href="/bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="/bower_components/iron-flex-layout/classes/iron-flex-layout.html">
 <link rel="import" href="/bower_components/paper-material/paper-material.html">
 <link rel="import" href="/bower_components/paper-ripple/paper-ripple.html">
 
-<dom-module id="user-card">
+<dom-module id="member-card">
   <style>
     :host {
       display: inline-block;
       text-align: center;
       margin: 10px;
       line-height: normal;
+      height: 250px;
     }
 
     div {
@@ -18,7 +20,6 @@
 
     paper-material {
       width: 150px;
-      height: 250px;
       padding: 10px;
       border-radius: 2px;
       overflow: hidden;
@@ -47,24 +48,26 @@
   </style>
 
   <template>
-    <a href="{{userWebpageURI}}">
-      <paper-material
-          id="material"
-          elevation="0"
-          animated
-          on-mouseover="_onHover"
-          on-mouseout="_onUnhover">
-        <object id="profileImage" data="{{profileImageURI}}" type="image/jpg">
-          <img src="default-profile.jpg">
-        </object>
-        <div id="name">{{formattedUserName}}</div>
-        <div id="blurb">{{userBlurb}}</div>
-      </paper-material>
-    </a>
+    <div class="layout vertical start-align">
+      <a href="{{webpageURI}}">
+        <paper-material
+            id="material"
+            elevation="0"
+            animated
+            on-mouseover="_onHover"
+            on-mouseout="_onUnhover">
+          <object id="profileImage" data="{{profileImageURI}}" type="image/jpg">
+            <img src="default-profile.jpg">
+          </object>
+          <div id="name">{{name}}</div>
+          <div id="blurb">{{blurb}}</div>
+        </paper-material>
+      </a>
+    </div>
 
     <iron-ajax
       auto
-      url="{{userBlurbURI}}"
+      url="{{blurbURI}}"
       handle-as="text"
       on-response="_handleBlurbResponse"
       on-error="_handleBlurbError">
@@ -73,32 +76,32 @@
 
   <script>
     Polymer({
-      is: 'user-card',
+      is: 'member-card',
 
       properties: {
-        userName: String,
+        name: String,
 
-        formattedUserName: {
+        pageDirName: {
           type: String,
-          computed: '_getFormattedUserName(userName)'
+          computed: '_getPageDirName(name)'
         },
 
         profileImageURI: {
           type: String,
-          computed: '_getProfileImageURI(userName)'
+          computed: '_getProfileImageURI(pageDirName)'
         },
 
-        userBlurbURI: {
+        blurbURI: {
           type: String,
-          computed: '_getUserBlurbURI(userName)'
+          computed: '_getBlurbURI(pageDirName)'
         },
 
-        userWebpageURI: {
+        webpageURI: {
           type: String,
-          computed: '_getUserWebpageURI(userName)'
+          computed: '_getWebpageURI(pageDirName)'
         },
 
-        userBlurb: {
+        blurb: {
           type: String,
           readOnly: true
         }
@@ -112,39 +115,39 @@
         this.$.material.elevation = 0;
       },
 
-      _getFormattedUserName: function(userName) {
+      _getPageDirName: function(name) {
         var formatted = '';
-        console.log("userName: " + userName);
-        for (var i = 0; i < userName.length; i++) {
-          if (userName[i] === '_') {
-            formatted += ' ';
+        console.log("name: " + name);
+        for (var i = 0; i < name.length; i++) {
+          if (name[i] === ' ') {
+            formatted += '_';
           } else {
-            formatted += userName[i];
+            formatted += name[i];
           }
         }
         console.log("formatted: " + formatted);
         return formatted;
       },
 
-      _getProfileImageURI: function(userName) {
-        return '/roster/' + userName + '/profile.jpg';
+      _getProfileImageURI: function(pageDirName) {
+        return '/roster/' + pageDirName + '/profile.jpg';
       },
 
-      _getUserBlurbURI: function(userName) {
-        return '/roster/' + userName + '/blurb.txt';
+      _getBlurbURI: function(pageDirName) {
+        return '/roster/' + pageDirName + '/blurb.txt';
       },
 
-      _getUserWebpageURI: function(userName) {
-        return '/roster/' + userName + '/index.html';
+      _getWebpageURI: function(pageDirName) {
+        return '/roster/' + pageDirName + '/index.html';
       },
 
       _handleBlurbResponse: function(resp) {
-        this._setUserBlurb(resp.detail.response);
+        this._setBlurb(resp.detail.response);
       },
 
       _handleBlurbError: function(error) {
         var DEFAULT_BLURB = 'A member of the Drake Developers Club.';
-        this._setUserBlurb(DEFAULT_BLURB);
+        this._setBlurb(DEFAULT_BLURB);
       }
     });
   </script>

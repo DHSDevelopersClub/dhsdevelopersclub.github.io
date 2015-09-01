@@ -1,0 +1,27 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/iron-flex-layout/classes/iron-flex-layout.html">
+<link rel="import" href="../member-card/member-card.html">
+
+<dom-module id="member-card-group">
+  <style>
+    :host {
+      display: block;
+    }
+  </style>
+  <template>
+    <div class="layout horizontal wrap">
+      <template is="dom-repeat" items="{{names}}">
+        <member-card name="{{item}}"></member-card>
+      </template>
+    </div>
+  </template>
+  <script>
+    Polymer({
+      is: 'member-card-group',
+
+      properties: {
+        names: Array
+      }
+    });
+  </script>
+</dom-module>

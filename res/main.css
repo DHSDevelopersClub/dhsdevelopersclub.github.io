@@ -16,20 +16,24 @@ h3 {
   font-size: 20px;
 }
 
+member-card {
+  margin: 10px 10px;
+}
+
 .headerContent {
   width: 1024px;
   height: auto;
   margin: 0 auto;
 }
 
-.carousel{
+.carousel {
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 10px;
   width: 650px;
   position: center;
 }
-.transparent{
+.transparent {
   background-color: transparent;
 }
 

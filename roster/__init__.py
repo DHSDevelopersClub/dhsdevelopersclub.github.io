@@ -4,16 +4,12 @@ __author__ = 'Alexander Otavka'
 
 import os
 import logging
+import json
 
 import webapp2
-import jinja2
 
 
 CURRENT_DIR = os.path.dirname(__file__)
-JINJA_ENVIRONMENT = jinja2.Environment(
-    loader=jinja2.FileSystemLoader(CURRENT_DIR),
-    extensions=['jinja2.ext.autoescape'],
-    autoescape=True)
 
 def format_name(name):
     formatted = ''
@@ -30,19 +26,13 @@ class RosterListHandler(webapp2.RequestHandler):
         members = []
         for dir_str in dir_list:
             if not dir_str[0] == '.':
-                member = {
-                    'name': format_name(dir_str),
-                    'page': '/roster/{}/index.html'.format(dir_str),
-                }
-                members.append(member)
+                name = format_name(dir_str)
+                members.append(name)
 
         members = sorted(members)
-        template_values = {
-            'members': members
-        }
-        template = JINJA_ENVIRONMENT.get_template('about.html')
-        self.response.write(template.render(template_values))
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.write(json.dumps(members))
 
 app = webapp2.WSGIApplication([
-    ('/angular/templates/about.html', RosterListHandler),
+    ('/roster/listmembers', RosterListHandler),
 ], debug=True)
