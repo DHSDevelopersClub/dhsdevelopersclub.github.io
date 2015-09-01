@@ -4,47 +4,9 @@
 // Creates app.
 angular.module('clubwebsite', [
   'ngRoute',
-  'ui.bootstrap',
-    'ngMaterial'
+  'ui.bootstrap'
 ])
-  // Creates nav element.
-  .directive('nav', function () {
-    'use strict';
-    return {
-      restrict: 'E',
-      replace: 'true',
-      templateUrl: '/angular/templates/nav.html'
-    };
-  })
-    .controller('mainCtrl', ['$scope', '$mdSidenav', function($scope, $mdSidenav) {
-        $scope.toggleSidenav = function (menuId) {
-            $mdSidenav(menuId).toggle();
-        };
-    }])
-    .controller('CarouselDemoCtrl', ['$scope', function ($scope) {
-      $scope.myInterval = 5000;
-      var slides = $scope.slides = [];
-      $scope.addSlide = function() {
-        var newWidth = 800 + slides.length + 1;
-        slides.push({
-          image: 'http://placekitten.com/' + newWidth + '/600',
-          text: ['More','Extra','Lots of','Surplus'][slides.length % 4] + ' ' +
-          ['Cats', 'Kittys', 'Felines', 'Cutes'][slides.length % 4]
-        });
-      };
-      for (var i=0; i<4; i++) {
-        $scope.addSlide();
-      }
-    }])
-
-// The controller for the nav bar. Switches the active class for each page.
-    
-  .controller('navCtrl', ['$scope', '$location', function ($scope, $location) {
-    'use strict';
-    $scope.isActive = function (viewLocation) {
-      return viewLocation === $location.path();
-    };
-  }])
+  .controller('mainCtrl', ['$scope', function($scope) {}])
   // Routes the nav buttons to pages. Loads the pages through ajax.
   .config(['$routeProvider', function ($routeProvider) {
     'use strict';
@@ -52,20 +14,14 @@ angular.module('clubwebsite', [
       .when('/', {
         templateUrl: '/angular/templates/home.html'
       })
-      .when('/references', {
-        templateUrl: '/angular/templates/references.html'
+      .when('/join', {
+        templateUrl: '/angular/templates/join.html'
       })
-      .when('/projects', {
-        templateUrl: '/angular/templates/projects.html'
+      .when('/learn', {
+        templateUrl: '/angular/templates/learn.html'
       })
-      .when('/gallery', {
-        templateUrl: '/angular/templates/gallery.html'
-      })
-      .when('/about', {
-        templateUrl: '/angular/templates/about.html'
-      })
-      .when('/contact', {
-        templateUrl: '/angular/templates/contact.html'
+      .when('/collaborate', {
+        templateUrl: '/angular/templates/collaborate.html'
       })
       .otherwise({
         redirectTo: '/'
