@@ -1,0 +1,146 @@
+<dom-module id="member-card">
+  <style>
+    :host {
+      display: inline-block;
+      text-align: center;
+      margin: 10px;
+      line-height: normal;
+      max-height: 250px;
+    }
+
+    div {
+      font-weight: 300;
+    }
+
+    paper-material {
+      width: 150px;
+      padding: 10px;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    a, a:hover {
+      text-decoration: none;
+      color: black;
+    }
+
+    #profileImage, #profileImage img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+    }
+
+    #name {
+      margin: 10px 0;
+      font-size: 14px;
+    }
+
+    #blurb {
+      font-style: italic;
+      font-size: 12px;
+    }
+  </style>
+
+  <template>
+    <div class="layout vertical start-align">
+      <a href="{{webpageURI}}">
+        <paper-material
+            id="material"
+            elevation="0"
+            animated
+            on-mouseover="_onHover"
+            on-mouseout="_onUnhover">
+          <object id="profileImage" data="{{profileImageURI}}" type="image/jpg">
+            <img src="default-profile.jpg">
+          </object>
+          <div id="name">{{name}}</div>
+          <div id="blurb">{{blurb}}</div>
+        </paper-material>
+      </a>
+    </div>
+
+    <iron-ajax
+      auto
+      url="{{blurbURI}}"
+      handle-as="text"
+      on-response="_handleBlurbResponse"
+      on-error="_handleBlurbError">
+    </iron-ajax>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'member-card',
+
+      properties: {
+        name: String,
+
+        pageDirName: {
+          type: String,
+          computed: '_getPageDirName(name)'
+        },
+
+        profileImageURI: {
+          type: String,
+          computed: '_getProfileImageURI(pageDirName)'
+        },
+
+        blurbURI: {
+          type: String,
+          computed: '_getBlurbURI(pageDirName)'
+        },
+
+        webpageURI: {
+          type: String,
+          computed: '_getWebpageURI(pageDirName)'
+        },
+
+        blurb: {
+          type: String,
+          readOnly: true
+        }
+      },
+
+      _onHover: function() {
+        this.$.material.elevation = 2;
+      },
+
+      _onUnhover: function() {
+        this.$.material.elevation = 0;
+      },
+
+      _getPageDirName: function(name) {
+        var formatted = '';
+        for (var i = 0; i < name.length; i++) {
+          if (name[i] === ' ') {
+            formatted += '_';
+          } else {
+            formatted += name[i];
+          }
+        }
+        return formatted;
+      },
+
+      _getProfileImageURI: function(pageDirName) {
+        return '/roster/' + pageDirName + '/profile.jpg';
+      },
+
+      _getBlurbURI: function(pageDirName) {
+        return '/roster/' + pageDirName + '/blurb.txt';
+      },
+
+      _getWebpageURI: function(pageDirName) {
+        return '/roster/' + pageDirName + '/index.html';
+      },
+
+      _handleBlurbResponse: function(resp) {
+        this._setBlurb(resp.detail.response);
+      },
+
+      _handleBlurbError: function(error) {
+        var DEFAULT_BLURB = 'A member of the Drake Developers Club.';
+        this._setBlurb(DEFAULT_BLURB);
+      }
+    });
+  </script>
+</dom-module>

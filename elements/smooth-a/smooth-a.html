@@ -1,0 +1,112 @@
+<!--
+@license
+Copyright (C) 2015 Alexander Otavka.  All rights reserved.
+-->
+<!--
+smooth-a.html
+
+@author Alexander Otavka (zotavka@gmail.com)
+
+An anchor element that improves hash scrolling.
+-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+<dom-module id="smooth-a">
+  <style>
+    :host {
+      display: inline;
+    }
+  </style>
+
+  <template>
+    <content></content>
+  </template>
+
+  <script>
+    (function() {
+      var anchors = {};
+
+      function smoothScroll(scrollPos) {
+        $("body").animate({
+          scrollTop: scrollPos
+        }, 600);
+      }
+
+      function updateHash() {
+        var scrollTop = document.querySelector("body").scrollTop;
+        var maxScroll = 0;
+        var href = window.location.href.split("#");
+        var newHash;
+        var newHref = href[0];
+
+        for (var aName in anchors) {
+          if (anchors.hasOwnProperty(aName) && !anchors[aName].noHash) {
+            var aTop = anchors[aName].getTop();
+            if (aTop <= scrollTop && aTop >= maxScroll) {
+              newHash = aName;
+              maxScroll = aTop;
+            }
+          }
+        }
+
+        if (href[1] !== newHash) {
+          if (newHash !== undefined) {
+            href[1] = newHash;
+            newHref = href.join("#");
+          }
+          history.replaceState({}, "", newHref);
+        }
+      }
+
+      SmoothA = Polymer({
+        is: "smooth-a",
+        extends: "a",
+        listeners: {
+          tap: "goToTarget"
+        },
+        properties: {
+          noHash: Boolean
+        },
+
+        attached: function() {
+          if (this.name) {
+            anchors[this.name] = this;
+          }
+
+          this.onclick = function() { return false; };
+        },
+        detached: function() {
+          if (this.name) {
+            delete anchors[this.name];
+          }
+        },
+
+        goToTarget: function() {
+          var href = this.href.split("#");
+          var target = anchors[href[1]];
+          if (href.length > 1 &&
+              window.location.href.split("#")[0] === href[0] &&
+              target !== undefined) {
+            var targetTop = target.getTop();
+            smoothScroll(targetTop);
+          } else {
+            window.location.href = this.href;
+          }
+        },
+
+        getTop: function() {
+          var obj = this;
+          var curtop = 0;
+          if (obj.offsetParent) {
+            do {
+              curtop += obj.offsetTop;
+            } while (obj == obj.offsetParent);
+            return curtop;
+          }
+        }
+      });
+
+      SmoothA.updateHash = updateHash;
+    }());
+  </script>
+</dom-module>

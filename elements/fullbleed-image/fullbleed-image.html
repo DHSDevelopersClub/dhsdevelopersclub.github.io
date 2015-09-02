@@ -1,0 +1,73 @@
+<!--
+@license
+Copyright (C) 2015 Drake Developers Club.  All rights reserved.
+-->
+<!--
+Custom CSS Properties:
+  --image-text-color: The default text color.
+  --image-text: Mixin applied to the image text.
+
+@author Alexander Otavka (zotavka@gmail.com)
+-->
+<dom-module id="fullbleed-image">
+  <style>
+    :host {
+      display: block;
+      position: relative;
+      height: 100vh;
+    }
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    #imageContent {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      text-align: center;
+      cursor: default;
+      color: white;
+      color: var(--image-text-color);
+      @apply(--image-text);
+      @apply(--layout-vertical);
+      @apply(--layout-center);
+      @apply(--layout-center-justified);
+    }
+
+    #imageTitle {
+      display: inline-block;
+      font-weight: 300;
+      font-size: 2.8rem;
+      text-shadow: 1px 1px 2px black;
+    }
+  </style>
+
+  <template>
+    <img src="{{uri}}">
+    <div id="imageContent">
+      <div id="imageTitle">
+        <content select=".image-title"></content>
+      </div>
+      <content select="*"></content>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'fullbleed-image',
+
+      properties: {
+        uri: String
+      }
+    });
+  </script>
+</dom-module>

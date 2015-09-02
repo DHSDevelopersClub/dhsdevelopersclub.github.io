@@ -1,0 +1,1 @@
+!function(){"use strict";var a=Polymer.dom(document).querySelector("#app");a.onRouteChange=function(e){"/learn"==e.detail.path||"/collaborate"==e.detail.path?a.$.mainNavbar.classList.add("no-image"):a.$.mainNavbar.classList.remove("no-image")}}();

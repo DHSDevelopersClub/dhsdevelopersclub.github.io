@@ -1,25 +1,8 @@
-<!--
-@license
-Copyright (C) 2015 Alexander Otavka.  All rights reserved.
--->
-<!-- 
-smooth-a.html
-
-@author Alexander Otavka (zotavka@gmail.com)
-
-An anchor element that improves hash scrolling.
--->
-
-<dom-module id="smooth-a">
-  <template>
-    <style>
+<dom-module id="smooth-a"><template><style>
       :host {
         display: inline;
       }
-    </style>
-    <content></content>
-  </template>
-  <script>
+    </style><content></content></template><script>
     (function() {
       var anchors = {};
 
@@ -110,5 +93,4 @@ An anchor element that improves hash scrolling.
       
       SmoothA.updateHash = updateHash;
     }());
-  </script>
-</dom-module>
+  </script></dom-module>
