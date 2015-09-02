@@ -1,0 +1,27 @@
+{
+  "name": "club-website",
+  "version": "1.0.0",
+  "description": "The website for Drake Developers Club",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DHSDevelopersClub/club-website.git"
+  },
+  "keywords": [
+    "html",
+    "website",
+    "github",
+    "pages",
+    "drake",
+    "developers"
+  ],
+  "author": "DHS Developers Club",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/DHSDevelopersClub/club-website/issues"
+  },
+  "homepage": "https://github.com/DHSDevelopersClub/club-website#readme"
+}
