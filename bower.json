@@ -1,12 +1,6 @@
 {
   "name": "dhs-devclub-website",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
+  "private": true,
   "dependencies": {
     "app-router": "erikringsmuth/app-router#~2.6.1",
     "iron-elements": "PolymerElements/iron-elements#~1.0.3",
