@@ -19,8 +19,8 @@ handlers:
   static_files: roster/club-members/\1/\2
   upload: roster/club-members/.*
 
-- url: /angular
-  static_dir: angular
+- url: /pages
+  static_dir: pages
 
 - url: /res
   static_dir: res

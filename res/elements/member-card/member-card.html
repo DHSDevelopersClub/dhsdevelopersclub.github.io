@@ -117,7 +117,6 @@
 
       _getPageDirName: function(name) {
         var formatted = '';
-        console.log("name: " + name);
         for (var i = 0; i < name.length; i++) {
           if (name[i] === ' ') {
             formatted += '_';
@@ -125,7 +124,6 @@
             formatted += name[i];
           }
         }
-        console.log("formatted: " + formatted);
         return formatted;
       },
 

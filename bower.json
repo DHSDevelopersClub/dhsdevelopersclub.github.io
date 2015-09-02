@@ -8,6 +8,7 @@
     "tests"
   ],
   "dependencies": {
+    "app-router": "erikringsmuth/app-router#~2.6.1",
     "iron-elements": "PolymerElements/iron-elements#~1.0.3",
     "paper-elements": "PolymerElements/paper-elements#~1.0.5",
     "parallax-container": "~0.0.3",
