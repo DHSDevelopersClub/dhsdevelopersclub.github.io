@@ -19,16 +19,26 @@
 
 
 <div class="parallax-window" data-parallax="scroll" data-image-src="./data/background.jpg">
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="/#">
-                    <b>Home</b>
-                </a>
+    <div layout="column" layout-fill ng-controller="navController">
+        <md-toolbar>
+            <div class="md-toolbar-tools transparent">
+                <span>Drake Developers Club</span>
+                <!-- fill up the space between left and right area -->
+                <span flex></span>
+                <md-button>
+                    Join
+                </md-button>
+
+                <md-button>
+                    Learn
+                </md-button>
+
+                <md-button>
+                    Collaborate
+                </md-button>
             </div>
-            <p class="navbar-text"><a href="/roster/Noah_Marty/index.html" class="navbar-link">The Best Page</a></p>
-        </div>
-    </nav>
+        </md-toolbar>
+    </div>
 
     <main ng-controller="myController">
         <div class="content">
