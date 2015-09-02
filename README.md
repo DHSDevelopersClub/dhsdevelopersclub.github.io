@@ -1,4 +1,4 @@
-# club-website
+# dhsdevelopersclub.github.io
 
 This is the repository for the Drake Developers Club website.  We are a club at Drake High School that focuses on spreading knowledge and passion for software development and coding.  Contact us at [drakedevelopersclub@gmail.com](mailto:drakedevelopersclub@gmail.com), or come to a meeting during lunch on Wednesday's in room 107.
 
@@ -17,7 +17,10 @@ Development requires software to edit and test your code.  Make sure you have al
   - Linux: Open a terminal and type in `sudo apt-get install git` to get the command line tools.
   - Mac: Download [GitHub for Mac](https://mac.github.com/).
   - Windows: Download [GitHub for Windows](https://windows.github.com/).
-- [**Google App Engine SDK.**](https://cloud.google.com/appengine/downloads) You need GAE to test this site on your own computer.  Make sure to get the Python version.  Also, make sure you say yes when it asks you if you want shortcuts to the command line tools.
+- **Node.js and NPM** You will need to install both node.js and npm to use the build tools and view the site.
+  - Linux: Run `sudo apt-get install nodejs npm`
+  - Mac: Install [MacPorts](https://www.macports.org/) then run `sudo port install nodejs npm`
+  - Windows: Ask somone like Max or Duncan
 
 ### Step 2: Download the Repository
 
@@ -25,15 +28,15 @@ Open up a terminal and type in `mkdir github` (you are making a folder called "g
 
 If you are using Windows and do not have access to a terminal, you can create a folder normally by right clicking in the directory you would like, and clicking create folder. Then skip the next to steps and see **.
 
-Type in `git clone https://github.com/DHSDevelopersClub/club-website.git` and press enter.  (you can use SSH too, if you like, it doesn't matter)
+Type in `git clone https://github.com/DHSDevelopersClub/dhsdevelopersclub.github.io.git` and press enter.  (you can use SSH too, if you like, it doesn't matter)
 
-If you type in `ls` you should see a folder called `club-website`.  If so, you can close your terminal, you are done with step #2!
+If you type in `ls` you should see a folder called `dhsdevelopersclub.github.io`.  If so type `cd dhsdevelopersclub.github.io` to open the repository folder. To download the additional files and tools you need run `sudo npm install && bower install` you may be asked to input your password. Now you are done with step #2!
 
 ** If you are on Windows or Mac, all of this can also be done through the user interface of the GitHub client you downloaded in step #1.
 
 ### Step 3: Make Your Very Own Folder
 
-Open a file browser and find the project folder (remember it should be called `club-website`).  Open it, then open the folder called `club-members`.  Inside, make a new folder with your first and last name.  No spaces allowed, use `_` instead, but keep the normal capitalization of your name.
+Open a file browser and find the project folder (remember it should be called `dhsdevelopersclub.github.io`).  Open it, then open the folder called `club-members`.  Inside, make a new folder with your first and last name.  No spaces allowed, use `_` instead, but keep the normal capitalization of your name.
 
 For example, someone named "Bobby Smith-Rogers" would make a folder titled `Bobby_Smith-Rogers`.  Someone called "Joe McCandless" would make a folder called `Joe_McCandless`.
 
@@ -58,11 +61,11 @@ When you're done, save the file.
 
 ### Step 5: Testing Your Home Page
 
-Open up a terminal/command line again.  Type in `dev_appserver.py /path/to/project` where `/path/to/project` is the location of the project.  If you followed step #2, the project should be at `~/github/club-website`.  If it complains and says `dev_appserver.py: command not found`, `cd` to the folder where you installed the GAE SDK and try again.
+Open up a terminal/command line again.  Type in `cd /path/to/project` where `/path/to/project` is the location of the project.  If you followed step #2, the project should be at `~/github/dhsdevelopersclub.github.io`. Now type `gulp serve` into the command line.
 
-If it works, you should see something along the lines of `dev server serving at localhost:8080`.
+If it works, you should see your web browser open and display the club website.
 
-Now open up your favorite web browser and got to [http://localhost:8080](http://localhost:8080).  Click `About`, then find your name in the club roster, and click the link.  You should be able to see you homepage.  Try modifying the index.html file, save, then refresh the page.  You should see the changes you made to your code reflected in the web browser.
+Now navigate to your page on the website.  You should be able to see you homepage.  Try modifying the index.html file, save.  You should see the changes you made to your code automaticly synced and reflected in the web browser.
 
 ### Step 6: Experiment
 
