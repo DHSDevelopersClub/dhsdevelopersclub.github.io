@@ -1,6 +1,6 @@
 # dhsdevelopersclub.github.io
 
-This is the repository for the Drake Developers Club website.  We are a club at Drake High School that focuses on spreading knowledge and passion for software development and coding.  Contact us at [drakedevelopersclub@gmail.com](mailto:drakedevelopersclub@gmail.com), or come to a meeting during lunch on Wednesday's in room 107.
+Hello, world! Welcome to the repository for the Drake Developers Club website. Working out of Room 127 at Drake High School, the Developer's Club strives to spread  knowledge and passion for software development and coding. For comments or questions, contact us at [drakedevelopersclub@gmail.com](mailto:drakedevelopersclub@gmail.com)
 
 ## New Member Instructions
 
@@ -46,7 +46,7 @@ Now open the folder with your name on it and make a new file inside it called `i
 
 ```html
   <!DOCTYPE html>
-  
+
   <html>
     <head>
       <title>--Your Name Here--</title>
@@ -69,11 +69,11 @@ Now navigate to your page on the website.  You should be able to see you homepag
 
 ### Step 6: Experiment
 
-Mess around with your code.  If you are new to HTML, ask a fellow club member for help, or check out [http://www.w3schools.com/](http://www.w3schools.com/) for reference or some tutorials.  Feel free to check out other people's pages to see how their code works and manifests into a webpage.  Just don't mess with their files: it's rude, and we can all see if you do.  You can, however copy bits of their code (with their permission) and experiement with it on your own page. For some more in depth tutorials and advanced techniques, check out [http://www.codecademy.com/](http://www.codecademy.com/).
+Mess around with your code.  If you are new to HTML, ask a fellow club member for help, or check out [http://www.w3schools.com/](http://www.w3schools.com/) for reference or some tutorials.  Feel free to check out other people's pages to see how their code works and manifests into a webpage.  Please don't tamper with other students files: it can ruin the project they are working on, and the changes are extremely hard to undo.  You can, however copy bits of their code (with their permission) and experiement with it on your own page. For some more in depth tutorials and advanced techniques, check out [http://www.codecademy.com/](http://www.codecademy.com/).
 
 ### Step 7: Add your profile Info
 
-Once you're satisfied with your homepage, it's time to let the club know who you are. 
+Once you're satisfied with your homepage, it's time to let the club know who you are.
 In the top level of your folder add an image called `profile.jpg` this is what will show up above your name so keep it clean!
 Next add a `blurb.txt` with a little info about yourself, again, school appropriate.
 
@@ -87,9 +87,9 @@ You will be prompted to enter a commit message.  A commit message should be one 
 
 ```
   Completely redesign my home page.
-  
-  I added a header bar, replaced the logo, and changed up the color 
-  scheme.  I also added a link to another page with a list of 
+
+  I added a header bar, replaced the logo, and changed up the color
+  scheme.  I also added a link to another page with a list of
   projects I have completed.
 ```
 
