@@ -19,7 +19,7 @@ Development requires software to edit and test your code.  Make sure you have al
   - Windows: Download [GitHub for Windows](https://windows.github.com/).
 - **Node.js and NPM** You will need to install both node.js and npm to use the build tools and view the site.
   - Linux: Run `sudo apt-get install nodejs npm`
-  - Mac: Install [MacPorts](https://www.macports.org/) then run `sudo port install nodejs npm`
+  - Mac: Install [Node.js](https://nodejs.org/en/download/)
   - Windows: Ask somone like Max or Duncan
 
 ### Step 2: Download the Repository
