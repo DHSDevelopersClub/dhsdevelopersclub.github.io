@@ -9,10 +9,6 @@ Custom CSS Properties:
 
 @author Alexander Otavka (zotavka@gmail.com)
 -->
-
-<link rel="import" href="/bower_components/polymer/polymer.html">
-<link rel="import" href="/bower_components/iron-flex-layout/iron-flex-layout.html">
-
 <dom-module id="fullbleed-image">
   <style>
     :host {
@@ -23,11 +19,13 @@ Custom CSS Properties:
 
     img {
       position: absolute;
+      object-fit: cover;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       z-index: 1;
+      background-color: var(--image-loading-color);
     }
 
     #imageContent {
