@@ -17,13 +17,10 @@ Development requires software to edit and test your code.  Make sure you have al
   - Linux: Open a terminal and type in `sudo apt-get install git` to get the command line tools.
   - Mac: Download [GitHub for Mac](https://mac.github.com/).
   - Windows: Download [GitHub for Windows](https://windows.github.com/).
-- [**Google App Engine SDK.**](https://cloud.google.com/appengine/downloads) You need GAE to test this site on your own computer.  Make sure to get the Python version.  Also, make sure you say yes when it asks you if you want shortcuts to the command line tools.
 
 ### Step 2: Download the Repository
 
-Open up a terminal and type in `mkdir github` (you are making a folder called "github") press enter, then type `cd github` (you are opening that folder).  If you already have a folder where you keep your projects, `cd` to that folder instead.
-
-If you are using Windows and do not have access to a terminal, you can create a folder normally by right clicking in the directory you would like, and clicking create folder. Then skip the next to steps and see **.
+Open up a terminal or command prompt and type in `mkdir github` (you are making a folder called "github") press enter, then type `cd github` (you are opening that folder).  If you already have a folder where you keep your projects, `cd` to that folder instead.
 
 Type in `git clone https://github.com/DHSDevelopersClub/club-website.git` and press enter.  (you can use SSH too, if you like, it doesn't matter)
 
