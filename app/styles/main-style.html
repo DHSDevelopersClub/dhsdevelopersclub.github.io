@@ -62,15 +62,31 @@ h1.content {
   text-shadow: none;
 }
 
-#mainNavbar a, #mainNavbar a:hover {
+#mainNavbar a {
   margin: 10px;
   color: white;
   text-decoration: none;
   cursor: pointer;
 }
 
-#mainNavbar:not(.image) a, #mainNavbar:not(.image) a:hover {
+#mainNavbar a:hover {
+  color: #eee;
+}
+
+#mainNavbar a:active {
+  color: #ddd;
+}
+
+#mainNavbar:not(.image) a {
   color: black;
+}
+
+#mainNavbar:not(.image) a:hover {
+  color: #555;
+}
+
+#mainNavbar:not(.image) a:active {
+  color: #777;
 }
 
 #mainNavbar nav-links {
