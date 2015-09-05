@@ -1,0 +1,85 @@
+<!--
+@license
+Copyright (C) 2015 Drake Developers Club.  All rights reserved.
+-->
+<!--
+Custom CSS Properties:
+  --dropdown-color: The background color of the dropdown.
+
+@author Alexander Otavka (zotavka@gmail.com)
+-->
+
+<dom-module id="nav-links">
+  <style>
+    :host {
+      display: inline-block;
+      top: 0;
+      right: 0;
+    }
+
+    @media (max-width: 639px) {
+      #material {
+        background-color: var(--dropdown-color, white);
+        @apply(--layout-vertical);
+        padding: 10px;
+      }
+    }
+
+    @media (min-width: 640px) {
+      #material {
+        @apply(--layout-horizontal);
+      }
+    }
+  </style>
+
+  <template>
+    <paper-material id="material">
+      <content></content>
+    </paper-material>
+
+    <iron-media-query
+      id="largeScreen"
+      query="min-width: 640px"
+      on-query-matches-changed="_mediaChanged">
+    </iron-media-query>
+  </template>
+
+  <script>
+    Polymer({
+      is: "nav-links",
+      behaviors: [
+        Polymer.IronOverlayBehavior
+      ],
+      properties: {
+      },
+
+      created: function() {
+        this.noCancelOnEscKey = true;
+      },
+
+      attached: function() {
+        this._mediaChanged();
+        this.style.maxWidth = "";
+      },
+
+      _mediaChanged: function() {
+        // Sweet hacks to break the inherited iron-fit-behavior.
+        delete this._fitInfo;
+
+        if (this.$.largeScreen.queryMatches) {
+          // Screen is large.
+          this.$.material.elevation = 0;
+          this.style.position = "relative";
+          this.noCancelOnOutsideClick = true;
+          this.open();
+        } else {
+          // Screen is small.
+          this.$.material.elevation = 1;
+          this.style.position = "absolute";
+          this.noCancelOnOutsideClick = false;
+          this.close();
+        }
+      }
+    });
+  </script>
+</dom-module>
