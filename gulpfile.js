@@ -13,6 +13,8 @@ var packageJson = require('./package.json');
 var crypto = require('crypto');
 var polybuild = require('polybuild');
 var deploy = require('gulp-gh-pages');
+var stringifyObject = require('stringify-object');
+var gutil = require('gulp-util');
 
 var AUTOPREFIXER_BROWSERS = [
   'ie >= 10',
@@ -196,7 +198,7 @@ gulp.task('clean', function (cb) {
 });
 
 // Watch files for changes & reload
-gulp.task('serve', ['styles', 'elements', 'images'], function () {
+gulp.task('serve', ['styles', 'elements', 'images', 'generate-roster'], function () {
   browserSync({
     port: 5000,
     notify: false,
@@ -260,13 +262,38 @@ gulp.task('deploy', ['default'], function () {
     .pipe(deploy({branch: 'master'}))
 });
 
+function string_src(filename, string) {
+  var src = require('stream').Readable({ objectMode: true })
+  src._read = function () {
+    this.push(new gutil.File({ cwd: "", base: "", path: filename, contents: new Buffer(string) }))
+    this.push(null)
+  }
+  return src
+}
+
+gulp.task('generate-roster', function () {
+  var members = [];
+  glob.sync("app/roster/*")
+  .forEach(function(file) {
+    var member = path.basename(file, path.extname(file))
+    members.push(member);
+  });
+  var string = stringifyObject(members, {
+      indent: '  ',
+      singleQuotes: false
+  });
+  return string_src("roster.json", string)
+    .pipe(gulp.dest('.tmp/roster/'))
+    .pipe(gulp.dest('dist/roster/'))
+});
+
 // Build production files, the default task
 gulp.task('default', ['clean'], function (cb) {
   // Uncomment 'cache-config' after 'rename-index' if you are going to use service workers.
   runSequence(
     ['copy', 'styles'],
     'elements',
-    ['jshint', 'images', 'fonts', 'html'],
+    ['jshint', 'images', 'fonts', 'html', 'generate-roster'],
     'rename-index', // 'cache-config',
     cb);
 });
