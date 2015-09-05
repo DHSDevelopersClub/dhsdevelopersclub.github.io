@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html ng-app="clubwebsite" lang="en">
+<html lang="en">
 <head>
   <title>Drake Developers Club</title>
   <meta name="viewport" content="initial-scale=1" />
@@ -25,9 +25,16 @@
     <paper-toolbar id="mainNavbar">
       <a href="#/">Drake Developers Club</a>
       <div class="layout flex"></div>
-      <a href="#/join" class="nav-link">Join</a>
-      <a href="#/learn" class="nav-link">Learn</a>
-      <a href="#/collaborate" class="nav-link">Collaborate</a>
+      <paper-icon-button
+        id="navDropdownButton"
+        icon="expand-more"
+        on-tap="openNavDropdown">
+      </paper-icon-button>
+      <nav-links id="navLinks">
+        <a href="#/join" class="nav-link">Join</a>
+        <a href="#/learn" class="nav-link">Learn</a>
+        <a href="#/collaborate" class="nav-link">Collaborate</a>
+      </nav-links>
     </paper-toolbar>
 
     <app-router id="router" on-state-change="onRouteChange">

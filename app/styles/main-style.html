@@ -51,30 +51,59 @@ h1.content {
   right: 0;
   z-index: 999;
   background: rgba(0, 0, 0, 0.2);
-}
-
-#mainNavbar a, #mainNavbar a:hover {
-  margin: 10px;
-  color: white;
-  text-decoration: none;
-  cursor: pointer;
   font-size: 18px;
   font-weight: 300;
+  color: white;
   text-shadow: black 0 0 2px;
 }
 
-#mainNavbar.no-image a, #mainNavbar.no-image a:hover {
+#mainNavbar:not(.image) {
   color: black;
   text-shadow: none;
 }
 
+#mainNavbar a {
+  margin: 10px;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#mainNavbar a:hover {
+  color: #eee;
+}
+
+#mainNavbar a:active {
+  color: #ddd;
+}
+
+#mainNavbar:not(.image) a {
+  color: black;
+}
+
+#mainNavbar:not(.image) a:hover {
+  color: #555;
+}
+
+#mainNavbar:not(.image) a:active {
+  color: #777;
+}
+
+#mainNavbar nav-links {
+  --dropdown-color: #222;
+}
+
+#mainNavbar:not(.image) nav-links {
+  --dropdown-color: white;
+}
+
 #mainHeaderImage {
   height: 90vh;
-  --image-loading-color: #35b;
+  --image-loading-color: rgb(33, 30, 67);
 }
 
 #joinHeaderImage {
-  --image-loading-color: #220;
+  --image-loading-color: rgb(29, 25, 25);
 }
 
 #scrollDownButton {
@@ -117,8 +146,30 @@ h1.content {
   margin: 10px 0 10px 20px;
 }
 
-@media (max-width: 600px) {
-  .nav-link {
+/* Tiny Screens */
+@media (max-width: 479px) {
+  .content {
+    margin: 16px;
+  }
+}
+
+/* Small Screens */
+@media (min-width: 480) and (max-width: 639px) {
+  .content {
+    margin: 32px;
+  }
+}
+
+/* Screens < Tablet */
+@media (max-width: 639px) {
+  #mainNavbar nav-links {
+    text-shadow: none;
+  }
+}
+
+/* Tablet+ Size Screens */
+@media (min-width: 640px) {
+  #navDropdownButton {
     display: none;
   }
 }
