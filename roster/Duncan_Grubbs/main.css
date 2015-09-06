@@ -1,0 +1,39 @@
+body {
+  background-image: url("background.jpg");
+}
+
+.text {
+  color: #484848;
+  text-align: left;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.text-essay {
+  color: #484848;
+  text-align: left;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.home-content {
+  margin-left: 60px;
+}
+
+.white-background {
+  border-radius: 4px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.button1 {
+  margin-left: 60px;
+}
+
+.emailForm {
+  padding-left: 15px;
+}

@@ -1,0 +1,51 @@
+a:link {
+  color: black;
+}
+
+.headerContent {
+  width: 100%;
+  height: auto;
+  margin: 0 0 0 0;
+}
+
+body {
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  padding-bottom: 10px;
+  margin: 0px;
+  height: 100%;
+}
+
+.body a {
+  color: black;
+  text-decoration: none;
+}
+
+.body a:hover{
+  color: #003B6F;
+}
+
+.line {
+  background-color: #003B6F;
+  margin-bottom: 10px;
+  color: white;
+  font-size: large;
+  text-align: center;
+  padding-bottom: 16px;
+  padding-top: 16px;
+}
+
+
+.line a {
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+}
+
+.line a:hover {
+  color: c9c9c9;
+}
+
+#home {
+  margin-left: 30%;
+}

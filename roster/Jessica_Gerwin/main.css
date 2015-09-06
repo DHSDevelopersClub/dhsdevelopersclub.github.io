@@ -1,0 +1,27 @@
+
+h2 {
+ text-shadow: 2px 2px #03d;
+ }
+
+ .footer{
+   position:absolute;
+   bottom: 0;
+   width:100%;
+ }
+ body {
+   background-image: url('purplebridge.jpeg');
+   background-size: 100%;
+ }
+header{
+  z-index:999;
+}
+.demo-layout-transparent .mdl-layout__header,
+.demo-layout-transparent .mdl-layout__drawer-button {
+  /* This background is dark, so we set text to white. Use 87% black instead if
+     your background is light. */
+  color: white;
+}
+.img {
+  width:25%;
+  height:25%;
+}
