@@ -15,6 +15,7 @@ var polybuild = require('polybuild');
 var deploy = require('gulp-gh-pages');
 var stringifyObject = require('stringify-object');
 var gutil = require('gulp-util');
+var stream = require('stream');
 
 var AUTOPREFIXER_BROWSERS = [
   'ie >= 10',
@@ -84,12 +85,12 @@ gulp.task('copy', function () {
     dot: true
   }).pipe(gulp.dest('dist'));
 
-  var readme = gulp.src(['README.md'])
-    .pipe(gulp.dest('dist'));
-
   var bower = gulp.src([
     'bower_components/**/*'
   ]).pipe(gulp.dest('dist/bower_components'));
+
+  var roster = gulp.src(['app/roster/**/*'])
+    .pipe(gulp.dest('dist/roster'));
 
   var elements = gulp.src(['app/elements/**/*.html'])
     .pipe(gulp.dest('dist/elements'));
@@ -104,7 +105,7 @@ gulp.task('copy', function () {
     .pipe($.rename('elements.vulcanized.html'))
     .pipe(gulp.dest('dist/elements'));
 
-  return merge(app, readme, bower, elements, vulcanized, swBootstrap, swToolbox)
+  return merge(app, bower, roster, elements, vulcanized, swBootstrap, swToolbox)
     .pipe($.size({title: 'copy'}));
 });
 
@@ -121,7 +122,7 @@ gulp.task('html', function () {
 
   return gulp.src(['app/**/*.html', '!app/{elements,test}/**/*.html'])
     // Replace path for vulcanized assets
-    .pipe($.if('*.html', $.replace('elements/elements.html', 'elements/elements.vulcanized.html')))
+    .pipe($.if('app/index.html', $.replace('elements/elements.html', 'elements/elements.vulcanized.html')))
     .pipe(assets)
     // Concatenate and minify JavaScript
     .pipe($.if('*.js', $.uglify({preserveComments: 'some'})))
@@ -263,11 +264,11 @@ gulp.task('deploy', ['default'], function () {
 });
 
 function string_src(filename, string) {
-  var src = require('stream').Readable({ objectMode: true })
+  var src = stream.Readable({ objectMode: true })
   src._read = function () {
     this.push(new gutil.File({ cwd: "", base: "", path: filename, contents: new Buffer(string) }))
     this.push(null)
-  }
+  };
   return src
 }
 
@@ -284,7 +285,7 @@ gulp.task('generate-roster', function () {
   });
   return string_src("roster.json", string)
     .pipe(gulp.dest('.tmp/roster/'))
-    .pipe(gulp.dest('dist/roster/'))
+    .pipe(gulp.dest('dist/roster/'));
 });
 
 // Build production files, the default task
