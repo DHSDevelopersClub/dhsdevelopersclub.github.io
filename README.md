@@ -132,7 +132,7 @@ Open up a terminal and `cd github/dhsdevelopersclub.github.io`.  Then, checkout 
 
 ### Step 13: Making More Changes
 
-If you've gotten this far, you've done most of the hard work already.  Making more changes in the future requires just X steps.
+If you've gotten this far, you've done most of the hard work already.  Making more changes in the future requires just 6 steps.
 
 1. [Sync your fork with the main repository.](#step-12-syncing-changes-back-to-your-fork)  This time, you don't need to add the remote; you just checkout dev, pull, then push.
 2. [Make a new branch.](#step-4-split-off-a-new-branch)  Name the branch something that makes sense (eg. if you plan to update the header of your site, call it `my-site-header` or something).  Make sure you are on the dev branch before branching.  If you just synced your fork with the main repository, you will probably be there already.
@@ -141,7 +141,7 @@ If you've gotten this far, you've done most of the hard work already.  Making mo
 5. [Commit your changes.](#step-10-commit-your-changes)  You can make more than one commit before making a pull request.  If you are making a lot of changes, you should split them up into smaller commits.
 6. [Make a pull request.](#step-11-submit-a-pull-request)  Once you have opened the pull request, you can still make commits in that branch.  If you `git push` them, they will become part of the pull request as well.
 
-Try to not make too many pull requests.  The website admins (Zander, Sebastian, and Max) have to manually test and deploy them.  It's much easier for them if you make a lot of changes on your fork, then bundle them up into one big pull request.
+Try to not make too many pull requests; the website admins (Zander, Sebastian, and Max) have to manually test and deploy them.  It's much easier for them if you make a lot of changes on your fork, then bundle them up into one big pull request.  Thanks in advance.
 
 ### Step 14: Edit the README.md File
 
