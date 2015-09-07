@@ -1,10 +1,10 @@
 # Drake Developers Club
 
-This is the repository for the Drake Developers Club website.  We are a club at Drake High School that focuses on spreading knowledge and passion for software development and coding.  Contact us at [leadership@dhsdevelopers.org](mailto:leadership@dhsdevelopers.org), or come to a meeting during lunch on Wednesdays in room 107.
+This is the repository for the Drake Developers Club website.  We are a club at Drake High School that focuses on spreading knowledge and passion for software development and coding.  Contact us at <leadership@dhsdevelopers.org>, or come to a meeting during lunch on Wednesdays in room 107.
 
 ## New Member Instructions
 
-All new members should follow these steps to create their own unique homepage on the website.  If, as you go through this guide you encounter any problems, ask for help from a fellow club member or from Google.  Both are happy to help and can probably get you sorted out.  If any part of the instructions are out of date, confusing, or incomplete, it is also the task of the new member to edit this file and fix any issues with the instructions, once you have solved the issue for yourself. If this seems like a lot to do (it kinda is) just remember you only have to do most of it once.
+All new members should follow these steps to create their own unique homepage on the website.  If, as you go through this guide you encounter any problems, ask for help from a fellow club member (either in person, or by posting in #general in [slack](https://dhsdevelopers.slack.com/)) or from Google.  Both are happy to help and can probably get you sorted out.  If any part of the instructions are out of date, confusing, or incomplete, it is also the task of the new member to edit this file and fix any issues with the instructions, once you have solved the issue for yourself. If this seems like a lot to do (it kinda is) just remember you only have to do most of it once.
 
 ### Step 1: Get the Software
 
@@ -14,76 +14,95 @@ Development requires software to edit and test your code.  Make sure you have al
   - [Brackets](http://brackets.io/)
   - [Atom](https://atom.io/)
 - **Git.** You will need git to upload your code to this online repository.  If you get the Windows or Mac version, make sure you click yes when it asks you if you want to install the command line tools.
-  - Linux: Open a terminal and type in `sudo apt-get install git` to get the command line tools.
+  - Linux: Open a terminal and copy-paste in `sudo apt-get install git`, then press enter to get the command line tools.
   - Mac: Download [GitHub for Mac](https://mac.github.com/).
   - Windows: Download [GitHub for Windows](https://windows.github.com/).
 - **Node.js and NPM.** You will need these to preview the website and to get the rest of the resources to load the page. You'll learn what this means later on.
   - Windows: Download [Node.js](https://nodejs.org/en/) Node comes with NPM so don't worry about that yet.
-  - Linux: Run `sudo apt-get install npm`
+  - Linux: Run `sudo apt-get install npm` in a terminal.
   - Mac : Run `ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"` to get [Homebrew](http://brew.sh/) if you don't already have it, then run `brew install npm`.
+  - **Bower and Gulp.** These can both be installed with NPM.  Once you have NPM (see above), open up a terminal and run `npm install -g gulp && npm install -g bower`.  If you are on linux or mac, you may need to run `sudo npm install -g gulp && sudo npm install -g bower`.
 
-### Step 2: Download the Repository
+### Step 2: Fork the Repository
 
-For those who are using the git gui, check out [this resource](https://help.github.com/desktop/guides/contributing/) on how to navigate it's features and do everything you need to get started in the Developers Club.
+Go to [the repository homepage](https://github.com/DHSDevelopersClub/dhsdevelopersclub.github.io) (if you are reading this, you're probably already there).  In the topright, click the "Fork" button.  When it's done, you will have a copy of the repository in your own account that you can edit.  If you don't yet have an account on GitHub, go ahead and [sign up](https://github.com/join), then email <leadership@dhsdevelopers.org> with the name of your github account so we can add you as a member of the club.
 
-Open up a terminal or command prompt and type in `mkdir github` (you are making a folder called "github") press enter, then type `cd github` (you are opening that folder).  If you already have a folder where you keep your projects, `cd` to that folder instead.
+### Step 3: Download Your Fork
 
-Type in `git clone https://github.com/DHSDevelopersClub/club-website.git` and press enter.  (you can use SSH too, if you like, it doesn't matter)
+#### Using GitHub for Desktop
+Check out [this resource](https://help.github.com/desktop/guides/contributing/) on how to navigate it's features and do everything you need to get started in the Developers Club.  For this step, look at the sidebar on the right and find the "Clone in Desktop" button.
 
-If you type in `ls` you should see a folder called `club-website`.  If so, you can close your terminal, you are done with step #2!
+#### Using Terminal/CMD
+For those who are using terminal, open up a terminal or command prompt and type in `mkdir github` (you are making a folder called "github") press enter, then type `cd github` (you are opening that folder).  If you already have a folder where you keep your projects, `cd` to that folder instead.
 
-### Step 3: Make Your Very Own Folder
+Go back to the github page of your fork and find the textbox that says "HTTP Clone URL".  Copy the text in there, then go back to your terminal.  Type in `git clone ` and then paster in that URL you just copied, then press enter.  (Advanced users: you can use [SSH](https://help.github.com/articles/generating-ssh-keys/) too, if you like, it doesn't matter).
 
-Open a file browser and find the project folder (remember it should be called `dhsdevelopersclub.github.io`).  Open it, then open the folder called `app` then the folder called `roster`.  Inside, make a new folder with your first and last name.  No spaces allowed, use `_` instead, but keep the normal capitalization of your name.
+If you type in `ls` you should see a folder called `dhsdevelopersclub.github.io`.  If so, you can close your terminal, you are done with step #3!
+
+### Step 4: Split Off a New Branch
+
+A branch is a place where you can make changes.  Changes you make in a branch will only exist in that branch until you merge it or [create a pull request](#step-11-submit-a-pull-request).
+
+#### Using GitHub for Desktop
+See [this article](https://help.github.com/desktop/guides/contributing/creating-a-branch-for-your-work/) on how to make a branch.  Name your branch `my-webpage-start`.
+
+#### Using Terminal/CMD
+Run `cd dhsdevelopersclub.github.io` to open the folder where your fork lives.  Then, run `git checkout -b my-webpage-start`.  This will create a new branch called `my-webpage-start` and "checkout" that branch.  When you have a branch checked out, changes you make will be saved to that branch.
+
+If you are confused about what a branch is, feel free to ask in #general in slack, someone will probably notice and explain it.  To be extra sure your question gets noticed, you can mention @zander.  He knows a lot about git and would be happy to help you understand it.  He is also the coolest README.md file writer in the whole world ;D.
+
+### Step 5: Make Your Very Own Folder
+
+Open a file browser (such as Finder or Windows explorer) and find the project folder (remember it should be called `dhsdevelopersclub.github.io`).  Open it, then open the folder called `app` then the folder called `roster`.  Inside, make a new folder with your first and last name.  No spaces allowed, use `_` instead, but keep the normal capitalization of your name.
 
 For example, someone named "Bobby Smith-Rogers" would make a folder titled `Bobby_Smith-Rogers`.  Someone called "Joe McCandless" would make a folder called `Joe_McCandless`.
 
-### Step 4: Make Your Home Page
+### Step 6: Make Your Home Page
 
-Now open the folder with your name on it and make a new file inside it called `index.html`.  Open `index.html` with your favorite code editor, and use your HTML skills to make whatever kind of home page you want for yourself.[*](#restrictions)  If you have no HTML skills, copy and paste this example code into the file.  We will teach you to use HTML later so you can make something more original.
+Now open the folder with your name on it and make a new file inside it called `index.html`.  Open `index.html` with your favorite code editor, and use your HTML skills to make whatever kind of home page you want for yourself.[*](#restrictions)  If you have no HTML skills yet, copy and paste this example code into the file (replace "Your Name Here" with your name).  We will teach you to use HTML later so you can make something more fancy and original.
 
 ```html
-  <!DOCTYPE html>
+  <!doctype html>
   
   <html>
     <head>
-      <title>--Your Name Here--</title>
+      <title>Your Name Here</title>
     </head>
     <body>
-      Hi I'm --Your Name Here-- and I am a member of the Drake Developer's Club.
+      Hi I'm Your Name Here and I am a member of the Drake Developer's Club.
     </body>
   </html>
 ```
 
 When you're done, save the file.
 
-### Step 5: Testing Your Home Page
+### Step 7: Add Your Profile Info
 
-Open up a terminal/comand line and navigate to the `dhsdevelopersclub.github.io` directory. once there run `npm install --global gulp` or of you're on Mac or Linux add `sudo` to the start of the command. This will install a build tool called gulp which helps in the development process.
+There are two more files you should add.  Find a picture you would like to use as your profile photo, and put it in your folder.  Rename it to profile.jpg.  If it isn't a JPEG, you will have to convert it.  Also, make a new text file called blurb.txt.  Inside it, write a few sentences about yourself and save it.  When you're done, your folder should have three files in it: `index.html`, `profile.jpg`, and `blurb.txt`.
 
-Next you need to load the rest of the resorces for the page, run `npm install bower` let it do its thing and then run `bower install`. This might take a bit so be patient. What it's doing is grabbing all of the code that we include in out page to make it run so we don't have to write everything. 
+### Step 8: Testing Your Home Page
 
-Once you have all that downloaded, run `gulp (thing)`. This should open a new tab in your default browser with our club website loaded.
+Open up a terminal/comand line and navigate to the `dhsdevelopersclub.github.io` directory using `cd`.  Once you're, there run 
 
-### Step 6: Experiment
+Next you need to load the rest of the resorces for the page, run  let it do its thing and then run `npm install && bower install`. This might take a bit so be patient. What it's doing is grabbing all of the code that we include in out page to make it run so we don't have to write everything. 
 
-Mess around with your code.  If you are new to HTML, ask a fellow club member for help, or check out [http://www.w3schools.com/](http://www.w3schools.com/) for reference or some tutorials.  Feel free to check out other people's pages to see how their code works and manifests into a webpage.  Just don't mess with their files, please.  You can, however copy bits of their code (with their permission) and experiment with it on your own page. For some more in depth tutorials and advanced techniques, check out [http://www.codecademy.com/](http://www.codecademy.com/). You'll notice when you save a change, the page automatically reloads to display your changes. That's thanks to gulp which you installed earlier.
+Once you have all that downloaded, run `gulp serve`. This should open a new tab in your default browser with the club website loaded.  Scroll down, and find the club roster.  Your name should show up with the picture and text you added in [step #7](#step-7-add-your-profile-info).  Click it to go to your page.
 
-### Step 7: Add your profile Info
+### Step 9: Experiment
 
-Once you're satisfied with your homepage, it's time to let the club know who you are. 
-In the top level of your folder add an image called `profile.jpg` this is what will show up above your name so keep it clean!
-Next add a `blurb.txt` with a little info about yourself, again, school appropriate.
+Mess around with your code.  If you are new to HTML, ask a fellow club member for help, or check out <http://www.w3schools.com> for reference or some tutorials.  Feel free to check out other people's pages to see how their code works and manifests into a webpage.  Just don't mess with their files, please.  You can, however copy bits of their code (with their permission) and experiment with it on your own page. For some more in depth tutorials and advanced techniques, check out <http://www.codecademy.com>. You'll notice when you save a change, the page automatically reloads to display your changes. That's thanks to gulp which you installed earlier.
 
-When you're done, you'll be ready to upload your changes to GitHub.
+### Step 10: Commit Your Changes
 
-### Step 8: Upload Your Changes to GitHub
-First you need to fork the repository
+A commit is a way to bundle changes made to multiple files together, sort of like saving.  See [this article](https://help.github.com/desktop/guides/contributing/about-commits/) for more about what a commit is.
+
+#### Using GitHub for Desktop
+See [this article](https://help.github.com/desktop/guides/contributing/committing-and-reviewing-changes-to-your-project/) for instructions on how to make a commit.  When you are done with your commit, [sync](https://help.github.com/desktop/guides/contributing/syncing-your-branch/) your changes with your fork.
+
 #### Using the CMD/Terminal
+Open a terminal/command line and type in `git add --all` (this flags all of your changes so the commit can scoop them up) then type in `git commit`.
 
-When you are finished, it is time to commit.  "Commit" is an action you can do with Git, it is a way to wrap up your changes into one tidy package with a message to describe what the changes are.  To commit, open a terminal/command line and type in `git add --all` (this flags all of your changes so the commit can scoop them up) then type in `git commit`.
-
-You will be prompted to enter a commit message.  A commit message should be one sentence.  Keep it short, less than sixty letters, and use the imperative form for verbs.  Eg. `Add some images to my home page.` or `Update my index.html.` or `Completely redesign my home page.`  Make it descriptive.  **Do NOT do anything like this:** `Changed stuff` or `i added a title bar and then i added an image of a cat and then i added another image of a cat`.  If you need to add extra description, you can add it below the message.  For example:
+You will be prompted to enter a commit message.  A commit message should be one sentence.  Keep it short, less than sixty letters, and use the imperative form for verbs.  Eg. `Add some images to my home page.` or `Update my index.html.` or `Completely redesign my home page.`  Make it descriptive.  **Do NOT do anything like this:** `Changed stuff` or `i added a title bar and then i added an image of a cat and then i added another image of a cat`.  If you need to add extra description, you can add it below the message, but make sure to leave a blank line.  For example:
 
 ```
   Completely redesign my home page.
@@ -93,18 +112,40 @@ You will be prompted to enter a commit message.  A commit message should be one 
   projects I have completed.
 ```
 
-Once you are done with your commit message, save and close the text editor you were using to edit the message.
+Once you are done with your commit message, save and close the text editor you were using to edit the message.  For nano (the default text editor on linux and mac), hit `CTRL` + `X`, then press `Y` to save and close.
 
-Now that you have made your commit, it is time to upload your changes.  In the terminal/command line type `git push`.  That should synchronize your changes with this repository.
+Now that you have made your commit, it is time to upload your changes.  In the terminal/command line type `git push -u origin my-webpage-start`.
 
-#### Using the GUI
+### Step 11: Submit a Pull Request
 
+At this point, your changes should be in the cloud, but they are still on your own fork.  If you go to <http://dhsdevelopers.org>, you won't see them.  That is because your changes still haven't been pulled into the main repository.
 
+Go back to your fork on <http://github.com>.  You should see a banner that says you recently pushed to `my-webpage-start` and that you can make a pull request.  Click the button to make a pull request.  Add a meaningful description of your changes, and click the big green button to open the PR.
 
+It may take a while for one of the admins to get to your PR, but when it's merged, you should get an email.  After it gets merged, you can go to <http://dhsdevelopers.org> and see your changes live on the internet.
 
-### Step 9: Edit the README.md File
+### Step 12: Syncing Changes Back to Your Fork
 
-Make sure to improve this file if you run into any problems.  You can edit this file in much the same way that you edit your index.html.  You can also edit it from the GitHub website.
+Other people will be making changes to the main repository and if you want to keep your fork up to date, you will need to sync changes back to your fork.  To do this, you will need to use the terminal/command line, since there is no way to connect to two remote repositories in GitHub Desktop.
+
+Open up a terminal and `cd github/dhsdevelopersclub.github.io`.  Then, checkout your dev branch: `git checkout dev`.  Next, add the main repository as a remote called "upstream" (you only have to do this once): `git remote add upstream https://github.com/DHSDevelopersClub/dhsdevelopersclub.github.io.git`.  Finally, pull the changes from the dev branch on upstream: `git pull upstream dev`.  You should also `git push` so your own fork stays up to date.  Nice job, you are now ready to [make more changes](#step-13-making-more-changes) to the website.
+
+### Step 13: Making More Changes
+
+If you've gotten this far, you've done most of the hard work already.  Making more changes in the future requires just X steps.
+
+1. [Sync your fork with the main repository.](#step-12-syncing-changes-back-to-your-fork)  This time, you don't need to add the remote; you just checkout dev, pull, then push.
+2. [Make a new branch.](#step-4-split-off-a-new-branch)  Name the branch something that makes sense (eg. if you plan to update the header of your site, call it `my-site-header` or something).  Make sure you are on the dev branch before branching.  If you just synced your fork with the main repository, you will probably be there already.
+3. Make your changes using your favorite text editor.
+4. [Test your changes.](#step-8-testing-your-home-page)  Even the best programmers rarely get it right the first time.  Everytime you make a change, test it out to see if it worked.  With the magic of gulp, you can just leave the browser tab open and look at it will show your latest changes when you save your files.
+5. [Commit your changes.](#step-10-commit-your-changes)  You can make more than one commit before making a pull request.  If you are making a lot of changes, you should split them up into smaller commits.
+6. [Make a pull request.](#step-11-submit-a-pull-request)  Once you have opened the pull request, you can still make commits in that branch.  If you `git push` them, they will become part of the pull request as well.
+
+Try to not make too many pull requests.  The website admins (Zander, Sebastian, and Max) have to manually test and deploy them.  It's much easier for them if you make a lot of changes on your fork, then bundle them up into one big pull request.
+
+### Step 14: Edit the README.md File
+
+Make sure to improve this file if you run into any problems.  You can edit this file in much the same way that you edit your index.html.  You can also edit it from the GitHub website.  The readme is written in markdown (hence the .md).  It is a very simplified version of HTML, see [this article](http://daringfireball.net/projects/markdown/syntax) for an overview of how to write markdown.  [Dillinger](http://dillinger.io/) is a good tool for editing markdown.  You can copy-paste the readme into it, make your edits, then copy-paste back into the file.
 
 Happy coding, and welcome to the club!
 
@@ -112,5 +153,3 @@ Happy coding, and welcome to the club!
 
 <a name="restrictions"></a>
 \* Certain restrictions apply: keep it PG and PC, no viruses or ads.  Club leadership reserves the right to make any changes we deem necessary to keep your page appropriate.
-
-
