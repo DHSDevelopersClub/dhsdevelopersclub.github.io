@@ -6,6 +6,8 @@ This is the repository for the Drake Developers Club website.  We are a club at 
 
 All new members should follow these steps to create their own unique homepage on the website.  If, as you go through this guide you encounter any problems, ask for help from a fellow club member (either in person, or by posting in #general in [slack](https://dhsdevelopers.slack.com/)) or from Google.  Both are happy to help and can probably get you sorted out.  If any part of the instructions are out of date, confusing, or incomplete, it is also the task of the new member to edit this file and fix any issues with the instructions, once you have solved the issue for yourself. If this seems like a lot to do (it kinda is) just remember you only have to do most of it once.
 
+**Note: running a command in terminal** just means opening up either terminal (Mac and Linux) or command prompt (Windows) and copy-pasting in the given command.  A command might look something like this: `ls -al ~`.  Once you have entered in the command, press enter.  That's it, terminal's not so complicated after all.
+
 ### Step 1: Get the Software
 
 Development requires software to edit and test your code.  Make sure you have all of the tools listed below.
@@ -20,7 +22,7 @@ Development requires software to edit and test your code.  Make sure you have al
 - **Node.js and NPM.** You will need these to preview the website and to get the rest of the resources to load the page. You'll learn what this means later on.
   - Windows: Download [Node.js](https://nodejs.org/en/) Node comes with NPM so don't worry about that yet.
   - Linux: Run `sudo apt-get install npm` in a terminal.
-  - Mac : Run `ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"` to get [Homebrew](http://brew.sh/) if you don't already have it, then run `brew install npm`.
+  - Mac : Run `ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"` in a terminal to get [Homebrew](http://brew.sh/) if you don't already have it, then run `brew install npm`.
   - **Bower and Gulp.** These can both be installed with NPM.  Once you have NPM (see above), open up a terminal and run `npm install -g gulp && npm install -g bower`.  If you are on linux or mac, you may need to run `sudo npm install -g gulp && sudo npm install -g bower`.
 
 ### Step 2: Fork the Repository
