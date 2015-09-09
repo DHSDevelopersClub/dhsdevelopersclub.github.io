@@ -41,18 +41,7 @@
     <hr>
 
     <section class="content">
-      <template is="dom-bind">
-        <member-card-group
-          names='{{clubMemberNames}}'>
-        </member-card-group>
-
-        <iron-ajax
-           auto
-           url="/roster/roster.json"
-           handle-as="json"
-           last-response="{{clubMemberNames}}">
-        </iron-ajax>
-      </template>
+      <member-card-group></member-card-group>
     </section>
   </div>
 </template>
