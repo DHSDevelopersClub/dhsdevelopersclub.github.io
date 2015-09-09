@@ -1,7 +1,6 @@
 (function() {
   "use strict";
-
-  var app = Polymer.dom(document).querySelector("#app");
+  var app = document.querySelector("#app");
 
   app.onRouteChange = function(event) {
     if (event.detail.path == "/" ||
