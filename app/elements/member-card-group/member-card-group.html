@@ -3,9 +3,13 @@
     :host {
       display: block;
     }
+
+    :host > div {
+      margin: -10px
+    }
   </style>
   <template>
-    <div class="layout horizontal wrap">
+    <div class="layout horizontal wrap center-justified">
       <template is="dom-repeat" items="{{names}}">
         <member-card name="{{item}}"></member-card>
       </template>
