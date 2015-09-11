@@ -78,6 +78,8 @@ Now open the folder with your name on it and make a new file inside it called `i
 
 When you're done, save the file.
 
+**Note:** if you already have a website that you want to use as your homepage, you can [setup a `config.json`](#setting-up-a-config-json).
+
 ### Step 7: Add Your Profile Info
 
 There are two more files you should add.  Find a picture you would like to use as your profile photo, and put it in your folder.  Rename it to profile.jpg.  If it isn't a JPEG, you will have to convert it.  Also, make a new text file called blurb.txt.  Inside it, write a few sentences about yourself and save it.  When you're done, your folder should have three files in it: `index.html`, `profile.jpg`, and `blurb.txt`.
@@ -150,6 +152,18 @@ Try to not make too many pull requests; the website admins (Zander, Sebastian, a
 Make sure to improve this file if you run into any problems.  You can edit this file in much the same way that you edit your index.html.  You can also edit it from the GitHub website.  The readme is written in markdown (hence the .md).  It is a very simplified version of HTML, see [this article](http://daringfireball.net/projects/markdown/syntax) for an overview of how to write markdown.  [Dillinger](http://dillinger.io/) is a good tool for editing markdown.  You can copy-paste the readme into it, make your edits, then copy-paste back into the file.
 
 Happy coding, and welcome to the club!
+
+------
+
+## Setting Up a config.json
+
+You can add a `config.json` to your folder in roster to redirect to a custom homepage.  Your `config.json` should look something like this:
+
+```
+{
+    "uri": "http://your-home-page.com"
+}
+```
 
 ------
 
