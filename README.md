@@ -78,7 +78,7 @@ Now open the folder with your name on it and make a new file inside it called `i
 
 When you're done, save the file.
 
-**Note:** if you already have a website that you want to use as your homepage, you can [setup a `config.json`](#setting-up-a-config-json).
+**Note:** if you already have a website that you want to use as your homepage, you can [setup a `config.json`](#setting-up-a-configjson).
 
 ### Step 7: Add Your Profile Info
 
