@@ -76,6 +76,13 @@
       on-response="_handleBlurbResponse"
       on-error="_handleBlurbError">
     </iron-ajax>
+
+    <iron-ajax
+       auto
+       url="{{pageConfigFileURI}}"
+       handle-as="json"
+       last-response="{{_pageConfig}}">
+     </iron-ajax>
   </template>
 
   <script>
@@ -100,9 +107,19 @@
           computed: '_getBlurbURI(name)'
         },
 
+        pageConfigFileURI: {
+          type: String,
+          computed: '_pageConfigFileURI(name)'
+        },
+
+        _pageConfig: {
+          type: Object,
+          value: {}
+        },
+
         webpageURI: {
           type: String,
-          computed: '_getWebpageURI(name)'
+          computed: '_getWebpageURI(name, _pageConfig)'
         },
 
         blurb: {
@@ -139,8 +156,12 @@
         return '/roster/' + name + '/blurb.txt';
       },
 
-      _getWebpageURI: function(name) {
-        return '/roster/' + name + '/index.html';
+      _getWebpageURI: function(name, _pageConfig) {
+        return _pageConfig.uri || '/roster/' + name + '/index.html';
+      },
+
+      _pageConfigFileURI: function(name) {
+        return '/roster/' + name + '/config.json';
       },
 
       _handleBlurbResponse: function(resp) {
