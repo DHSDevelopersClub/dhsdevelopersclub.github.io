@@ -2,9 +2,10 @@ html{
     height: 100%;
 }
 body{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     height: 100%;
     background-size: cover;
-    padding-top: 50px;
+    margin: 0;
 }
 main{
     position: relative;
@@ -13,7 +14,7 @@ main{
 .content{
     margin-left: auto;
     margin-right: auto;
-    width: 50%;
+    width: 75%;
     background: #fff;
     border-radius: 10px;
 }
