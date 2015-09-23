@@ -1,51 +1,98 @@
-a:link {
-  color: black;
+* {
+    margin: 0;
 }
 
-.headerContent {
-  width: 100%;
-  height: auto;
-  margin: 0 0 0 0;
-}
-
-body {
-  text-align: center;
-  font-family: 'Open Sans', sans-serif;
-  padding-bottom: 10px;
-  margin: 0px;
+#image {
+  background-image: url(fish.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100%;
+  height: auto !important;
   height: 100%;
-}
-
-.body a {
-  color: black;
-  text-decoration: none;
-}
-
-.body a:hover{
-  color: #003B6F;
-}
-
-.line {
-  background-color: #003B6F;
-  margin-bottom: 10px;
-  color: white;
-  font-size: large;
+  margin: 0 auto -20px;
   text-align: center;
-  padding-bottom: 16px;
-  padding-top: 16px;
+
+}
+html, body {
+  height: 100%;
+  padding: 0px;
 }
 
-
-.line a {
+#imageText {
+  display: inline-block;
+  font-weight: 400;
+  font-size: 8rem;
+  text-shadow: 1px 1px 2px black;
   color: white;
-  padding: 10px 20px;
+  font-family: 'Lobster', cursive;
+  padding-top: 10%;
+}
+#content {
+  margin-top: 15px;
+  font-family: 'Raleway', sans-serif;
+  text-align: center;
+  min-height: 500px;
+  margin-bottom: 50px;
+}
+.file-upload {
+    position: relative;
+    overflow: hidden;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.file-upload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+#uploadFile {
+    line-height: 28px;
+    cursor: default;
+}
+input[type="file"] {
+    display: block;
+}
+.obj {
+  width: 50%
+}
+a {
+  color: blue;
   text-decoration: none;
 }
-
-.line a:hover {
-  color: c9c9c9;
+a:hover {
+  color: purple;
 }
-
-#home {
-  margin-left: 30%;
+p {
+  margin-top: 20px;
 }
