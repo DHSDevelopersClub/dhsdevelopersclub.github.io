@@ -1,6 +1,6 @@
 {
   "name": "parallax-container",
-  "version": "0.0.0",
+  "version": "0.0.4",
   "authors": [
     "Winston Howes <winstonhowes@gmail.com>"
   ],
@@ -18,10 +18,10 @@
     "/.*",
     "/test/",
     "/demo/",
-    "bower_components"
+    "/bower_components"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.0.0"
+    "polymer": "~1.1.4"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
