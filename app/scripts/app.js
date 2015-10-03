@@ -21,7 +21,7 @@
   };
 
   var onHashChange = function() {
-    if (!window.location.hash || window.location.hash[0] !== "/") {
+    if (!window.location.hash || window.location.hash[1] !== "/") {
       window.location.hash = "/";
     }
   };
