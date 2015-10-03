@@ -20,14 +20,6 @@
     }, 100);
   };
 
-  var onHashChange = function() {
-    if (!window.location.hash || window.location.hash[0] !== "/") {
-      window.location.hash = "/";
-    }
-  };
-  window.addEventListener("hashchange", onHashChange);
-  onHashChange();
-
   app.addEventListener("dom-change", function() {
     // The contents of the app template have loaded
   });
