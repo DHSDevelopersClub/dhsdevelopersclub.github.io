@@ -114,6 +114,14 @@ h1.content {
 
 #joinHeaderImage {
   --image-loading-color: rgb(29, 25, 25);
+  background-color: black;
+}
+fullbleed-image#joinHeaderImage::shadow img {
+  filter: blur(25px);
+  -webkit-filter: blur(25px);
+  -moz-filter: blur(25px);
+  -o-filter: blur(25px);
+  -ms-filter: blur(25px);
 }
 
 #scrollDownButton {
