@@ -231,6 +231,7 @@ gulp.task('serve', ['styles', 'elements', 'images', 'generate-roster'], function
   gulp.watch(['app/elements/**/*.css'], ['elements', reload]);
   gulp.watch(['app/{scripts,elements}/**/{*.js,*.html}'], ['jshint']);
   gulp.watch(['app/images/**/*'], reload);
+  gulp.watch(['app/roster/**'], ['generate-roster']);
 });
 
 // Build and serve the output from the dist build
