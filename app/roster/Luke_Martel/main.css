@@ -1,17 +1,33 @@
 body{
-  background-image: url(http://www.zingerbugimages.com/backgrounds/wooden_fence_boards.jpg)
+  background-image: url(http://www.kynatins.com/images/WebsiteBackground.png)
 }
 .nav-bar{
-  background-color: blue;
-  height: 65px;
+  background-image:url(http://www.montreat.org/wp-content/uploads/2014/04/header-night.jpg);
+  height: 75px;
   text-align: center;
+  padding:1px;
+  border:8px solid white;
 }
 
 .nav-bar a {
-  text-decoration: none;
-  font-size: 200;
+  text-decoration:none;
+  font-size: 20px;
+  color: black;
+  font-family: 'Roboto', sans-serif;
 }
 
 .nav-bar ul li{
   text-decoration: none;
+}
+
+.paragraph{
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-right: 20px;
+  padding-left: 20px;
+  font-size: 15px;
+  color: black;
+  font-family: 'Roboto', sans-serif;
+  border: 8px solid black;
 }
