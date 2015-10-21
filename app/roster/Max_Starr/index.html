@@ -6,46 +6,26 @@
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="/res/main.css">
     <link rel="stylesheet" type="text/css" href="main.css">
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-route.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="./data/parallax.js-1.3.1/parallax.js"></script>
     <script src="app.js"></script>
+
+    <!-- Polymer -->
+    <link rel="import" href="../bower_components/paper-toolbar">
 </head>
-<body ng-app='myPage'>
-
-
+<body>
 
 <div class="parallax-window" data-parallax="scroll" data-image-src="./data/background.jpg">
-    <div layout="column" layout-fill ng-controller="navController">
-        <md-toolbar>
-            <div class="md-toolbar-tools transparent">
-                <span>Drake Developers Club</span>
-                <!-- fill up the space between left and right area -->
-                <span flex></span>
-                <md-button>
-                    Join
-                </md-button>
+    <paper-toolbar>
+        <paper-icon-button icon="menu" on-tap="menuAction"></paper-icon-button>
+        <div class="title">Title</div>
+        <paper-icon-button icon="more-vert" on-tap="moreAction"></paper-icon-button>
+    </paper-toolbar>
 
-                <md-button>
-                    Learn
-                </md-button>
-
-                <md-button>
-                    Collaborate
-                </md-button>
-            </div>
-        </md-toolbar>
-    </div>
-
-    <main ng-controller="myController">
+    <main>
         <div class="content">
-            <h4>Hi I'm {{author}} and I am a member of the Drake Developer's Club.</h4>
-            <p>Check out this AJAX!</p>
-            <input ng-model="example">
-            <p>{{example}}</p>
+            <h4>Hi I'm Max and I am a member of the Drake Developer's Club.</h4>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur quis justo ac purus porta pharetra. Pellentesque luctus elit quam, sit amet eleifend tellus feugiat ut. Maecenas eget libero sit amet ex maximus hendrerit non ac arcu. Donec nulla nulla, consequat et dui vitae, sollicitudin semper lacus. Nulla sed ultricies lacus, id auctor quam. Aliquam suscipit eleifend placerat. Nam nulla turpis, aliquam pretium lacus vitae, placerat sollicitudin ligula. Aliquam et orci viverra, tincidunt justo et, finibus ipsum. Integer pellentesque risus augue, eget blandit neque venenatis sit amet. Duis eu felis dapibus, ultricies tellus et, varius neque. Pellentesque lorem tortor, pellentesque mattis tortor vestibulum, scelerisque sodales mauris. Nulla facilisi. Sed volutpat justo aliquet, euismod leo sit amet, placerat erat. Sed sapien est, aliquet vel eleifend sit amet, iaculis nec neque. Proin velit nibh, congue ut porta quis, varius ac augue. Nulla ut tempor ex.
 
             Aenean pellentesque interdum elit, eu tempor orci malesuada nec. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tempor sagittis faucibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Maecenas cursus, diam at luctus vehicula, leo felis molestie leo, vitae laoreet ante magna at velit. Praesent molestie diam eget quam ornare tincidunt. In at metus elit. Vestibulum viverra neque quis nisi scelerisque, quis feugiat nisl sagittis.
