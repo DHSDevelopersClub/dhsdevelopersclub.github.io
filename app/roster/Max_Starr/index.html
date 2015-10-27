@@ -3,6 +3,8 @@
 <html>
 <head>
     <title>Max's Page</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="/res/main.css">
     <link rel="stylesheet" type="text/css" href="main.css">
@@ -18,16 +20,26 @@
     <script src="/bower_components/webcomponentsjs/webcomponents.min.js"></script>
 >>>>>>> Updated Personal Page
 
+    <!-- Bootstrap -->
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
     <!-- Polymer -->
     <link rel="import" href="/bower_components/paper-toolbar/paper-toolbar.html">
     <link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
     <link rel="import" href="/bower_components/polymer/polymer.html">
     <link rel="import" href="/bower_components/iron-icons/iron-icons.html">
 </head>
-<body>
-        <paper-toolbar>
+<body fullbleed layout vertical>
+        <paper-toolbar justify="start">
             <paper-icon-button icon="menu" on-tap="menuAction"></paper-icon-button>
             <div class="title">Title</div>
+            <paper-menu>
+                <paper-item>Item 1</paper-item>
+                <paper-item>Item 2</paper-item>
+            </paper-menu>
             <paper-icon-button icon="more-vert" on-tap="moreAction"></paper-icon-button>
         </paper-toolbar>
 
