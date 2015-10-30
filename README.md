@@ -65,12 +65,23 @@ Now open the folder with your name on it and make a new file inside it called `i
 
 ```html
   <!doctype html>
-  
+
+  <!--
+  This is a comment.  The computer ignores it, so it is meant only for the
+  people who are reading your code (including you).
+  -->
+
   <html>
     <head>
       <title>Your Name Here</title>
     </head>
     <body>
+      <!--
+      Keep this <span> element.  It magically reloads the page when you change
+      your code. (but you have to be using gulp serve)
+      -->
+      <span id="browser-sync-binding"></span>
+
       Hi I'm Your Name Here and I am a member of the Drake Developer's Club.
     </body>
   </html>
@@ -86,9 +97,9 @@ There are two more files you should add.  Find a picture you would like to use a
 
 ### Step 8: Testing Your Home Page
 
-Open up a terminal/comand line and navigate to the `dhsdevelopersclub.github.io` directory using `cd`.  Once you're, there run 
+Open up a terminal/comand line and navigate to the `dhsdevelopersclub.github.io` directory using `cd`.  Once you're, there run
 
-Next you need to load the rest of the resorces for the page, run  let it do its thing and then run `npm install && bower install`. This might take a bit so be patient. What it's doing is grabbing all of the code that we include in out page to make it run so we don't have to write everything. 
+Next you need to load the rest of the resorces for the page, run  let it do its thing and then run `npm install && bower install`. This might take a bit so be patient. What it's doing is grabbing all of the code that we include in out page to make it run so we don't have to write everything.
 
 Once you have all that downloaded, run `gulp serve`. This should open a new tab in your default browser with the club website loaded.  Scroll down, and find the club roster.  Your name should show up with the picture and text you added in [step #7](#step-7-add-your-profile-info).  Click it to go to your page.
 
@@ -110,9 +121,9 @@ You will be prompted to enter a commit message.  A commit message should be one 
 
 ```
   Completely redesign my home page.
-  
-  I added a header bar, replaced the logo, and changed up the color 
-  scheme.  I also added a link to another page with a list of 
+
+  I added a header bar, replaced the logo, and changed up the color
+  scheme.  I also added a link to another page with a list of
   projects I have completed.
 ```
 
