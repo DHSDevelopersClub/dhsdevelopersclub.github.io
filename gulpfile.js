@@ -28,6 +28,12 @@ var AUTOPREFIXER_BROWSERS = [
   'android >= 4.4',
   'bb >= 10'
 ];
+var TESTING_BROWSERS = [
+  'firefox',
+  'google chrome',
+  'safari',
+  'edge'  // TODO: make sure this actually works (I don't have windows to test it)
+];
 
 var styleTask = function (stylesPath, srcs) {
   return gulp.src(srcs.map(function(src) {
@@ -253,6 +259,7 @@ gulp.task('serve:dist', ['default'], function () {
     //       will present a certificate warning in the browser.
     // https: true,
     server: 'dist',
+    browser: TESTING_BROWSERS,
     middleware: [ historyApiFallback() ]
   });
 });
