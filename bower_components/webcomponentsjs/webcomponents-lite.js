@@ -7,14 +7,13 @@
  * Code distributed by Google as part of the polymer project is also
  * subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
  */
-// @version 0.7.15
-(function() {
-  window.WebComponents = window.WebComponents || {
-    flags: {}
-  };
+// @version 0.7.14
+window.WebComponents = window.WebComponents || {};
+
+(function(scope) {
+  var flags = scope.flags || {};
   var file = "webcomponents-lite.js";
   var script = document.querySelector('script[src*="' + file + '"]');
-  var flags = {};
   if (!flags.noOpts) {
     location.search.slice(1).split("&").forEach(function(option) {
       var parts = option.split("=");
@@ -30,7 +29,7 @@
         }
       }
     }
-    if (flags.log && flags.log.split) {
+    if (flags.log) {
       var parts = flags.log.split(",");
       flags.log = {};
       parts.forEach(function(f) {
@@ -40,14 +39,20 @@
       flags.log = {};
     }
   }
+  flags.shadow = flags.shadow || flags.shadowdom || flags.polyfill;
+  if (flags.shadow === "native") {
+    flags.shadow = false;
+  } else {
+    flags.shadow = flags.shadow || !HTMLElement.prototype.createShadowRoot;
+  }
   if (flags.register) {
     window.CustomElements = window.CustomElements || {
       flags: {}
     };
     window.CustomElements.flags.register = flags.register;
   }
-  WebComponents.flags = flags;
-})();
+  scope.flags = flags;
+})(window.WebComponents);
 
 (function(scope) {
   "use strict";
@@ -608,9 +613,6 @@ if (typeof WeakMap === "undefined") {
 }
 
 (function(global) {
-  if (global.JsMutationObserver) {
-    return;
-  }
   var registrationsTable = new WeakMap();
   var setImmediate;
   if (/Trident|Edge/.test(navigator.userAgent)) {
@@ -906,10 +908,7 @@ if (typeof WeakMap === "undefined") {
     }
   };
   global.JsMutationObserver = JsMutationObserver;
-  if (!global.MutationObserver) {
-    global.MutationObserver = JsMutationObserver;
-    JsMutationObserver._isPolyfilled = true;
-  }
+  if (!global.MutationObserver) global.MutationObserver = JsMutationObserver;
 })(self);
 
 window.HTMLImports = window.HTMLImports || {
@@ -1757,9 +1756,8 @@ window.CustomElements.addModule(function(scope) {
       }
     });
   }
-  var hasThrottledAttached = window.MutationObserver._isPolyfilled && flags["throttle-attached"];
-  scope.hasPolyfillMutations = hasThrottledAttached;
-  scope.hasThrottledAttached = hasThrottledAttached;
+  var hasPolyfillMutations = !window.MutationObserver || window.MutationObserver === window.JsMutationObserver;
+  scope.hasPolyfillMutations = hasPolyfillMutations;
   var isPendingMutations = false;
   var pendingMutations = [];
   function deferMutation(fn) {
@@ -1778,7 +1776,7 @@ window.CustomElements.addModule(function(scope) {
     pendingMutations = [];
   }
   function attached(element) {
-    if (hasThrottledAttached) {
+    if (hasPolyfillMutations) {
       deferMutation(function() {
         _attached(element);
       });
@@ -1801,7 +1799,7 @@ window.CustomElements.addModule(function(scope) {
     });
   }
   function detached(element) {
-    if (hasThrottledAttached) {
+    if (hasPolyfillMutations) {
       deferMutation(function() {
         _detached(element);
       });

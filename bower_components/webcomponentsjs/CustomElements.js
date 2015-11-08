@@ -7,7 +7,7 @@
  * Code distributed by Google as part of the polymer project is also
  * subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
  */
-// @version 0.7.15
+// @version 0.7.14
 if (typeof WeakMap === "undefined") {
   (function() {
     var defineProperty = Object.defineProperty;
@@ -45,9 +45,6 @@ if (typeof WeakMap === "undefined") {
 }
 
 (function(global) {
-  if (global.JsMutationObserver) {
-    return;
-  }
   var registrationsTable = new WeakMap();
   var setImmediate;
   if (/Trident|Edge/.test(navigator.userAgent)) {
@@ -343,10 +340,7 @@ if (typeof WeakMap === "undefined") {
     }
   };
   global.JsMutationObserver = JsMutationObserver;
-  if (!global.MutationObserver) {
-    global.MutationObserver = JsMutationObserver;
-    JsMutationObserver._isPolyfilled = true;
-  }
+  if (!global.MutationObserver) global.MutationObserver = JsMutationObserver;
 })(self);
 
 window.CustomElements = window.CustomElements || {
@@ -448,9 +442,8 @@ window.CustomElements.addModule(function(scope) {
       }
     });
   }
-  var hasThrottledAttached = window.MutationObserver._isPolyfilled && flags["throttle-attached"];
-  scope.hasPolyfillMutations = hasThrottledAttached;
-  scope.hasThrottledAttached = hasThrottledAttached;
+  var hasPolyfillMutations = !window.MutationObserver || window.MutationObserver === window.JsMutationObserver;
+  scope.hasPolyfillMutations = hasPolyfillMutations;
   var isPendingMutations = false;
   var pendingMutations = [];
   function deferMutation(fn) {
@@ -469,7 +462,7 @@ window.CustomElements.addModule(function(scope) {
     pendingMutations = [];
   }
   function attached(element) {
-    if (hasThrottledAttached) {
+    if (hasPolyfillMutations) {
       deferMutation(function() {
         _attached(element);
       });
@@ -492,7 +485,7 @@ window.CustomElements.addModule(function(scope) {
     });
   }
   function detached(element) {
-    if (hasThrottledAttached) {
+    if (hasPolyfillMutations) {
       deferMutation(function() {
         _detached(element);
       });
