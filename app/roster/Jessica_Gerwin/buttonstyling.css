@@ -1,0 +1,50 @@
+/*button panel */
+.ghost-button {
+    color: white;
+    background: none;
+    border: 1px solid #fff;
+    font-size: 24px;
+    padding: 9px 30px;
+    width:10%;
+    font-weight: normal;
+    display: inline-block;
+    text-decoration: none;
+    font-family: "HelveticaLTStd-Roman", Arial, sans-serif;
+    min-width: 120px;
+	text-transform: uppercase;
+	display: inline-block;
+  position: absolute;
+  margin-left:45%;
+  margin-top: 35%;
+
+}
+
+.ghost-button:hover, .ghost-button:active {
+  color:#fff;
+  background: none;
+  text-decoration: none;
+  opacity: 0.8;
+}
+
+.ghost-button-sub {
+    color: #4c4c4c;
+    background: none;
+    border: 1px solid #4c4c4c;
+    font-size: 16px;
+    padding: 9px 30px;
+    font-weight: normal;
+    display: inline-block;
+    text-decoration: none;
+    font-family: "HelveticaLTStd-Roman", Arial, sans-serif;
+    min-width: 120px;
+	text-transform: uppercase;
+	display: inline-block;
+
+}
+
+.ghost-button-sub:hover, .ghost-button-sub:active {
+  color:#f16529;
+  border: 1px solid #f16529;
+  background: none;
+  text-decoration: none;
+}

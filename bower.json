@@ -7,8 +7,8 @@
     "iron-overlay-behavior": "PolymerElements/iron-overlay-behavior#~1.0.6",
     "paper-elements": "PolymerElements/paper-elements#~1.0.5",
     "parallax-container": "~0.0.3",
-    "polymer": "Polymer/polymer#~1.0.3",
-    "webcomponentsjs": "~0.7.12"
+    "polymer": "Polymer/polymer#1.0.3",
+    "webcomponentsjs": "#0.7.14"
   },
   "resolutions": {
     "polymer": "^1.1.0"
