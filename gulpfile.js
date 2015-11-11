@@ -16,6 +16,10 @@ var deploy = require('gulp-gh-pages');
 var stringifyObject = require('stringify-object');
 var gutil = require('gulp-util');
 var stream = require('stream');
+var os = require('os');
+
+var WINDOWS = /^win/.test(os.platform());
+var MAC = /^darwin$/.test(os.platform());
 
 var AUTOPREFIXER_BROWSERS = [
   'ie >= 10',
@@ -28,6 +32,16 @@ var AUTOPREFIXER_BROWSERS = [
   'android >= 4.4',
   'bb >= 10'
 ];
+
+var TESTING_BROWSERS = [
+  'firefox',
+  'chrome'
+];
+if (WINDOWS) {
+    TESTING_BROWSERS.push('iexplore');
+} else if (MAC) {
+    TESTING_BROWSERS.push('safari');
+}
 
 var styleTask = function (stylesPath, srcs) {
   return gulp.src(srcs.map(function(src) {
@@ -253,6 +267,7 @@ gulp.task('serve:dist', ['default'], function () {
     //       will present a certificate warning in the browser.
     // https: true,
     server: 'dist',
+    browser: TESTING_BROWSERS,
     middleware: [ historyApiFallback() ]
   });
 });
