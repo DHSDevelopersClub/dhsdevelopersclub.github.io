@@ -35,12 +35,12 @@ var AUTOPREFIXER_BROWSERS = [
 
 var TESTING_BROWSERS = [
   'firefox',
-  'chrome'
+  'google chrome'
 ];
 if (WINDOWS) {
-    TESTING_BROWSERS.push('iexplore');
+  TESTING_BROWSERS.push('iexplore');
 } else if (MAC) {
-    TESTING_BROWSERS.push('safari');
+  TESTING_BROWSERS.push('safari');
 }
 
 var styleTask = function (stylesPath, srcs) {
@@ -213,8 +213,7 @@ gulp.task('clean', function (cb) {
   del(['.tmp', 'dist'], cb);
 });
 
-// Watch files for changes & reload
-gulp.task('serve', ['styles', 'elements', 'images', 'generate-roster'], function () {
+var serveTask = function(browser) {
   browserSync({
     port: 5000,
     notify: false,
@@ -231,6 +230,7 @@ gulp.task('serve', ['styles', 'elements', 'images', 'generate-roster'], function
     // Note: this uses an unsigned certificate which on first access
     //       will present a certificate warning in the browser.
     // https: true,
+    browser: browser,
     server: {
       baseDir: ['.tmp', 'app'],
       middleware: [ historyApiFallback() ],
@@ -246,6 +246,15 @@ gulp.task('serve', ['styles', 'elements', 'images', 'generate-roster'], function
   gulp.watch(['app/{scripts,elements}/**/{*.js,*.html}'], ['jshint']);
   gulp.watch(['app/images/**/*'], reload);
   gulp.watch(['app/roster/**'], ['generate-roster', reload]);
+}
+
+// Watch files for changes & reload
+gulp.task('serve', ['styles', 'elements', 'images', 'generate-roster'], function () {
+  serveTask('default');
+});
+
+gulp.task('multi-serve', ['styles', 'elements', 'images', 'generate-roster'], function () {
+  serveTask(TESTING_BROWSERS);
 });
 
 // Build and serve the output from the dist build
