@@ -16,6 +16,11 @@ var deploy = require('gulp-gh-pages');
 var stringifyObject = require('stringify-object');
 var gutil = require('gulp-util');
 var stream = require('stream');
+var os = require('os');
+
+var WINDOWS = /^win/.test(os.platform());
+var MAC = /^darwin$/.test(os.platform());
+var OS_MAJOR_VERSION = Number(/^(\d+)/.exec(os.release())[0])
 
 var AUTOPREFIXER_BROWSERS = [
   'ie >= 10',
@@ -28,12 +33,20 @@ var AUTOPREFIXER_BROWSERS = [
   'android >= 4.4',
   'bb >= 10'
 ];
+
 var TESTING_BROWSERS = [
   'firefox',
-  'google chrome',
-  'safari',
-  'edge'  // TODO: make sure this actually works (I don't have windows to test it)
+  'chrome'
 ];
+if (WINDOWS) {
+    if (OS_MAJOR_VERSION >= 10) {
+        TESTING_BROWSERS.push('edge');  // TODO: make sure edge actually works (I don't have windows 10 to test it)
+    } else {
+        TESTING_BROWSERS.push('iexplore');
+    }
+} else if (MAC) {
+    TESTING_BROWSERS.push('safari');
+}
 
 var styleTask = function (stylesPath, srcs) {
   return gulp.src(srcs.map(function(src) {
