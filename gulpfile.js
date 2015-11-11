@@ -20,7 +20,6 @@ var os = require('os');
 
 var WINDOWS = /^win/.test(os.platform());
 var MAC = /^darwin$/.test(os.platform());
-var OS_MAJOR_VERSION = Number(/^(\d+)/.exec(os.release())[0])
 
 var AUTOPREFIXER_BROWSERS = [
   'ie >= 10',
@@ -39,11 +38,7 @@ var TESTING_BROWSERS = [
   'chrome'
 ];
 if (WINDOWS) {
-    if (OS_MAJOR_VERSION >= 10) {
-        TESTING_BROWSERS.push('edge');  // TODO: make sure edge actually works (I don't have windows 10 to test it)
-    } else {
-        TESTING_BROWSERS.push('iexplore');
-    }
+    TESTING_BROWSERS.push('iexplore');
 } else if (MAC) {
     TESTING_BROWSERS.push('safari');
 }
