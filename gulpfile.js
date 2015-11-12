@@ -17,6 +17,7 @@ var stringifyObject = require('stringify-object');
 var gutil = require('gulp-util');
 var stream = require('stream');
 var os = require('os');
+var url = require('url');
 
 var WINDOWS = /^win/.test(os.platform());
 var MAC = /^darwin$/.test(os.platform());
@@ -213,9 +214,10 @@ gulp.task('clean', function (cb) {
   del(['.tmp', 'dist'], cb);
 });
 
-var serveTask = function(browser) {
+// Start a Browsersync server
+var startBrowserSync = function(port, browser, baseDir, routes) {
   browserSync({
-    port: 5000,
+    port: port,
     notify: false,
     logPrefix: 'PSK',
     snippetOptions: {
@@ -232,12 +234,18 @@ var serveTask = function(browser) {
     // https: true,
     browser: browser,
     server: {
-      baseDir: ['.tmp', 'app'],
+      baseDir: baseDir,
       middleware: [ historyApiFallback() ],
-      routes: {
-        '/bower_components': 'bower_components'
-      }
-    }
+      routes: routes
+    },
+    middleware: [] // Hack to make blank urls show their index.html
+  });
+};
+
+// Watch files for changes & reload
+var serveTask = function(browser) {
+  startBrowserSync(5000, browser, ['.tmp', 'app'], {
+    '/bower_components': 'bower_components'
   });
 
   gulp.watch(['app/**/*.html'], reload);
@@ -246,39 +254,21 @@ var serveTask = function(browser) {
   gulp.watch(['app/{scripts,elements}/**/{*.js,*.html}'], ['jshint']);
   gulp.watch(['app/images/**/*'], reload);
   gulp.watch(['app/roster/**'], ['generate-roster', reload]);
-}
+};
 
-// Watch files for changes & reload
-gulp.task('serve', ['styles', 'elements', 'images', 'generate-roster'], function () {
+var serveSubTasks = ['styles', 'elements', 'images', 'generate-roster'];
+
+gulp.task('serve', serveSubTasks, function () {
   serveTask('default');
 });
 
-gulp.task('multi-serve', ['styles', 'elements', 'images', 'generate-roster'], function () {
+gulp.task('multi-serve', serveSubTasks, function () {
   serveTask(TESTING_BROWSERS);
 });
 
 // Build and serve the output from the dist build
 gulp.task('serve:dist', ['default'], function () {
-  browserSync({
-    port: 5001,
-    notify: false,
-    logPrefix: 'PSK',
-    snippetOptions: {
-      rule: {
-        match: '<span id="browser-sync-binding"></span>',
-        fn: function (snippet) {
-          return snippet;
-        }
-      }
-    },
-    // Run as an https by uncommenting 'https: true'
-    // Note: this uses an unsigned certificate which on first access
-    //       will present a certificate warning in the browser.
-    // https: true,
-    server: 'dist',
-    browser: TESTING_BROWSERS,
-    middleware: [ historyApiFallback() ]
-  });
+  startBrowserSync(5001, TESTING_BROWSERS, 'dist');
 });
 
 /**
