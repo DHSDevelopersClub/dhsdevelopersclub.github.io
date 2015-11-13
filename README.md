@@ -178,5 +178,15 @@ You can add a `config.json` to your folder in roster to redirect to a custom hom
 
 ------
 
+## Adding Resource Cards to the Learn Page
+
+The Learn page is loaded from `app/pages/learn.html`.  If you know of any online tutorials, reference materials or other helpful resources for a specific language, you are more than welcome to add them.  If the language in question isn't listed, feel free to add a section for it before adding your resource.  The code in learn.html is pretty self-explanatory, but if you're confused, don't hesitate to message @zander on slack in #help.
+
+You can also add yourself as a resource, using a `<member-card>` element.  Again, there is example code in learn.html, but you can just insert `<member-card name="Your_Name"></member-card>` into the `<card-carousel>`.
+
+Your help in giving our newer members resources to start them on their way is much appreciated.
+
+------
+
 <a name="restrictions"></a>
 \* Certain restrictions apply: keep it PG and PC, no viruses or ads.  Club leadership reserves the right to make any changes we deem necessary to keep your page appropriate.
