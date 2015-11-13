@@ -1,5 +1,10 @@
 <style is="custom-style">
 
+:root {
+  --content-margin-horiz: calc(15px + 10vw);
+  --content-margin-vert: 15px;
+}
+
 body {
   font-family: 'Helvetica', sans-serif;
   background-color: white;
@@ -46,12 +51,17 @@ hr {
 }
 
 .content {
-  margin: 15px calc(15px + 10%);
+  margin: var(--content-margin-vert) var(--content-margin-horiz);
   max-width: 1000px;
 }
 
 h1.content {
   margin-top: 40px;
+}
+
+card-carousel {
+  --carousel-padding-horiz: var(--content-margin-horiz);
+  --carousel-padding-vert: var(--content-margin-vert);
 }
 
 #mainNavbar {
