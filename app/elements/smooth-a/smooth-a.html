@@ -27,7 +27,7 @@ An anchor element that improves hash scrolling.
       var anchors = {};
 
       function smoothScroll(scrollPos) {
-        $("body").animate({
+        $("html, body").animate({
           scrollTop: scrollPos
         }, 600);
       }
