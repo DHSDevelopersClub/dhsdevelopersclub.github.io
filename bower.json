@@ -11,6 +11,7 @@
     "webcomponentsjs": "#0.7.14"
   },
   "resolutions": {
-    "polymer": "^1.1.0"
+    "polymer": "^1.1.0",
+    "webcomponentsjs": "0.7.14"
   }
 }
