@@ -133,7 +133,7 @@ body {
   position: absolute;
   top: 0;
   height: 100%;
-  
+
   @apply(--gradient-bg);
 }
 
@@ -188,6 +188,20 @@ body {
 
 .content-area p {
   padding: 0 15%;
+}
+
+@media (max-width: 639px) {
+  .content-area p {
+    padding: 0;
+  }
+
+  #mainHeading {
+    font-size: 3.5rem;
+  }
+
+  #headerTitle a {
+    display: none;
+  }
 }
 
 </style>
