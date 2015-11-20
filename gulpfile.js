@@ -219,7 +219,7 @@ var startBrowserSync = function(port, browser, baseDir, routes) {
   browserSync({
     port: port,
     notify: false,
-    logPrefix: 'PSK',
+    logPrefix: 'DHS',
     snippetOptions: {
       rule: {
         match: '<span id="browser-sync-binding"></span>',
