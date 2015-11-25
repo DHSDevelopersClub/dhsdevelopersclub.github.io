@@ -8,10 +8,11 @@
     "paper-elements": "PolymerElements/paper-elements#~1.0.5",
     "paper-toolbar": "PolymerElements/paper-toolbar#~1.0.4",
     "parallax-container": "~0.0.3",
-    "polymer": "Polymer/polymer#^1.0.3",
-    "webcomponentsjs": "#^0.7.14"
+    "polymer": "Polymer/polymer#1.0.3",
+    "webcomponentsjs": "#0.7.14"
   },
   "resolutions": {
-    "polymer": "^1.0.3"
+    "polymer": "^1.1.0",
+    "webcomponentsjs": "0.7.14"
   }
 }
