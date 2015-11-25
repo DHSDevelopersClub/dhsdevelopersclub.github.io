@@ -254,6 +254,8 @@ var serveTask = function(browser) {
   gulp.watch(['app/{scripts,elements}/**/{*.js,*.html}'], ['jshint']);
   gulp.watch(['app/images/**/*'], reload);
   gulp.watch(['app/roster/**'], ['generate-roster', reload]);
+
+  gulp.watch(['bower_components/**/*'], reload);
 };
 
 var serveSubTasks = ['styles', 'elements', 'images', 'generate-roster'];
