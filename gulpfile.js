@@ -89,8 +89,6 @@ var optimizeHtmlTask = function(src, dest) {
   var assets = $.useref.assets({searchPath: [".tmp", "app", "dist"]});
 
   return gulp.src(src)
-    // Replace path for vulcanized assets
-    .pipe($.if("app/index.html", $.replace("elements/elements.html", "elements/elements.vulcanized.html")))
     .pipe(assets)
     // Concatenate and minify JavaScript
     .pipe($.if("*.js", $.uglify({preserveComments: "some"})))
@@ -108,6 +106,12 @@ var optimizeHtmlTask = function(src, dest) {
     // Output files
     .pipe(gulp.dest(dest))
     .pipe($.size({title: "html"}));
+};
+
+var vulcanizeTask = function(src, dest) {
+  return gulp.src(src)
+    .pipe(polybuild({maximumCrush: true}))
+    .pipe(gulp.dest(dest));
 };
 
 // Start a Browsersync server
@@ -166,7 +170,7 @@ gulp.task("resize-profiles", function() {
       .pipe($.rename({ suffix: "-" + i + "x" }))
       .pipe(gulp.dest("dist/roster/")));
   }
-  return merged.pipe($.size({title: "profile-images"}));
+  return merged.pipe($.size({title: "resize-profiles"}));
 });
 
 // Optimize images
@@ -215,11 +219,7 @@ gulp.task("copy", function() {
   var swToolbox = gulp.src(["bower_components/sw-toolbox/*.js"])
     .pipe(gulp.dest("dist/sw-toolbox"));
 
-  var vulcanized = gulp.src(["app/elements/elements.html"])
-    .pipe($.rename("elements.vulcanized.html"))
-    .pipe(gulp.dest("dist/elements"));
-
-  return merge(app, bower, roster, elements, vulcanized, swBootstrap, swToolbox)
+  return merge(app, bower, roster, elements, swBootstrap, swToolbox)
     .pipe($.size({title: "copy"}));
 });
 
@@ -239,10 +239,12 @@ gulp.task("html", function() {
 
 // Polybuild will take care of inlining HTML imports,
 // scripts and CSS for you.
+// Anyone who wants their page vulcanized can add a vulcanizeTask here.
 gulp.task("vulcanize", function() {
-  return gulp.src("dist/index.html")
-    .pipe(polybuild({maximumCrush: true}))
-    .pipe(gulp.dest("dist/"));
+  var app = vulcanizeTask("dist/index.html", "dist/");
+  var zander = vulcanizeTask(
+    "dist/roster/Zander_Otavka/index.html", "dist/roster/Zander_Otavka");
+  return merge(app, zander);
 });
 
 // If you require more granular configuration of Vulcanize
@@ -251,13 +253,13 @@ gulp.task("vulcanize", function() {
 
 // Rename Polybuild"s index.build.html to index.html
 gulp.task("rename-index", function() {
-  return gulp.src("dist/index.build.html")
-    .pipe($.rename("index.html"))
+  return gulp.src("dist/**/index.build.html")
+    .pipe($.rename({ basename: "index" }))
     .pipe(gulp.dest("dist/"));
 });
 
 gulp.task("remove-old-build-index", function() {
-  return del("dist/index.build.html");
+  return del("dist/**/index.build.html");
 });
 
 // Generate config data for the <sw-precache-cache> element.
