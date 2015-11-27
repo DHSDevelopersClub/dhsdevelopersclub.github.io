@@ -20,13 +20,19 @@ Copyright (C) 2015 Drake Developers Club.  All rights reserved.
   <template>
     <a href="{{webpageURI}}">
       <content-card default-elevation="0" hovered-elevation="2">
-        <object class="card-image" data="{{profileImageURI}}" type="image/jpg">
-          <img src="/images/default-profile.jpg">
-        </object>
+        <img id="profileImage" class="card-image">
         <div class="card-title">{{readableName}}</div>
         <div class="card-text">{{blurb}}</div>
       </content-card>
     </a>
+
+    <iron-ajax
+      auto
+      url="{{profileImageURI}}"
+      handle-as="blob"
+      on-response="_handleImgResponse"
+      on-error="_handleImgError">
+    </iron-ajax>
 
     <iron-ajax
       auto
@@ -117,6 +123,14 @@ Copyright (C) 2015 Drake Developers Club.  All rights reserved.
 
       _handleBlurbResponse: function(resp) {
         this._setBlurb(resp.detail.response);
+      },
+
+      _handleImgResponse: function(resp) {
+        this.$.profileImage.src = URL.createObjectURL(resp.detail.response);
+      },
+
+      _handleImgError: function(resp) {
+        this.$.profileImage.src = "/images/default-profile.jpg";
       }
     });
   </script>
