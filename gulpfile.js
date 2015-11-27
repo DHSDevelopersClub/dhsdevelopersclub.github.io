@@ -1,3 +1,15 @@
+/*
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+*/
+
+'use strict';
+
+// Include Gulp & tools we'll use
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var del = require('del');
@@ -12,9 +24,7 @@ var historyApiFallback = require('connect-history-api-fallback');
 var packageJson = require('./package.json');
 var crypto = require('crypto');
 var polybuild = require('polybuild');
-var deploy = require('gulp-gh-pages');
 var stringifyObject = require('stringify-object');
-var gutil = require('gulp-util');
 var stream = require('stream');
 var os = require('os');
 
@@ -55,39 +65,100 @@ var styleTask = function (stylesPath, srcs) {
     .pipe($.size({title: stylesPath}));
 };
 
-// Compile and automatically prefix stylesheets
-gulp.task('styles', function () {
-  return styleTask('styles', ['**/*.css']);
-});
-
-gulp.task('elements', function () {
-  return styleTask('elements', ['**/*.css']);
-});
-
-// Lint JavaScript
-gulp.task('jshint', function () {
-  return gulp.src([
-      'app/scripts/**/*.js',
-      'app/elements/**/*.js',
-      'app/elements/**/*.html'
-    ])
-    .pipe(reload({stream: true, once: true}))
+var jshintTask = function (src) {
+  return gulp.src(src)
     .pipe($.jshint.extract()) // Extract JS from .html files
     .pipe($.jshint())
     .pipe($.jshint.reporter('jshint-stylish'))
     .pipe($.if(!browserSync.active, $.jshint.reporter('fail')));
+};
+
+var imageOptimizeTask = function (src, dest) {
+  return gulp.src(src)
+    .pipe($.cache($.imagemin({
+      progressive: true,
+      interlaced: true,
+      multipass: true
+    })))
+    .pipe(gulp.dest(dest))
+    .pipe($.size({title: 'images'}));
+};
+
+var optimizeHtmlTask = function (src, dest) {
+  var assets = $.useref.assets({searchPath: ['.tmp', 'app', 'dist']});
+
+  return gulp.src(src)
+    // Replace path for vulcanized assets
+    .pipe($.if('app/index.html', $.replace('elements/elements.html', 'elements/elements.vulcanized.html')))
+    .pipe(assets)
+    // Concatenate and minify JavaScript
+    .pipe($.if('*.js', $.uglify({preserveComments: 'some'})))
+    // Concatenate and minify styles
+    // In case you are still using useref build blocks
+    .pipe($.if('*.css', $.cssmin()))
+    .pipe(assets.restore())
+    .pipe($.useref())
+    // Minify any HTML
+    .pipe($.if('*.html', $.minifyHtml({
+      quotes: true,
+      empty: true,
+      spare: true
+    })))
+    // Output files
+    .pipe(gulp.dest(dest))
+    .pipe($.size({title: 'html'}));
+};
+
+// Compile and automatically prefix stylesheets
+gulp.task('app-styles', function () {
+  return styleTask('styles', ['**/*.css']);
+});
+
+gulp.task('element-styles', function () {
+  return styleTask('elements', ['**/*.css']);
+});
+
+gulp.task('roster-styles', function () {
+  return styleTask('roster', ['**/*.css']);
+});
+
+// Scale images for multiple screen resolutions
+gulp.task('resize-profiles', function () {
+  var merged = merge();
+  for (var i = 1; i <= 3; i++) {
+    merged.add(gulp.src(['app/roster/*/profile.jpg'])
+      .pipe($.imageResize({
+        width: 100 * i,
+        height: 100 * i,
+        crop: true,
+        upscale: false,
+        imageMagick: true
+      }))
+      .pipe($.rename({ suffix: '-' + i + 'x' }))
+      .pipe(gulp.dest('dist/roster/')));
+  }
+  return merged.pipe($.size({title: 'profile-images'}));
 });
 
 // Optimize images
-gulp.task('images', function () {
-  return gulp.src('app/images/**/*')
-    .pipe($.if($.if.isFile,$.cache($.imagemin({
-      progressive: true,
-      interlaced: true
-    }))
-    .on('error', function(err){ console.log(err); this.end; })))
-    .pipe(gulp.dest('dist/images'))
-    .pipe($.size({title: 'images'}));
+gulp.task('app-images', function () {
+  return imageOptimizeTask('app/images/**/*', 'dist/images');
+});
+
+gulp.task('roster-images', function () {
+  return imageOptimizeTask('app/roster/**/*.{png,jpg,jpeg}', 'dist/roster');
+});
+
+// Lint JavaScript
+gulp.task('jshint', function () {
+  return jshintTask([
+      'app/scripts/**/*.js',
+      'app/elements/**/*.js',
+      'app/elements/**/*.html',
+      'app/roster/**/*.js',
+      'app/roster/**/*.html',
+      'gulpfile.js'
+    ]);
 });
 
 // Copy all files at the root level (app)
@@ -100,9 +171,8 @@ gulp.task('copy', function () {
     dot: true
   }).pipe(gulp.dest('dist'));
 
-  var bower = gulp.src([
-    'bower_components/**/*'
-  ]).pipe(gulp.dest('dist/bower_components'));
+  var bower = gulp.src(['bower_components/**/*'])
+    .pipe(gulp.dest('dist/bower_components'));
 
   var roster = gulp.src(['app/roster/**/*'])
     .pipe(gulp.dest('dist/roster'));
@@ -133,28 +203,9 @@ gulp.task('fonts', function () {
 
 // Scan your HTML for assets & optimize them
 gulp.task('html', function () {
-  var assets = $.useref.assets({searchPath: ['.tmp', 'app', 'dist']});
-
-  return gulp.src(['app/**/*.html', '!app/{elements,test}/**/*.html'])
-    // Replace path for vulcanized assets
-    .pipe($.if('app/index.html', $.replace('elements/elements.html', 'elements/elements.vulcanized.html')))
-    .pipe(assets)
-    // Concatenate and minify JavaScript
-    .pipe($.if('*.js', $.uglify({preserveComments: 'some'})))
-    // Concatenate and minify styles
-    // In case you are still using useref build blocks
-    .pipe($.if('*.css', $.cssmin()))
-    .pipe(assets.restore())
-    .pipe($.useref())
-    // Minify any HTML
-    .pipe($.if('*.html', $.minifyHtml({
-      quotes: true,
-      empty: true,
-      spare: true
-    })))
-    // Output files
-    .pipe(gulp.dest('dist'))
-    .pipe($.size({title: 'html'}));
+  return optimizeHtmlTask(
+    ['app/**/*.html', '!app/{elements,test}/**/*.html'],
+    'dist');
 });
 
 // Polybuild will take care of inlining HTML imports,
@@ -171,10 +222,13 @@ gulp.task('vulcanize', function () {
 
 // Rename Polybuild's index.build.html to index.html
 gulp.task('rename-index', function () {
-  gulp.src('dist/index.build.html')
+  return gulp.src('dist/index.build.html')
     .pipe($.rename('index.html'))
     .pipe(gulp.dest('dist/'));
-  return del(['dist/index.build.html']);
+});
+
+gulp.task('remove-old-build-index', function () {
+  return del('dist/index.build.html');
 });
 
 // Generate config data for the <sw-precache-cache> element.
@@ -213,11 +267,16 @@ gulp.task('clean', function (cb) {
   del(['.tmp', 'dist'], cb);
 });
 
-var serveTask = function(browser) {
+// Watch files for changes & reload
+gulp.task('serve', [
+  'app-styles', 'element-styles', 'roster-styles',
+  'app-images', 'roster-images',
+  'resize-profiles', 'generate-roster'
+], function () {
   browserSync({
     port: 5000,
     notify: false,
-    logPrefix: 'PSK',
+    logPrefix: 'DHS',
     snippetOptions: {
       rule: {
         match: '<span id="browser-sync-binding"></span>',
@@ -230,7 +289,7 @@ var serveTask = function(browser) {
     // Note: this uses an unsigned certificate which on first access
     //       will present a certificate warning in the browser.
     // https: true,
-    browser: browser,
+    browser: TESTING_BROWSERS,
     server: {
       baseDir: ['.tmp', 'app'],
       middleware: [ historyApiFallback() ],
@@ -241,20 +300,12 @@ var serveTask = function(browser) {
   });
 
   gulp.watch(['app/**/*.html'], reload);
-  gulp.watch(['app/styles/**/*.css'], ['styles', reload]);
-  gulp.watch(['app/elements/**/*.css'], ['elements', reload]);
+  gulp.watch(['app/styles/**/*.css'], ['app-styles', reload]);
+  gulp.watch(['app/elements/**/*.css'], ['element-styles', reload]);
+  gulp.watch(['app/roster/**/*.css'], ['roster-styles', reload]);
   gulp.watch(['app/{scripts,elements}/**/{*.js,*.html}'], ['jshint']);
   gulp.watch(['app/images/**/*'], reload);
   gulp.watch(['app/roster/**'], ['generate-roster', reload]);
-}
-
-// Watch files for changes & reload
-gulp.task('serve', ['styles', 'elements', 'images', 'generate-roster'], function () {
-  serveTask('default');
-});
-
-gulp.task('multi-serve', ['styles', 'elements', 'images', 'generate-roster'], function () {
-  serveTask(TESTING_BROWSERS);
 });
 
 // Build and serve the output from the dist build
@@ -262,7 +313,7 @@ gulp.task('serve:dist', ['default'], function () {
   browserSync({
     port: 5001,
     notify: false,
-    logPrefix: 'PSK',
+    logPrefix: 'DHS',
     snippetOptions: {
       rule: {
         match: '<span id="browser-sync-binding"></span>',
@@ -286,13 +337,13 @@ gulp.task('serve:dist', ['default'], function () {
  */
 gulp.task('deploy', ['default'], function () {
   return gulp.src("./dist/**/*")
-    .pipe(deploy({branch: 'master'}))
+    .pipe($.ghPages({branch: 'master'}));
 });
 
 function string_src(filename, string) {
   var src = stream.Readable({ objectMode: true })
   src._read = function () {
-    this.push(new gutil.File({ cwd: "", base: "", path: filename, contents: new Buffer(string) }))
+    this.push(new $.util.File({ cwd: "", base: "", path: filename, contents: new Buffer(string) }))
     this.push(null)
   };
   return src
@@ -318,9 +369,10 @@ gulp.task('generate-roster', function () {
 gulp.task('default', ['clean'], function (cb) {
   // Uncomment 'cache-config' after 'rename-index' if you are going to use service workers.
   runSequence(
-    ['copy', 'styles'],
-    'elements',
-    ['jshint', 'images', 'fonts', 'html', 'generate-roster'],
-    'rename-index', // 'cache-config',
+    ['copy', 'app-styles'],
+    ['element-styles', 'roster-styles'],
+    ['app-images', 'roster-images', 'fonts', 'html', 'generate-roster'],
+    'resize-profiles',
+    'vulcanize', 'rename-index', 'remove-old-build-index', // 'cache-config',
     cb);
 });
