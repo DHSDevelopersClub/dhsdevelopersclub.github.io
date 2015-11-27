@@ -27,6 +27,7 @@ var polybuild = require('polybuild');
 var stringifyObject = require('stringify-object');
 var stream = require('stream');
 var os = require('os');
+var url = require('url');
 
 var WINDOWS = /^win/.test(os.platform());
 var MAC = /^darwin$/.test(os.platform());
@@ -267,14 +268,10 @@ gulp.task('clean', function (cb) {
   del(['.tmp', '.publish', 'dist'], cb);
 });
 
-// Watch files for changes & reload
-gulp.task('serve', [
-  'app-styles', 'element-styles', 'roster-styles',
-  'app-images', 'roster-images',
-  'resize-profiles', 'generate-roster'
-], function () {
+// Start a Browsersync server
+var startBrowserSync = function(port, baseDir, routes) {
   browserSync({
-    port: 5000,
+    port: port,
     notify: false,
     logPrefix: 'DHS',
     snippetOptions: {
@@ -291,12 +288,22 @@ gulp.task('serve', [
     // https: true,
     browser: TESTING_BROWSERS,
     server: {
-      baseDir: ['.tmp', 'app'],
+      baseDir: baseDir,
       middleware: [ historyApiFallback() ],
-      routes: {
-        '/bower_components': 'bower_components'
-      }
-    }
+      routes: routes
+    },
+    middleware: [] // Hack to make blank urls show their index.html
+  });
+};
+
+// Watch files for changes & reload
+gulp.task('serve', [
+  'app-styles', 'element-styles', 'roster-styles',
+  'app-images', 'roster-images',
+  'resize-profiles', 'generate-roster'
+], function () {
+  startBrowserSync(5000, ['.tmp', 'app'], {
+    '/bower_components': 'bower_components'
   });
 
   gulp.watch(['app/**/*.html'], reload);
@@ -306,30 +313,13 @@ gulp.task('serve', [
   gulp.watch(['app/{scripts,elements}/**/{*.js,*.html}'], ['jshint']);
   gulp.watch(['app/images/**/*'], reload);
   gulp.watch(['app/roster/**'], ['generate-roster', reload]);
+
+  gulp.watch(['bower_components/**/*'], reload);
 });
 
 // Build and serve the output from the dist build
 gulp.task('serve:dist', ['default'], function () {
-  browserSync({
-    port: 5001,
-    notify: false,
-    logPrefix: 'DHS',
-    snippetOptions: {
-      rule: {
-        match: '<span id="browser-sync-binding"></span>',
-        fn: function (snippet) {
-          return snippet;
-        }
-      }
-    },
-    // Run as an https by uncommenting 'https: true'
-    // Note: this uses an unsigned certificate which on first access
-    //       will present a certificate warning in the browser.
-    // https: true,
-    server: 'dist',
-    browser: TESTING_BROWSERS,
-    middleware: [ historyApiFallback() ]
-  });
+  startBrowserSync(5001, 'dist');
 });
 
 /**

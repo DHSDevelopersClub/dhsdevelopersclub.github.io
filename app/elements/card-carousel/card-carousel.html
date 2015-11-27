@@ -1,0 +1,57 @@
+<!--
+@license
+Copyright (C) 2015 Drake Developers Club.  All rights reserved.
+-->
+<!--
+@author Alexander Otavka (zotavka@gmail.com)
+-->
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+
+<dom-module id="card-carousel">
+  <template>
+    <style>
+      :host {
+        display: block;
+        width: 100%;
+      }
+
+      #container {
+        @apply(--layout-scroll);
+      }
+
+      #slider {
+        @apply(--layout-horizontal);
+        padding: var(--carousel-padding-vert) 0;
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      #slider > ::content > *, #slider > * {
+        /*
+        Workaround for a safari bug.  See this for details:
+        https://github.com/philipwalton/flexbugs#1-minimum-content-sizing-of-flex-items-not-honored
+        */
+        -webkit-flex-shrink: 0;
+        flex-shrink: 0;
+      }
+
+      #slider .padding {
+        padding-left: var(--carousel-padding-horiz);
+        height: 1px;
+      }
+    </style>
+
+    <div id="container">
+      <div id="slider">
+        <div class="padding"></div>
+        <content></content>
+        <div class="padding"></div>
+      </div>
+    </div>
+  </template>
+  <script>
+    Polymer({
+      is: 'card-carousel'
+    });
+  </script>
+</dom-module>

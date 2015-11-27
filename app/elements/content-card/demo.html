@@ -1,0 +1,44 @@
+<!doctype html>
+
+<html>
+<head>
+  <title>Content Card Demo</title>
+
+  <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="content-card.html">
+
+  <style is="custom-style">
+    body {
+      font-family: 'Helvetica', sans-serif;
+      background-color: grey;
+    }
+    
+    #kitten {
+      --card-background: #bef;
+    }
+  </style>
+</head>
+<body>
+  <span id="browser-sync-binding"></span>
+  <content-card id="puppy">
+    <img class="card-image" src="http://media.mydogspace.com.s3.amazonaws.com/wp-content/uploads/2013/08/puppy-500x350.jpg">
+    <div class="card-title">
+      Puppy
+    </div>
+    <div class="card-text">
+      Everyone loves puppies.
+    </div>
+  </content-card>
+  <content-card id="kitten" default-elevation="2" hovered-elevation="4">
+    <img class="card-image" src="http://www.purina.com.au/~/media/PurinaAustralia/Images/kittens-articles-imagery/article-kitten-finding-large.ashx?20150424T1118500853">
+    <div class="card-title">
+      Kitten
+    </div>
+    <div class="card-text">
+      Kittens are sooooo cute I want to cry.  OMG, I love kittens so much that
+      I will keep writing way too much text.  This is crazy.  I am going to end
+      up with a clipped card, if I keep writing so much text.  This is crazy.
+    </div>
+  </content-card>
+</body>
+</html>

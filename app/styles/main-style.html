@@ -1,5 +1,10 @@
 <style is="custom-style">
 
+:root {
+  --content-margin-horiz: calc(15px + 10vw);
+  --content-margin-vert: 15px;
+}
+
 body {
   font-family: 'Helvetica', sans-serif;
   background-color: white;
@@ -41,17 +46,32 @@ hr {
   position: center;
 }
 
+.banner {
+  font-size: 20px;
+  font-weight: 300;
+  background-color: #86cdea;
+}
+
+.banner a, .banner a:hover {
+  color: black;
+}
+
 .transparent {
   background-color: transparent;
 }
 
 .content {
-  margin: 15px calc(15px + 10%);
+  margin: var(--content-margin-vert) var(--content-margin-horiz);
   max-width: 1000px;
 }
 
 h1.content {
   margin-top: 40px;
+}
+
+card-carousel {
+  --carousel-padding-horiz: var(--content-margin-horiz);
+  --carousel-padding-vert: var(--content-margin-vert);
 }
 
 #mainNavbar {
@@ -112,6 +132,10 @@ h1.content {
   --image-loading-color: rgb(33, 30, 67);
 }
 
+#scrollDownButton {
+  height: 10vh;
+}
+
 #joinHeaderImage {
   --image-loading-color: rgb(29, 25, 25);
   background-color: black;
@@ -124,7 +148,7 @@ fullbleed-image#joinHeaderImage::shadow img {
   -ms-filter: blur(25px);
 }
 
-#scrollDownButton {
+#scrollDownButton paper-fab {
   position: relative;
   top: -30px;
   z-index: 3;
