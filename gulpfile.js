@@ -9,7 +9,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 "use strict";
 
-// Include Gulp & tools we"ll use
+// Include Gulp & tools we'll use
 var gulp = require("gulp");
 var $ = require("gulp-load-plugins")();
 var del = require("del");
@@ -322,7 +322,7 @@ gulp.task("vulcanize", function() {
 // than polybuild provides, follow instructions from readme at:
 // https://github.com/PolymerElements/polymer-starter-kit/#if-you-require-more-granular-configuration-of-vulcanize-than-polybuild-provides-you-an-option-by
 
-// Rename Polybuild"s index.build.html to index.html
+// Rename Polybuild's index.build.html to index.html
 gulp.task("rename-index", function() {
   return gulp.src("dist/**/index.build.html")
     .pipe($.rename({ basename: "index" }))
@@ -335,7 +335,7 @@ gulp.task("remove-old-build-index", function() {
 
 // Generate config data for the <sw-precache-cache> element.
 // This include a list of files that should be precached, as well as a (hopefully unique) cache
-// id that ensure that multiple PSK projects don"t share the same Cache Storage.
+// id that ensure that multiple PSK projects don't share the same Cache Storage.
 // This task does not run by default, but if you are interested in using service worker caching
 // in your project, please enable it within the "default" task.
 // See https://github.com/PolymerElements/polymer-starter-kit#enable-service-worker-support
