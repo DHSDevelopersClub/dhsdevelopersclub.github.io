@@ -28,11 +28,13 @@ var stringifyObject = require("stringify-object");
 var stream = require("stream");
 var os = require("os");
 var url = require("url");
+var gm = require("gm");
+var through = require("through2");
 
-var WINDOWS = /^win/.test(os.platform());
-var MAC = /^darwin$/.test(os.platform());
+const WINDOWS = /^win/.test(os.platform());
+const MAC = /^darwin$/.test(os.platform());
 
-var AUTOPREFIXER_BROWSERS = [
+const AUTOPREFIXER_BROWSERS = [
   "ie >= 10",
   "ie_mob >= 10",
   "ff >= 30",
@@ -44,15 +46,18 @@ var AUTOPREFIXER_BROWSERS = [
   "bb >= 10"
 ];
 
-var TESTING_BROWSERS = [
-  "firefox",
-  "google chrome"
-];
-if (WINDOWS) {
-  TESTING_BROWSERS.push("iexplore");
-} else if (MAC) {
-  TESTING_BROWSERS.push("safari");
-}
+const TESTING_BROWSERS = (function() {
+  var browsers = [
+    "firefox",
+    "google chrome"
+  ];
+  if (WINDOWS) {
+    browsers.push("iexplore");
+  } else if (MAC) {
+    browsers.push("safari");
+  }
+  return browsers;
+})();
 
 var styleTask = function(stylesPath, srcs) {
   return gulp.src(srcs.map(function(src) {
@@ -142,6 +147,56 @@ var startBrowserSync = function(port, baseDir, routes) {
   });
 };
 
+// Code shamlessly stolen from gulp-gm https://www.npmjs.com/package/gulp-gm.
+var resizeAndRename = function(scale) {
+  return through.obj(function (originalFile, enc, done) {
+    var PluginError = $.util.PluginError;
+    const PLUGIN_NAME = "resize-rename-task";
+
+    var file = originalFile.clone({contents: false});
+
+    if (file.isNull()) {
+      return done(null, file);
+    }
+
+    if (file.isStream()) {
+      return done(new PluginError(PLUGIN_NAME, "Streaming not supported"));
+    }
+
+    var passthrough = through();
+    var gmFile = gm(file.contents, file.path);
+
+    gmFile.size(function (err, size) {
+      var width = Math.round(size.width * scale);
+      var height = Math.round(size.height * scale);
+      var modifiedGmFile = gmFile.resize(width, height);
+
+      if (modifiedGmFile == null) {
+        return done(new PluginError(PLUGIN_NAME, "Modifier callback didn't return anything."));
+      } else {
+        modifiedGmFile.toBuffer(function (err, buffer) {
+          if (err) {
+            return done(new PluginError(PLUGIN_NAME, err));
+          } else {
+            if (modifiedGmFile._outputFormat) {
+              file.path = file.path.replace(
+                path.extname(file.path), "." + modifiedGmFile._outputFormat);
+            }
+            var extname = path.extname(file.path);
+            var basename = path.basename(file.path, extname);
+            file.path = file.path.replace(
+              basename,
+              basename + "-" + width + "w"
+            );
+            file.contents = buffer;
+            done(null, file);
+          }
+        });
+      }
+    });
+  });
+};
+
 // Compile and automatically prefix stylesheets
 gulp.task("app-styles", function() {
   return styleTask("styles", ["**/*.css"]);
@@ -168,9 +223,25 @@ gulp.task("resize-profiles", function() {
         imageMagick: true
       }))
       .pipe($.rename({ suffix: "-" + i + "x" }))
+      .pipe(gulp.dest(".tmp/roster/"))
       .pipe(gulp.dest("dist/roster/")));
   }
   return merged.pipe($.size({title: "resize-profiles"}));
+});
+
+gulp.task("resize-images", function() {
+  var merged = merge();
+  for (var i = 1; i <= 3; i++) {
+    merged.add(gulp.src([
+        "app/**/*.{png,jpg,jpeg}",
+        "!app/roster/*/profile.jpg",
+        "!app/images/touch/**/*"
+      ])
+      .pipe(resizeAndRename(1 / i))
+      .pipe(gulp.dest(".tmp/"))
+      .pipe(gulp.dest("dist/")));
+  }
+  return merged.pipe($.size({title: "resize-images"}));
 });
 
 // Optimize images
@@ -302,7 +373,7 @@ gulp.task("clean", function(cb) {
 gulp.task("serve", [
   "app-styles", "element-styles", "roster-styles",
   "app-images", "roster-images",
-  "resize-profiles", "generate-roster"
+  "generate-roster", "resize-profiles", "resize-images"
 ], function() {
   startBrowserSync(5000, [".tmp", "app"], {
     "/bower_components": "bower_components"
@@ -315,6 +386,12 @@ gulp.task("serve", [
   gulp.watch(["app/{scripts,elements}/**/{*.js,*.html}"], ["jshint"]);
   gulp.watch(["app/images/**/*"], reload);
   gulp.watch(["app/roster/**"], ["generate-roster", reload]);
+  gulp.watch(["app/roster/*/profile.jpg"], ["resize-profiles", reload]);
+  gulp.watch([
+      "app/**/*.{png,jpg,jpeg}",
+      "!app/roster/*/profile.jpg",
+      "!app/images/touch/**/*"
+    ], ["resize-images", reload]);
 
   gulp.watch(["bower_components/**/*"], reload);
 });
@@ -365,7 +442,7 @@ gulp.task("default", ["clean"], function(cb) {
     ["copy", "app-styles"],
     ["element-styles", "roster-styles"],
     ["app-images", "roster-images", "fonts", "html", "generate-roster"],
-    "resize-profiles",
+    ["resize-profiles", "resize-images"],
     "vulcanize", "rename-index", "remove-old-build-index", // "cache-config",
     cb);
 });
