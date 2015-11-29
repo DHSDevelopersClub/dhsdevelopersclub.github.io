@@ -21,17 +21,13 @@
           return check;
         };
         if (mobileAndTabletcheck()) {
-          var recalcVH = function(winHeight) {
-            document.querySelector("#mainHeaderImage").style.height = winHeight * .9 + "px";
-            document.querySelector("#scrollDownButton").style.height = winHeight * .1 + "px";
-          };
           var getWinHeight = function() {
             return window.innerHeight ||
               document.documentElement.clientHeight ||
               document.body.clientHeight;
           };
           var isPortrait;
-          window.addEventListener("resize", function() {
+          var recalcVH = function(winHeight) {
             var winHeight = getWinHeight();
             var winWidth = window.innerWidth ||
               document.documentElement.clientWidth ||
@@ -39,18 +35,22 @@
             var newIsPortrait = winHeight > winWidth;
             if (newIsPortrait != isPortrait) {
               isPortrait = newIsPortrait;
-              recalcVH(winHeight);
+              document.querySelector("#mainHeaderImage").style.height = winHeight * .9 + "px";
+              document.querySelector("#scrollDownButton").style.height = winHeight * .1 + "px";
             }
-          });
-          recalcVH(getWinHeight());
+          };
+          window.addEventListener("resize", recalcVH);
+          recalcVH();
         }
       })();
     </script>
 
-    <div class="banner" style="width: 100%;">
-      <div class="content">
-        Join the Congressional app challenge.  All levels of coding knowledge
-        welcome.
+    <div class="banner" style="background-color: #86cdea;">
+      <div class="content layout horizontal wrap justified">
+        <div>
+          Join the Congressional app challenge.  All levels of coding knowledge
+          welcome.
+        </div>
         <a href="http://www.congressionalappchallenge.us/">Learn more.</a>
       </div>
     </div>
@@ -61,7 +61,7 @@
     <hr>
 
     <section class="content">
-      The Drake Developers Club is an organization at Drake High School dedicated to spreading knowledge and enthusiasm for computer programming and web development.  Our membership consists of both experienced and inexperienced developers, and we welcome both.  For those new to coding, we offer workshops to improve your skills and get help.  For more experienced members, the club is a way to meet other people interested in coding and collaborate on intersting projects.  We meet at lunch on Wednesdays in room 127, and all are welcome to drop by and check us out.
+      The Drake Developers Club is an organization at Drake High School dedicated to spreading knowledge and enthusiasm for computer programming and web development.  Our membership consists of both experienced and inexperienced developers, and we welcome both.  For those new to coding, we offer workshops to improve your skills and get help.  For more experienced members, the club is a way to meet other people interested in coding and collaborate on more advanced projects.  We meet at lunch on Wednesdays in room 127; all are welcome to drop by and check us out.
     </section>
 
     <h1 class="content">People</h1>
