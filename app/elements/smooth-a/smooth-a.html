@@ -66,7 +66,7 @@ An anchor element that improves hash scrolling.
         }
       }
 
-      this.SmoothA = Polymer({
+      window.SmoothA = Polymer({
         is: "smooth-a",
 
         extends: "a",
@@ -133,7 +133,7 @@ An anchor element that improves hash scrolling.
 
       var hashUpdaters = {};
 
-      this.SmoothA.unbindHashUpdater = (function(scroller) {
+      window.SmoothA.unbindHashUpdater = (function(scroller) {
         if (scroller in hashUpdaters) {
           var updater = hashUpdaters[scroller];
           delete hashUpdaters[scroller];
@@ -143,11 +143,11 @@ An anchor element that improves hash scrolling.
             elements[i].removeEventListener("scroll", updater);
           }
         }
-      }).bind(this.SmoothA);
+      }).bind(window.SmoothA);
 
-      this.SmoothA.bindHashUpdater = (function(scroller) {
+      window.SmoothA.bindHashUpdater = (function(scroller) {
         if (scroller in hashUpdaters) {
-          this.unbindHashUpdater(scroller);
+          window.unbindHashUpdater(scroller);
         }
 
         var updater = function() {
@@ -173,7 +173,7 @@ An anchor element that improves hash scrolling.
         for (var i = 0; i < elements.length; i++) {
           elements[i].addEventListener("scroll", updater);
         }
-      }).bind(this.SmoothA);
+      }).bind(window.SmoothA);
     }());
   </script>
 </dom-module>
