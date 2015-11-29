@@ -1,10 +1,5 @@
 <style is="custom-style">
 
-:root {
-  --content-margin-horiz: calc(15px + 10vw);
-  --content-margin-vert: 15px;
-}
-
 body {
   font-family: 'Helvetica', sans-serif;
   background-color: white;
@@ -63,17 +58,12 @@ hr {
 }
 
 .content {
-  margin: var(--content-margin-vert) var(--content-margin-horiz);
+  margin: 15px calc(15px + 10vw);
   max-width: 1000px;
 }
 
 h1.content {
   margin-top: 40px;
-}
-
-card-carousel {
-  --carousel-padding-horiz: var(--content-margin-horiz);
-  --carousel-padding-vert: var(--content-margin-vert);
 }
 
 #mainNavbar {
@@ -142,7 +132,8 @@ card-carousel {
   --image-loading-color: rgb(29, 25, 25);
   background-color: black;
 }
-fullbleed-image#joinHeaderImage::shadow img {
+
+#joinHeaderImage::shadow img {
   filter: blur(25px);
   -webkit-filter: blur(25px);
   -moz-filter: blur(25px);
@@ -193,14 +184,14 @@ fullbleed-image#joinHeaderImage::shadow img {
 /* Tiny Screens */
 @media (max-width: 479px) {
   .content {
-    margin: 16px;
+    margin: 15px 15px;
   }
 }
 
 /* Small Screens */
-@media (min-width: 480) and (max-width: 639px) {
+@media (min-width: 480px) and (max-width: 639px) {
   .content {
-    margin: 32px;
+    margin: 15px 30px;
   }
 }
 
