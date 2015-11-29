@@ -21,17 +21,13 @@
           return check;
         };
         if (mobileAndTabletcheck()) {
-          var recalcVH = function(winHeight) {
-            document.querySelector("#mainHeaderImage").style.height = winHeight * .9 + "px";
-            document.querySelector("#scrollDownButton").style.height = winHeight * .1 + "px";
-          };
           var getWinHeight = function() {
             return window.innerHeight ||
               document.documentElement.clientHeight ||
               document.body.clientHeight;
           };
           var isPortrait;
-          window.addEventListener("resize", function() {
+          var recalcVH = function(winHeight) {
             var winHeight = getWinHeight();
             var winWidth = window.innerWidth ||
               document.documentElement.clientWidth ||
@@ -39,10 +35,12 @@
             var newIsPortrait = winHeight > winWidth;
             if (newIsPortrait != isPortrait) {
               isPortrait = newIsPortrait;
-              recalcVH(winHeight);
+              document.querySelector("#mainHeaderImage").style.height = winHeight * .9 + "px";
+              document.querySelector("#scrollDownButton").style.height = winHeight * .1 + "px";
             }
-          });
-          recalcVH(getWinHeight());
+          };
+          window.addEventListener("resize", recalcVH);
+          recalcVH();
         }
       })();
     </script>
