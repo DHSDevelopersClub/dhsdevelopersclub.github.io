@@ -219,8 +219,7 @@ gulp.task("resize-profiles", function() {
         width: 100 * i,
         height: 100 * i,
         crop: true,
-        upscale: false,
-        imageMagick: true
+        upscale: false
       }))
       .pipe($.rename({ suffix: "-" + i + "x" }))
       .pipe(gulp.dest(".tmp/roster/"))
