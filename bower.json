@@ -9,7 +9,8 @@
     "paper-toolbar": "PolymerElements/paper-toolbar#~1.0.4",
     "parallax-container": "~0.0.3",
     "polymer": "Polymer/polymer#1.0.3",
-    "webcomponentsjs": "#0.7.14"
+    "webcomponentsjs": "#0.7.14",
+    "velocity": "~1.2.3"
   },
   "resolutions": {
     "polymer": "^1.1.0",
