@@ -10,6 +10,7 @@ smooth-a.html
 An anchor element that improves hash scrolling.
 -->
 <script>
+  // Defer loading of velocity.js until the whole page has loaded.
   function downloadJSAtOnload() {
     var element = document.createElement("script");
     element.src = "/bower_components/velocity/velocity.min.js";
