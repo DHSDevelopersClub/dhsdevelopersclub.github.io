@@ -137,11 +137,11 @@ var startBrowserSync = function(port, baseDir, routes) {
 };
 
 var minifyImage = function() {
-  return $.cache($.imagemin({
+  return $.imagemin({
     progressive: true,
     interlaced: true,
     multipass: true
-  }));
+  });
 };
 
 // Code shamlessly stolen from gulp-gm https://www.npmjs.com/package/gulp-gm.
@@ -362,13 +362,8 @@ gulp.task("cache-config", function(callback) {
 });
 
 // Clean output directory
-gulp.task("clean", ["clear-cache"], function(cb) {
+gulp.task("clean", function(cb) {
   del([".tmp", ".publish", "dist"], cb);
-});
-
-// Clear cache
-gulp.task('clear-cache', function (cb) {
-  return $.cache.clearAll(cb);
 });
 
 // Watch files for changes & reload
