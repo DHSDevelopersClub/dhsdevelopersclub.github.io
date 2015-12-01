@@ -221,6 +221,11 @@ gulp.task("resize-profiles", function() {
         crop: true,
         upscale: false
       }))
+      .pipe($.cache($.imagemin({
+        progressive: true,
+        interlaced: true,
+        multipass: true
+      })))
       .pipe($.rename({ suffix: "-" + i + "x" }))
       .pipe(gulp.dest(".tmp/roster/"))
       .pipe(gulp.dest("dist/roster/")));
@@ -236,6 +241,11 @@ gulp.task("resize-images", function() {
         "!app/roster/*/profile.jpg",
         "!app/images/touch/**/*"
       ])
+      .pipe($.cache($.imagemin({
+        progressive: true,
+        interlaced: true,
+        multipass: true
+      })))
       .pipe(resizeAndRename(1 / i))
       .pipe(gulp.dest(".tmp/"))
       .pipe(gulp.dest("dist/")));
@@ -366,6 +376,11 @@ gulp.task("cache-config", function(callback) {
 // Clean output directory
 gulp.task("clean", function(cb) {
   del([".tmp", ".publish", "dist"], cb);
+});
+
+// Clear cache
+gulp.task('clear-cache', function (cb) {
+  return $.cache.clearAll(cb);
 });
 
 // Watch files for changes & reload
