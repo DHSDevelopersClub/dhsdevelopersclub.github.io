@@ -79,17 +79,6 @@ var jshintTask = function(src) {
     .pipe($.if(!browserSync.active, $.jshint.reporter("fail")));
 };
 
-var imageOptimizeTask = function(src, dest) {
-  return gulp.src(src)
-    .pipe($.cache($.imagemin({
-      progressive: true,
-      interlaced: true,
-      multipass: true
-    })))
-    .pipe(gulp.dest(dest))
-    .pipe($.size({title: "images"}));
-};
-
 var optimizeHtmlTask = function(src, dest) {
   var assets = $.useref.assets({searchPath: [".tmp", "app", "dist"]});
 
@@ -145,6 +134,14 @@ var startBrowserSync = function(port, baseDir, routes) {
     },
     middleware: [] // Hack to make blank urls show their index.html
   });
+};
+
+var minifyImage = function() {
+  return $.cache($.imagemin({
+    progressive: true,
+    interlaced: true,
+    multipass: true
+  }));
 };
 
 // Code shamlessly stolen from gulp-gm https://www.npmjs.com/package/gulp-gm.
@@ -221,12 +218,8 @@ gulp.task("resize-profiles", function() {
         crop: true,
         upscale: false
       }))
-      .pipe($.cache($.imagemin({
-        progressive: true,
-        interlaced: true,
-        multipass: true
-      })))
       .pipe($.rename({ suffix: "-" + i + "x" }))
+      .pipe(minifyImage())
       .pipe(gulp.dest(".tmp/roster/"))
       .pipe(gulp.dest("dist/roster/")));
   }
@@ -241,12 +234,8 @@ gulp.task("resize-images", function() {
         "!app/roster/*/profile.jpg",
         "!app/images/touch/**/*"
       ])
-      .pipe($.cache($.imagemin({
-        progressive: true,
-        interlaced: true,
-        multipass: true
-      })))
       .pipe(resizeAndRename(1 / i))
+      .pipe(minifyImage())
       .pipe(gulp.dest(".tmp/"))
       .pipe(gulp.dest("dist/")));
   }
@@ -254,12 +243,11 @@ gulp.task("resize-images", function() {
 });
 
 // Optimize images
-gulp.task("app-images", function() {
-  return imageOptimizeTask("app/images/**/*", "dist/images");
-});
-
-gulp.task("roster-images", function() {
-  return imageOptimizeTask("app/roster/**/*.{png,jpg,jpeg}", "dist/roster");
+gulp.task("optimize-images", function() {
+  return gulp.src("app/**/*.{png,jpg,jpeg,svg}")
+    .pipe(minifyImage())
+    .pipe(gulp.dest("dist"))
+    .pipe($.size({title: "optimize-images"}));
 });
 
 // Lint JavaScript
@@ -374,7 +362,7 @@ gulp.task("cache-config", function(callback) {
 });
 
 // Clean output directory
-gulp.task("clean", function(cb) {
+gulp.task("clean", ["clear-cache"], function(cb) {
   del([".tmp", ".publish", "dist"], cb);
 });
 
@@ -386,8 +374,8 @@ gulp.task('clear-cache', function (cb) {
 // Watch files for changes & reload
 gulp.task("serve", [
   "app-styles", "element-styles", "roster-styles",
-  "app-images", "roster-images",
-  "generate-roster", "resize-profiles", "resize-images"
+  "optimize-images", "resize-profiles", "resize-images",
+  "generate-roster"
 ], function() {
   startBrowserSync(5000, [".tmp", "app"], {
     "/bower_components": "bower_components"
@@ -455,7 +443,7 @@ gulp.task("default", ["clean"], function(cb) {
   runSequence(
     ["copy", "app-styles"],
     ["element-styles", "roster-styles"],
-    ["app-images", "roster-images", "fonts", "html", "generate-roster"],
+    ["optimize-images", "fonts", "html", "generate-roster"],
     ["resize-profiles", "resize-images"],
     "vulcanize", "rename-index", "remove-old-build-index", // "cache-config",
     cb);
