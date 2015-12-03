@@ -35,11 +35,11 @@
 
     if (insideImage) {
       if (header.classList.contains("hidden")) {
-        header.classList.remove("hidden")
+        header.classList.remove("hidden");
       }
     } else {
       if (!header.classList.contains("hidden")) {
-        header.classList.add("hidden")
+        header.classList.add("hidden");
       }
     }
   });

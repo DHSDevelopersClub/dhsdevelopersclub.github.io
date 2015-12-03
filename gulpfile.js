@@ -1,3 +1,4 @@
+/* globals require, __dirname, Buffer */
 /*
 Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
 This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
@@ -7,6 +8,7 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
 
+(function() {
 "use strict";
 
 // Include Gulp & tools we'll use
@@ -53,7 +55,7 @@ var TESTING_BROWSERS = (function() {
     if (e.code !== "MODULE_NOT_FOUND") {
       throw e;
     }
-    
+
     var browsers = [
       "firefox",
       "google chrome"
@@ -176,7 +178,7 @@ var resizeAndRename = function(scale) {
       var height = Math.round(size.height * scale);
       var modifiedGmFile = gmFile.resize(width, height);
 
-      if (modifiedGmFile == null) {
+      if (modifiedGmFile === null) {
         return done(new PluginError(PLUGIN_NAME, "Modifier callback didn't return anything."));
       } else {
         modifiedGmFile.toBuffer(function (err, buffer) {
@@ -318,7 +320,7 @@ gulp.task("generate-roster", function() {
   var members = [];
   glob.sync("app/roster/*")
   .forEach(function(file) {
-    var member = path.basename(file, path.extname(file))
+    var member = path.basename(file, path.extname(file));
     members.push(member);
   });
   var string = stringifyObject(members, {
@@ -456,3 +458,5 @@ gulp.task("deploy:dist", function() {
   return gulp.src("dist/**/*")
     .pipe($.ghPages({branch: "master"}));
 });
+
+})();
