@@ -66,7 +66,7 @@ var styleTask = function(stylesPath, srcs) {
     .pipe($.changed(stylesPath, {extension: ".css"}))
     .pipe($.autoprefixer(AUTOPREFIXER_BROWSERS))
     .pipe(gulp.dest(".tmp/" + stylesPath))
-    .pipe($.cssmin())
+    .pipe($.minifyCss())
     .pipe(gulp.dest("dist/" + stylesPath))
     .pipe($.size({title: stylesPath}));
 };
@@ -88,7 +88,7 @@ var optimizeHtmlTask = function(src, dest) {
     .pipe($.if("*.js", $.uglify({preserveComments: "some"})))
     // Concatenate and minify styles
     // In case you are still using useref build blocks
-    .pipe($.if("*.css", $.cssmin()))
+    .pipe($.if("*.css", $.minifyCss()))
     .pipe(assets.restore())
     .pipe($.useref())
     // Minify any HTML
