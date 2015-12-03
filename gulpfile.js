@@ -305,6 +305,34 @@ gulp.task("html", function() {
     "dist");
 });
 
+// Generate roster.json based on the folders in app/roster
+gulp.task("generate-roster", function() {
+  var members = [];
+  glob.sync("app/roster/*")
+  .forEach(function(file) {
+    var member = path.basename(file, path.extname(file))
+    members.push(member);
+  });
+  var string = stringifyObject(members, {
+      indent: "  ",
+      singleQuotes: false
+  });
+
+  var src = stream.Readable({ objectMode: true });
+  src._read = function() {
+    this.push(new $.util.File({
+      cwd: "",
+      base: "",
+      path: "roster.json",
+      contents: new Buffer(string)
+    }));
+    this.push(null);
+  };
+  return src
+    .pipe(gulp.dest(".tmp/roster/"))
+    .pipe(gulp.dest("dist/roster/"));
+});
+
 // Polybuild will take care of inlining HTML imports,
 // scripts and CSS for you.
 // Anyone who wants their page vulcanized can add a vulcanizeTask here.
@@ -326,8 +354,8 @@ gulp.task("rename-index", function() {
     .pipe(gulp.dest("dist/"));
 });
 
-gulp.task("remove-old-build-index", function() {
-  return del("dist/**/index.build.html");
+gulp.task("remove-old-build-index", function(cb) {
+  del("dist/**/index.build.html", cb);
 });
 
 // Generate config data for the <sw-precache-cache> element.
@@ -398,40 +426,6 @@ gulp.task("serve:dist", ["default"], function() {
   startBrowserSync(5001, "dist");
 });
 
-// Push build to gh-pages
-gulp.task("deploy", ["default"], function() {
-  return gulp.src("./dist/**/*")
-    .pipe($.ghPages({branch: "master"}));
-});
-
-// Generate roster.json based on the folders in app/roster
-gulp.task("generate-roster", function() {
-  var members = [];
-  glob.sync("app/roster/*")
-  .forEach(function(file) {
-    var member = path.basename(file, path.extname(file))
-    members.push(member);
-  });
-  var string = stringifyObject(members, {
-      indent: "  ",
-      singleQuotes: false
-  });
-
-  var src = stream.Readable({ objectMode: true });
-  src._read = function() {
-    this.push(new $.util.File({
-      cwd: "",
-      base: "",
-      path: "roster.json",
-      contents: new Buffer(string)
-    }));
-    this.push(null);
-  };
-  return src
-    .pipe(gulp.dest(".tmp/roster/"))
-    .pipe(gulp.dest("dist/roster/"));
-});
-
 // Build production files, the default task
 gulp.task("default", ["clean"], function(cb) {
   // Uncomment "cache-config" after "rename-index" if you are going to use service workers.
@@ -442,4 +436,14 @@ gulp.task("default", ["clean"], function(cb) {
     ["resize-profiles", "resize-images"],
     "vulcanize", "rename-index", "remove-old-build-index", // "cache-config",
     cb);
+});
+
+// Push build to gh-pages
+gulp.task("deploy", function(cb) {
+  runSequence("default", "deploy:dist", cb);
+});
+
+gulp.task("deploy:dist", function() {
+  return gulp.src("dist/**/*")
+    .pipe($.ghPages({branch: "master"}));
 });
