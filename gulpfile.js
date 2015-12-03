@@ -31,10 +31,10 @@ var url = require("url");
 var gm = require("gm");
 var through = require("through2");
 
-const WINDOWS = /^win/.test(os.platform());
-const MAC = /^darwin$/.test(os.platform());
+var WINDOWS = /^win/.test(os.platform());
+var MAC = /^darwin$/.test(os.platform());
 
-const AUTOPREFIXER_BROWSERS = [
+var AUTOPREFIXER_BROWSERS = [
   "ie >= 10",
   "ie_mob >= 10",
   "ff >= 30",
@@ -46,7 +46,7 @@ const AUTOPREFIXER_BROWSERS = [
   "bb >= 10"
 ];
 
-const TESTING_BROWSERS = (function() {
+var TESTING_BROWSERS = (function() {
   var browsers = [
     "firefox",
     "google chrome"
@@ -148,7 +148,7 @@ var minifyImage = function() {
 var resizeAndRename = function(scale) {
   return through.obj(function (originalFile, enc, done) {
     var PluginError = $.util.PluginError;
-    const PLUGIN_NAME = "resize-rename-task";
+    var PLUGIN_NAME = "resize-rename-task";
 
     var file = originalFile.clone({contents: false});
 
@@ -443,6 +443,7 @@ gulp.task("deploy", function(cb) {
   runSequence("default", "deploy:dist", cb);
 });
 
+// Push the current contents of dist/ to github pages
 gulp.task("deploy:dist", function() {
   return gulp.src("dist/**/*")
     .pipe($.ghPages({branch: "master"}));
