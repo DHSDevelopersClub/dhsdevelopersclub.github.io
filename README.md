@@ -192,5 +192,26 @@ Your help in giving our newer members resources to start them on their way is mu
 
 ------
 
+## Using a Custom Set of Browsers For Testing
+
+Create a file in the project root called `testing-browsers.json`.  In it, put an array of strings of the desired browsers.  For example:
+
+```
+[
+  "default",
+  "firefox",
+  "google chrome",
+  "safari",
+  "opera",
+  "iexplore"
+]
+```
+
+Please note, `"default"` corresponds to your currently selected default browser.  Also, Microsoft Edge is not supported because it is weird.  Sorry, I tried to make it work, but it just doesn't.  You will have to open in manually and paste in the URL.
+
+That's it.  Only the browser(s) you put in `testing-browsers.json` should now open up when you run `gulp serve`.
+
+------
+
 <a name="restrictions"></a>
 \* Certain restrictions apply: keep it PG and PC, no viruses or ads.  Club leadership reserves the right to make any changes we deem necessary to keep your page appropriate.

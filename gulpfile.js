@@ -47,16 +47,24 @@ var AUTOPREFIXER_BROWSERS = [
 ];
 
 var TESTING_BROWSERS = (function() {
-  var browsers = [
-    "firefox",
-    "google chrome"
-  ];
-  if (WINDOWS) {
-    browsers.push("iexplore");
-  } else if (MAC) {
-    browsers.push("safari");
+  try {
+    return require("./testing-browsers.json");
+  } catch (e) {
+    if (e.code !== "MODULE_NOT_FOUND") {
+      throw e;
+    }
+    
+    var browsers = [
+      "firefox",
+      "google chrome"
+    ];
+    if (WINDOWS) {
+      browsers.push("iexplore");
+    } else if (MAC) {
+      browsers.push("safari");
+    }
+    return browsers;
   }
-  return browsers;
 })();
 
 var styleTask = function(stylesPath, srcs) {
