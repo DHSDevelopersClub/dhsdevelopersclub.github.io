@@ -1,3 +1,4 @@
+/* globals require, __dirname, Buffer */
 /*
 Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
 This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
@@ -7,6 +8,7 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
 
+(function() {
 "use strict";
 
 // Include Gulp & tools we'll use
@@ -31,10 +33,10 @@ var url = require("url");
 var gm = require("gm");
 var through = require("through2");
 
-const WINDOWS = /^win/.test(os.platform());
-const MAC = /^darwin$/.test(os.platform());
+var WINDOWS = /^win/.test(os.platform());
+var MAC = /^darwin$/.test(os.platform());
 
-const AUTOPREFIXER_BROWSERS = [
+var AUTOPREFIXER_BROWSERS = [
   "ie >= 10",
   "ie_mob >= 10",
   "ff >= 30",
@@ -46,17 +48,25 @@ const AUTOPREFIXER_BROWSERS = [
   "bb >= 10"
 ];
 
-const TESTING_BROWSERS = (function() {
-  var browsers = [
-    "firefox",
-    "google chrome"
-  ];
-  if (WINDOWS) {
-    browsers.push("iexplore");
-  } else if (MAC) {
-    browsers.push("safari");
+var TESTING_BROWSERS = (function() {
+  try {
+    return require("./testing-browsers.json");
+  } catch (e) {
+    if (e.code !== "MODULE_NOT_FOUND") {
+      throw e;
+    }
+
+    var browsers = [
+      "firefox",
+      "google chrome"
+    ];
+    if (WINDOWS) {
+      browsers.push("iexplore");
+    } else if (MAC) {
+      browsers.push("safari");
+    }
+    return browsers;
   }
-  return browsers;
 })();
 
 var styleTask = function(stylesPath, srcs) {
@@ -66,7 +76,7 @@ var styleTask = function(stylesPath, srcs) {
     .pipe($.changed(stylesPath, {extension: ".css"}))
     .pipe($.autoprefixer(AUTOPREFIXER_BROWSERS))
     .pipe(gulp.dest(".tmp/" + stylesPath))
-    .pipe($.cssmin())
+    .pipe($.minifyCss())
     .pipe(gulp.dest("dist/" + stylesPath))
     .pipe($.size({title: stylesPath}));
 };
@@ -88,7 +98,7 @@ var optimizeHtmlTask = function(src, dest) {
     .pipe($.if("*.js", $.uglify({preserveComments: "some"})))
     // Concatenate and minify styles
     // In case you are still using useref build blocks
-    .pipe($.if("*.css", $.cssmin()))
+    .pipe($.if("*.css", $.minifyCss()))
     .pipe(assets.restore())
     .pipe($.useref())
     // Minify any HTML
@@ -148,7 +158,7 @@ var minifyImage = function() {
 var resizeAndRename = function(scale) {
   return through.obj(function (originalFile, enc, done) {
     var PluginError = $.util.PluginError;
-    const PLUGIN_NAME = "resize-rename-task";
+    var PLUGIN_NAME = "resize-rename-task";
 
     var file = originalFile.clone({contents: false});
 
@@ -168,7 +178,7 @@ var resizeAndRename = function(scale) {
       var height = Math.round(size.height * scale);
       var modifiedGmFile = gmFile.resize(width, height);
 
-      if (modifiedGmFile == null) {
+      if (modifiedGmFile === null) {
         return done(new PluginError(PLUGIN_NAME, "Modifier callback didn't return anything."));
       } else {
         modifiedGmFile.toBuffer(function (err, buffer) {
@@ -305,6 +315,34 @@ gulp.task("html", function() {
     "dist");
 });
 
+// Generate roster.json based on the folders in app/roster
+gulp.task("generate-roster", function() {
+  var members = [];
+  glob.sync("app/roster/*")
+  .forEach(function(file) {
+    var member = path.basename(file, path.extname(file));
+    members.push(member);
+  });
+  var string = stringifyObject(members, {
+      indent: "  ",
+      singleQuotes: false
+  });
+
+  var src = stream.Readable({ objectMode: true });
+  src._read = function() {
+    this.push(new $.util.File({
+      cwd: "",
+      base: "",
+      path: "roster.json",
+      contents: new Buffer(string)
+    }));
+    this.push(null);
+  };
+  return src
+    .pipe(gulp.dest(".tmp/roster/"))
+    .pipe(gulp.dest("dist/roster/"));
+});
+
 // Polybuild will take care of inlining HTML imports,
 // scripts and CSS for you.
 // Anyone who wants their page vulcanized can add a vulcanizeTask here.
@@ -326,8 +364,8 @@ gulp.task("rename-index", function() {
     .pipe(gulp.dest("dist/"));
 });
 
-gulp.task("remove-old-build-index", function() {
-  return del("dist/**/index.build.html");
+gulp.task("remove-old-build-index", function(cb) {
+  del("dist/**/index.build.html", cb);
 });
 
 // Generate config data for the <sw-precache-cache> element.
@@ -398,40 +436,6 @@ gulp.task("serve:dist", ["default"], function() {
   startBrowserSync(5001, "dist");
 });
 
-// Push build to gh-pages
-gulp.task("deploy", ["default"], function() {
-  return gulp.src("./dist/**/*")
-    .pipe($.ghPages({branch: "master"}));
-});
-
-// Generate roster.json based on the folders in app/roster
-gulp.task("generate-roster", function() {
-  var members = [];
-  glob.sync("app/roster/*")
-  .forEach(function(file) {
-    var member = path.basename(file, path.extname(file))
-    members.push(member);
-  });
-  var string = stringifyObject(members, {
-      indent: "  ",
-      singleQuotes: false
-  });
-
-  var src = stream.Readable({ objectMode: true });
-  src._read = function() {
-    this.push(new $.util.File({
-      cwd: "",
-      base: "",
-      path: "roster.json",
-      contents: new Buffer(string)
-    }));
-    this.push(null);
-  };
-  return src
-    .pipe(gulp.dest(".tmp/roster/"))
-    .pipe(gulp.dest("dist/roster/"));
-});
-
 // Build production files, the default task
 gulp.task("default", ["clean"], function(cb) {
   // Uncomment "cache-config" after "rename-index" if you are going to use service workers.
@@ -443,3 +447,16 @@ gulp.task("default", ["clean"], function(cb) {
     "vulcanize", "rename-index", "remove-old-build-index", // "cache-config",
     cb);
 });
+
+// Push build to gh-pages
+gulp.task("deploy", function(cb) {
+  runSequence("default", "deploy:dist", cb);
+});
+
+// Push the current contents of dist/ to github pages
+gulp.task("deploy:dist", function() {
+  return gulp.src("dist/**/*")
+    .pipe($.ghPages({branch: "master"}));
+});
+
+})();
