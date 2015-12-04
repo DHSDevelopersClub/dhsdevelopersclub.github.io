@@ -5,8 +5,8 @@ Copyright (C) 2015 Drake Developers Club.  All rights reserved.
 <!--
 @author Alexander Otavka (zotavka@gmail.com)
 -->
-<link rel="import" href="/bower_components/polymer/polymer.html">
-<link rel="import" href="/bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
 
 <dom-module id="card-carousel">
   <template>
@@ -18,12 +18,12 @@ Copyright (C) 2015 Drake Developers Club.  All rights reserved.
 
       #container {
         @apply(--layout-scroll);
+        background: rgba(255, 255, 255, 0.2);
       }
 
       #slider {
         @apply(--layout-horizontal);
-        padding: var(--carousel-padding-vert) 0;
-        background: rgba(255, 255, 255, 0.2);
+        padding: 15px 0;
       }
 
       #slider > ::content > *, #slider > * {
@@ -36,8 +36,22 @@ Copyright (C) 2015 Drake Developers Club.  All rights reserved.
       }
 
       #slider .padding {
-        padding-left: var(--carousel-padding-horiz);
+        width: calc(5px + 10vw);
         height: 1px;
+      }
+
+      /* Tiny Screens */
+      @media (max-width: 479px) {
+        #slider .padding {
+          width: 5px;
+        }
+      }
+
+      /* Small Screens */
+      @media (min-width: 480px) and (max-width: 639px) {
+        #slider .padding {
+          width: 20px;
+        }
       }
     </style>
 

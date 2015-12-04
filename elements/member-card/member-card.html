@@ -6,8 +6,8 @@ Copyright (C) 2015 Drake Developers Club.  All rights reserved.
 @author Alexander Otavka (zotavka@gmail.com)
 -->
 
-<link rel="import" href="/bower_components/polymer/polymer.html">
-<link rel="import" href="/bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../content-card/content-card.html">
 
 <dom-module id="member-card">
@@ -20,9 +20,10 @@ Copyright (C) 2015 Drake Developers Club.  All rights reserved.
   <template>
     <a href="{{webpageURI}}">
       <content-card default-elevation="0" hovered-elevation="2">
-        <object class="card-image" data="{{profileImageURI}}" type="image/jpg">
-          <img src="/images/default-profile.jpg">
-        </object>
+        <img is="async-img"
+          class="card-image"
+          main-src="{{profileImageURI}}"
+          alt-src="/images/default-profile.jpg">
         <div class="card-title">{{readableName}}</div>
         <div class="card-text">{{blurb}}</div>
       </content-card>
