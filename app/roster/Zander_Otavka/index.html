@@ -11,110 +11,124 @@ Zander's main page.
 <!doctype html>
 
 <html>
-    <head>
-      <meta charset="utf-8">
-      <!-- TODO: add support for mobile browsers. -->
-      <title>Zander Otavka</title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Zander Otavka</title>
 
-      <link rel="import" href="elements/elements.html">
+  <!-- Chrome for Android theme color -->
+  <meta name="theme-color" content="#000000">
 
-      <link rel="import" href="main-style.html">
+  <!-- Tile color for Win8 -->
+  <meta name="msapplication-TileColor" content="#000000">
 
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    </head>
+  <!-- build:js ../../bower_components/webcomponentsjs/webcomponents-lite.min.js -->
+  <script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <!-- endbuild -->
 
-    <body>
-      <div id="header">
-        <a is="smooth-a" id="home" href="/" class="header-item heading">
-          Home
-        </a>
+  <link rel="import" href="elements/elements.html">
 
-        <div id="headerTitle">
-          <a is="smooth-a" href="#top" class="header-item heading" id="titleText" hidden>Zander Otavka</a>
-        </div>
+  <link rel="import" href="main-style.html">
 
-        <a is="smooth-a" href="#about" class="header-item heading">
-          About
-        </a>
-        <a is="smooth-a" href="#portfolio" class="header-item heading">
-          Portfolio
-        </a>
-      </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
 
-      <parallax-container perspective="100">
-        <div id="mainImage" class="parallax-image">
-          <parallax-group z="1">
-            <parallax-layer layer="-1" class="image-layer">
-              <img src="images/main.jpg"/>
-            </parallax-layer>
+<body>
+  <span id="browser-sync-binding"></span>
 
-            <parallax-layer>
-              <a is="smooth-a" name="top"> </a>
-              <div class="section-title">
-                <div class="section-title-text">
-                  <div id="mainHeading" class="heading"> Zander Otavka </div>
-                  <div class="subtitle"> Drake Developers Club, Vice President </div>
-                </div>
-              </div>
-            </parallax-layer>
-          </parallax-group>
-        </div>
+  <div id="header">
+    <a is="smooth-a" id="home" href="/" class="header-item heading">
+      Home
+    </a>
 
-        <parallax-group z="2" class="content-wrapper">
-          <a is="smooth-a" id="mainImageEnd"> </a>
-          <a is="smooth-a" name="about"> </a>
+    <div id="headerTitle">
+      <a is="smooth-a" href="#top" class="header-item heading" id="titleText" hidden>Zander Otavka</a>
+    </div>
 
-          <parallax-layer class="content-area">
-            <p>
-              Zander is a young programmer with great potential.  He enjoys making cool websites and long walks on the beach.
-            </p>
+    <a is="smooth-a" href="#about" class="header-item heading">
+      About
+    </a>
+    <a is="smooth-a" href="#portfolio" class="header-item heading">
+      Portfolio
+    </a>
+  </div>
 
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus fringilla vitae velit at porta. Donec non velit quis nibh consectetur consectetur eget quis est. Suspendisse viverra nunc nec tincidunt faucibus. Aliquam ut consectetur dolor, sit amet commodo lorem. Mauris feugiat pulvinar orci, tempor scelerisque odio. In tellus elit, vulputate imperdiet commodo nec, porttitor faucibus sem. Sed nulla quam, facilisis in nulla id, imperdiet blandit erat. Sed at rhoncus velit. Vivamus eget ligula faucibus ante condimentum pretium. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed condimentum porttitor sem, vitae consectetur nisi. Fusce ultrices ante nibh, quis vehicula risus dapibus at. Proin quis neque nec ante ultricies congue. Vivamus quis auctor mauris. Etiam nibh ante, interdum at viverra et, maximus dignissim eros. Etiam leo magna, ultricies vitae tortor vel, congue rutrum diam.
-            </p>
+  <parallax-container perspective="100">
+    <div id="mainImage" class="parallax-image">
+      <parallax-group z="1">
+        <parallax-layer layer="-1" class="image-layer">
+          <img src="images/main.jpg"/>
+        </parallax-layer>
 
-            <p>
-              Proin volutpat ex mi, a eleifend purus accumsan ac. Praesent volutpat est ac lacus mattis lobortis. Integer viverra ipsum nec libero vestibulum, et bibendum urna pulvinar. Phasellus ullamcorper, magna nec posuere aliquam, tortor lorem euismod risus, pretium iaculis lorem justo ut ipsum. Nam nec consectetur dolor. Ut bibendum tempus porta. In ut leo in massa ornare rhoncus. Morbi id purus nisl. Donec pharetra consectetur leo venenatis convallis. Vivamus malesuada non libero non pulvinar. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc condimentum quam vitae sollicitudin efficitur. Nulla at ipsum sit amet diam tempus rutrum consectetur in purus. Duis eu molestie mauris.
-            </p>
-          </parallax-layer>
-        </parallax-group>
+        <parallax-layer>
+          <a is="smooth-a" name="top"> </a>
+          <div class="section-title">
+            <div class="section-title-text">
+              <div id="mainHeading" class="heading"> Zander Otavka </div>
+              <div class="subtitle"> Drake Developers Club, Vice President </div>
+            </div>
+          </div>
+        </parallax-layer>
+      </parallax-group>
+    </div>
 
-        <div class="parallax-image">
-          <parallax-group z="1">
-            <parallax-layer layer="-1" class="image-layer">
-              <img src="images/portfolio.jpg"/>
-            </parallax-layer>
+    <parallax-group z="2" class="content-wrapper">
+      <a is="smooth-a" id="mainImageEnd"> </a>
+      <a is="smooth-a" name="about"> </a>
 
-            <parallax-layer>
-              <a is="smooth-a" name="portfolio"> </a>
+      <parallax-layer class="content-area">
+        <p>
+          Zander is a young programmer with great potential.  He enjoys making cool websites and long walks on the beach.
+        </p>
 
-              <div class="section-title">
-                <div class="section-title-text">
-                  <div class="heading"> Portfolio </div>
-                </div>
-              </div>
-            </parallax-layer>
-          </parallax-group>
-        </div>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus fringilla vitae velit at porta. Donec non velit quis nibh consectetur consectetur eget quis est. Suspendisse viverra nunc nec tincidunt faucibus. Aliquam ut consectetur dolor, sit amet commodo lorem. Mauris feugiat pulvinar orci, tempor scelerisque odio. In tellus elit, vulputate imperdiet commodo nec, porttitor faucibus sem. Sed nulla quam, facilisis in nulla id, imperdiet blandit erat. Sed at rhoncus velit. Vivamus eget ligula faucibus ante condimentum pretium. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed condimentum porttitor sem, vitae consectetur nisi. Fusce ultrices ante nibh, quis vehicula risus dapibus at. Proin quis neque nec ante ultricies congue. Vivamus quis auctor mauris. Etiam nibh ante, interdum at viverra et, maximus dignissim eros. Etiam leo magna, ultricies vitae tortor vel, congue rutrum diam.
+        </p>
 
-        <parallax-group z="2" class="content-wrapper">
-          <parallax-layer class="content-area">
-            <p>
-              Proin volutpat ex mi, a eleifend purus accumsan ac. Praesent volutpat est ac lacus mattis lobortis. Integer viverra ipsum nec libero vestibulum, et bibendum urna pulvinar. Phasellus ullamcorper, magna nec posuere aliquam, tortor lorem euismod risus, pretium iaculis lorem justo ut ipsum. Nam nec consectetur dolor. Ut bibendum tempus porta. In ut leo in massa ornare rhoncus. Morbi id purus nisl. Donec pharetra consectetur leo venenatis convallis. Vivamus malesuada non libero non pulvinar. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc condimentum quam vitae sollicitudin efficitur. Nulla at ipsum sit amet diam tempus rutrum consectetur in purus. Duis eu
-              molestie mauris.
-            </p>
+        <p>
+          Proin volutpat ex mi, a eleifend purus accumsan ac. Praesent volutpat est ac lacus mattis lobortis. Integer viverra ipsum nec libero vestibulum, et bibendum urna pulvinar. Phasellus ullamcorper, magna nec posuere aliquam, tortor lorem euismod risus, pretium iaculis lorem justo ut ipsum. Nam nec consectetur dolor. Ut bibendum tempus porta. In ut leo in massa ornare rhoncus. Morbi id purus nisl. Donec pharetra consectetur leo venenatis convallis. Vivamus malesuada non libero non pulvinar. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc condimentum quam vitae sollicitudin efficitur. Nulla at ipsum sit amet diam tempus rutrum consectetur in purus. Duis eu molestie mauris.
+        </p>
+      </parallax-layer>
+    </parallax-group>
 
-            <p>
-              Proin volutpat ex mi, a eleifend purus accumsan ac. Praesent volutpat est ac lacus mattis lobortis. Integer viverra ipsum nec libero vestibulum, et bibendum urna pulvinar. Phasellus ullamcorper, magna nec posuere aliquam, tortor lorem euismod risus, pretium iaculis lorem justo ut ipsum. Nam nec consectetur dolor. Ut bibendum tempus porta. In ut leo in massa ornare rhoncus. Morbi id purus nisl. Donec pharetra consectetur leo venenatis convallis. Vivamus malesuada non libero non pulvinar. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc condimentum quam vitae sollicitudin efficitur. Nulla at ipsum sit amet diam tempus rutrum consectetur in purus. Duis eu molestie mauris.
-            </p>
+    <div class="parallax-image">
+      <parallax-group z="1">
+        <parallax-layer layer="-1" class="image-layer">
+          <img src="images/portfolio.jpg"/>
+        </parallax-layer>
 
-            <p>
-              Proin volutpat ex mi, a eleifend purus accumsan ac. Praesent volutpat est ac lacus mattis lobortis. Integer viverra ipsum nec libero vestibulum, et bibendum urna pulvinar. Phasellus ullamcorper, magna nec posuere aliquam, tortor lorem euismod risus, pretium iaculis lorem justo ut ipsum. Nam nec consectetur dolor. Ut bibendum tempus porta. In ut leo in massa ornare rhoncus. Morbi id purus nisl. Donec pharetra consectetur leo venenatis convallis. Vivamus malesuada non libero non pulvinar. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc condimentum quam vitae sollicitudin efficitur. Nulla at ipsum sit amet diam tempus rutrum consectetur in purus. Duis eu molestie mauris.
-            </p>
-          </parallax-layer>
-        </parallax-group>
-      </parallax-container>
+        <parallax-layer>
+          <a is="smooth-a" name="portfolio"> </a>
 
-      <script src="main.js"></script>
-    </body>
+          <div class="section-title">
+            <div class="section-title-text">
+              <div class="heading"> Portfolio </div>
+            </div>
+          </div>
+        </parallax-layer>
+      </parallax-group>
+    </div>
+
+    <parallax-group z="2" class="content-wrapper">
+      <parallax-layer class="content-area">
+        <p>
+          Proin volutpat ex mi, a eleifend purus accumsan ac. Praesent volutpat est ac lacus mattis lobortis. Integer viverra ipsum nec libero vestibulum, et bibendum urna pulvinar. Phasellus ullamcorper, magna nec posuere aliquam, tortor lorem euismod risus, pretium iaculis lorem justo ut ipsum. Nam nec consectetur dolor. Ut bibendum tempus porta. In ut leo in massa ornare rhoncus. Morbi id purus nisl. Donec pharetra consectetur leo venenatis convallis. Vivamus malesuada non libero non pulvinar. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc condimentum quam vitae sollicitudin efficitur. Nulla at ipsum sit amet diam tempus rutrum consectetur in purus. Duis eu
+          molestie mauris.
+        </p>
+
+        <p>
+          Proin volutpat ex mi, a eleifend purus accumsan ac. Praesent volutpat est ac lacus mattis lobortis. Integer viverra ipsum nec libero vestibulum, et bibendum urna pulvinar. Phasellus ullamcorper, magna nec posuere aliquam, tortor lorem euismod risus, pretium iaculis lorem justo ut ipsum. Nam nec consectetur dolor. Ut bibendum tempus porta. In ut leo in massa ornare rhoncus. Morbi id purus nisl. Donec pharetra consectetur leo venenatis convallis. Vivamus malesuada non libero non pulvinar. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc condimentum quam vitae sollicitudin efficitur. Nulla at ipsum sit amet diam tempus rutrum consectetur in purus. Duis eu molestie mauris.
+        </p>
+
+        <p>
+          Proin volutpat ex mi, a eleifend purus accumsan ac. Praesent volutpat est ac lacus mattis lobortis. Integer viverra ipsum nec libero vestibulum, et bibendum urna pulvinar. Phasellus ullamcorper, magna nec posuere aliquam, tortor lorem euismod risus, pretium iaculis lorem justo ut ipsum. Nam nec consectetur dolor. Ut bibendum tempus porta. In ut leo in massa ornare rhoncus. Morbi id purus nisl. Donec pharetra consectetur leo venenatis convallis. Vivamus malesuada non libero non pulvinar. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc condimentum quam vitae sollicitudin efficitur. Nulla at ipsum sit amet diam tempus rutrum consectetur in purus. Duis eu molestie mauris.
+        </p>
+      </parallax-layer>
+    </parallax-group>
+  </parallax-container>
+
+  <!-- build:js main.js -->
+  <script src="main.js"></script>
+  <!-- endbuild -->
+</body>
 </html>

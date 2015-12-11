@@ -1,0 +1,45 @@
+<!--
+@license
+Copyright (C) 2015 Drake Developers Club.  All rights reserved.
+-->
+<!--
+@author Alexander Otavka (zotavka@gmail.com)
+-->
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+
+<dom-module id="async-img">
+  <template>
+    <iron-ajax
+      auto
+      url="{{mainSrc}}"
+      handle-as="blob"
+      on-response="_handleImgResponse"
+      on-error="_handleImgError">
+    </iron-ajax>
+  </template>
+  <script>
+  (function() {
+    'use strict';
+
+    Polymer({
+      is: 'async-img',
+      extends: 'img',
+
+      properties: {
+        mainSrc: String,
+        altSrc: String
+      },
+
+      _handleImgResponse: function(resp) {
+        this.src = URL.createObjectURL(resp.detail.response);
+      },
+
+      _handleImgError: function(resp) {
+        this.src = this.altSrc;
+      }
+    });
+  })();
+  </script>
+</dom-module>

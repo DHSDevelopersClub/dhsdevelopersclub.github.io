@@ -1,8 +1,18 @@
-*.pyc
-*.idea
+# Package manager downloads
 node_modules
 bower_components
+
+# Build and deploy output directories
 dist
-npm-debug.log
 .publish
 .tmp
+
+# Editor specific files
+*.idea
+*.sw[po]
+
+# NPM logs
+npm-debug.log
+
+# Custom testing browsers
+testing-browsers.json
