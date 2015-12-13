@@ -24,7 +24,7 @@ Copyright (C) 2015 Drake Developers Club.  All rights reserved.
         <img is="responsive-img"
           id="image"
           class="card-image"
-          src="{{profileImageURI}}"
+          base-src="{{profileImageURI}}"
           on-image-not-found="_useDefaultProfile">
         <div class="card-title">{{readableName}}</div>
         <div class="card-text">{{blurb}}</div>
@@ -125,7 +125,7 @@ Copyright (C) 2015 Drake Developers Club.  All rights reserved.
       _useDefaultProfile: function(event) {
         var DEFAULT_PROFILE = "/images/default-profile.jpg";
         if (event.detail.absolutePath !== DEFAULT_PROFILE) {
-          this.$.image.src = DEFAULT_PROFILE;
+          this.$.image.baseSrc = DEFAULT_PROFILE;
         }
       }
     });

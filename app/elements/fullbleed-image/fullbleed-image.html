@@ -55,7 +55,7 @@ Custom CSS Properties:
   </style>
 
   <template>
-    <img is="responsive-img" src="{{uri}}" sizes="100vw">
+    <img is="responsive-img" base-src="{{src}}" sizes="100vw">
     <div id="imageContent">
       <div id="imageTitle">
         <content select=".image-title"></content>
@@ -69,7 +69,7 @@ Custom CSS Properties:
       is: 'fullbleed-image',
 
       properties: {
-        uri: String
+        src: String
       }
     });
   </script>

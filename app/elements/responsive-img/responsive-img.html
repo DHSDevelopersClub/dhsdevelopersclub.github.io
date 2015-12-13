@@ -46,19 +46,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       extends: 'img',
 
       properties: {
-        src: {
+        baseSrc: {
           type: String,
-          observer: "_srcChanged"
+          observer: "_baseSrcChanged"
         }
       },
 
-      _srcChanged: function() {
-        var absolutePath = getAbsolutePath(this.src);
+      _baseSrcChanged: function(newBaseSrc) {
+        var absolutePath = getAbsolutePath(newBaseSrc);
         if (IMAGE_INDEX.hasOwnProperty(absolutePath)) {
-          this.srcset = getSrcset(this.src, IMAGE_INDEX[absolutePath]);
+          this.src = newBaseSrc;
+          this.srcset = getSrcset(newBaseSrc, IMAGE_INDEX[absolutePath]);
         } else {
           this.fire("image-not-found", {
-            path: this.src,
+            path: newBaseSrc,
             absolutePath: absolutePath
           });
         }
