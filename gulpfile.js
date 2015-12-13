@@ -226,6 +226,18 @@ var reduceFraction = function(numerator, denominator) {
   return [numerator/gcdResult, denominator/gcdResult];
 };
 
+var getReadableName = function(name) {
+    var formatted = '';
+    for (var i = 0; i < name.length; i++) {
+      if (name[i] === '_') {
+        formatted += ' ';
+      } else {
+        formatted += name[i];
+      }
+    }
+    return formatted;
+};
+
 // Compile and automatically prefix stylesheets
 gulp.task("app-styles", function() {
   return styleTask("styles", ["**/*.css"]);
@@ -389,32 +401,48 @@ gulp.task("html", function() {
     "dist");
 });
 
-// Generate roster.json based on the folders in app/roster
+// Generate roster-metadata.js based on the folders and files in app/roster
 gulp.task("generate-roster", function() {
-  var members = [];
-  glob.sync("app/roster/*")
-  .forEach(function(file) {
-    var member = path.basename(file, path.extname(file));
-    members.push(member);
+  var members = {};
+  glob.sync("app/roster/*").forEach(function(dir) {
+    var name = path.basename(dir);
+    var readFile = function(filename) {
+      try {
+        return fs.readFileSync(path.join(dir, filename)).toString();
+      } catch (e) {
+        return null;
+      }
+    };
+
+    members[name] = {
+      readableName: getReadableName(name),
+      blurb: readFile("blurb.txt"),
+      config: JSON.parse(readFile("config.json") || "{}")
+    };
+
+    if (!members[name].config.uri) {
+      members[name].config.uri = dir.match(/^app(.*)$/)[1];
+    }
   });
-  var string = stringifyObject(members, {
+
+  var string = "window.ROSTER_METADATA = " + stringifyObject(members, {
       indent: "  ",
       singleQuotes: false
-  });
+  }) + ";\n";
 
   var src = stream.Readable({ objectMode: true });
   src._read = function() {
     this.push(new $.util.File({
       cwd: "",
       base: "",
-      path: "roster.json",
+      path: "roster-metadata.js",
       contents: new Buffer(string)
     }));
     this.push(null);
   };
   return src
-    .pipe(gulp.dest(".tmp/roster/"))
-    .pipe(gulp.dest("dist/roster/"));
+    .pipe(gulp.dest(".tmp/elements/member-card/"))
+    .pipe(gulp.dest("dist/elements/member-card/"));
 });
 
 // Polybuild will take care of inlining HTML imports,

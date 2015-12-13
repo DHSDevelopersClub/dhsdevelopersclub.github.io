@@ -1,3 +1,8 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/classes/iron-flex-layout.html">
+<link rel="import" href="../member-card/member-card.html">
+<script src="../member-card/roster-metadata.js"></script>
+
 <dom-module id="member-card-group">
   <style>
     :host {
@@ -14,21 +19,29 @@
         <member-card name="{{item}}"></member-card>
       </template>
     </div>
-    
-    <iron-ajax
-       auto
-       url="/roster/roster.json"
-       handle-as="json"
-       last-response="{{names}}">
-    </iron-ajax>
   </template>
   <script>
+  (function() {
+    "use strict";
+
+    var names = [];
+    for (var name in ROSTER_METADATA) {
+      if (ROSTER_METADATA.hasOwnProperty(name)) {
+        names.push(name);
+      }
+    }
+
     Polymer({
       is: 'member-card-group',
 
       properties: {
-        names: Array
+        names: {
+          type: Array,
+          value: names,
+          readOnly: true
+        }
       }
     });
+  })();
   </script>
 </dom-module>
