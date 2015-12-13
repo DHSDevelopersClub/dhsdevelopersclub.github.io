@@ -93,7 +93,7 @@ var resizeProfileTask = function(scale, src, dest) {
     .pipe(minifyImage())
     .pipe(gulp.dest(".tmp/" + dest))
     .pipe(gulp.dest("dist/" + dest));
-}
+};
 
 var jshintTask = function(src) {
   return gulp.src(src)
@@ -218,6 +218,14 @@ var resizeAndRename = function(scale) {
   });
 };
 
+var reduceFraction = function(numerator, denominator) {
+  var gcd = function gcd(a,b){
+    return b ? gcd(b, a%b) : a;
+  };
+  var gcdResult = gcd(numerator, denominator);
+  return [numerator/gcdResult, denominator/gcdResult];
+};
+
 // Compile and automatically prefix stylesheets
 gulp.task("app-styles", function() {
   return styleTask("styles", ["**/*.css"]);
@@ -262,40 +270,60 @@ gulp.task("resize-images", function() {
 // Create a file at app/elements/responsive-img/image-index.js which declares
 // a variable in the global scope called IMAGE_INDEX.  The variable holds
 // metadata about the available sizes/scales of each image.
-gulp.task("index-image-resolutions", function() {
+gulp.task("index-image-resolutions", function(done) {
   var regex = /^\.tmp(.*)-(\d+[wx])(\.[a-zA-Z1-9]+)$/;
   var images = {};
 
-  glob.sync(".tmp/**/*.{png,jpg,jpeg}").forEach(function(file) {
-    var matchData = regex.exec(file);
+  var imageProcessingThreads = 0;
+  var loopFinished = false;
+
+  glob.sync(".tmp/**/*.{png,jpg,jpeg}").forEach(function(fileName) {
+    var matchData = regex.exec(fileName);
     if (matchData) {
       var imageName = matchData[1] + matchData[3];
       var imageWidth = matchData[2];
       if (!images.hasOwnProperty(imageName)) {
-        images[imageName] = [];
+        images[imageName] = { resolutions: [], aspectRatio: "" };
       }
-      images[imageName].push(imageWidth);
+      images[imageName].resolutions.push(imageWidth);
+
+      imageProcessingThreads++;
+      gm(fileName).size(function(err, size) {
+        var aspectRatio = reduceFraction(size.width, size.height);
+        aspectRatio = { width: aspectRatio[0], height: aspectRatio[1] };
+        images[imageName].aspectRatio = aspectRatio;
+        imageProcessingDone();
+      });
     }
   });
 
-  var string = "window.IMAGE_INDEX = " + stringifyObject(images, {
-      indent: "  ",
-      singleQuotes: false
-  }) + ";\n";
+  loopFinished = true;
 
-  var src = stream.Readable({ objectMode: true });
-  src._read = function() {
-    this.push(new $.util.File({
-      cwd: "",
-      base: "",
-      path: "image-index.js",
-      contents: new Buffer(string)
-    }));
-    this.push(null);
+  var imageProcessingDone = function() {
+    if (--imageProcessingThreads || !loopFinished) {
+      return;
+    }
+
+    var string = "window.IMAGE_INDEX = " + stringifyObject(images, {
+        indent: "  ",
+        singleQuotes: false
+    }) + ";\n";
+
+    var src = stream.Readable({ objectMode: true });
+    src._read = function() {
+      this.push(new $.util.File({
+        cwd: "",
+        base: "",
+        path: "image-index.js",
+        contents: new Buffer(string)
+      }));
+      this.push(null);
+    };
+    src
+      .pipe(gulp.dest(".tmp/elements/responsive-img/"))
+      .pipe(gulp.dest("dist/elements/responsive-img/"));
+    done();
   };
-  return src
-    .pipe(gulp.dest(".tmp/elements/responsive-img/"))
-    .pipe(gulp.dest("dist/elements/responsive-img/"));
 });
 
 // Optimize images

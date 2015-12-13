@@ -55,7 +55,10 @@ Custom CSS Properties:
   </style>
 
   <template>
-    <img is="responsive-img" base-src="{{src}}" sizes="100vw">
+    <img is="responsive-img"
+      base-src="{{src}}"
+      max-width="{{maxWidth}}"
+      max-height="{{maxHeight}}">
     <div id="imageContent">
       <div id="imageTitle">
         <content select=".image-title"></content>
@@ -69,7 +72,17 @@ Custom CSS Properties:
       is: 'fullbleed-image',
 
       properties: {
-        src: String
+        src: String,
+
+        maxWidth: {
+          type: String,
+          value: "100vw"
+        },
+        
+        maxHeight: {
+          type: String,
+          value: "100vh"
+        }
       }
     });
   </script>
