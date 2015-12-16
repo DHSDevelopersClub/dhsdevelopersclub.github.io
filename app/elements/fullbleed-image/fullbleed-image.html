@@ -11,6 +11,7 @@ Custom CSS Properties:
 -->
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../responsive-img/responsive-img.html">
 
 <dom-module id="fullbleed-image">
   <style>
@@ -54,7 +55,10 @@ Custom CSS Properties:
   </style>
 
   <template>
-    <img src="{{uri}}">
+    <img is="responsive-img"
+      base-src="{{src}}"
+      max-width="{{maxWidth}}"
+      max-height="{{maxHeight}}">
     <div id="imageContent">
       <div id="imageTitle">
         <content select=".image-title"></content>
@@ -68,7 +72,17 @@ Custom CSS Properties:
       is: 'fullbleed-image',
 
       properties: {
-        uri: String
+        src: String,
+
+        maxWidth: {
+          type: String,
+          value: "100vw"
+        },
+        
+        maxHeight: {
+          type: String,
+          value: "100vh"
+        }
       }
     });
   </script>

@@ -81,6 +81,20 @@ var styleTask = function(stylesPath, srcs) {
     .pipe($.size({title: stylesPath}));
 };
 
+var resizeProfileTask = function(scale, src, dest) {
+  return gulp.src(src)
+    .pipe($.imageResize({
+      width: 100 * scale,
+      height: 100 * scale,
+      crop: true,
+      upscale: false
+    }))
+    .pipe($.rename({ suffix: "-" + scale + "x" }))
+    .pipe(minifyImage())
+    .pipe(gulp.dest(".tmp/" + dest))
+    .pipe(gulp.dest("dist/" + dest));
+};
+
 var jshintTask = function(src) {
   return gulp.src(src)
     .pipe($.jshint.extract()) // Extract JS from .html files
@@ -204,6 +218,26 @@ var resizeAndRename = function(scale) {
   });
 };
 
+var reduceFraction = function(numerator, denominator) {
+  var gcd = function gcd(a,b){
+    return b ? gcd(b, a%b) : a;
+  };
+  var gcdResult = gcd(numerator, denominator);
+  return [numerator/gcdResult, denominator/gcdResult];
+};
+
+var getReadableName = function(name) {
+    var formatted = '';
+    for (var i = 0; i < name.length; i++) {
+      if (name[i] === '_') {
+        formatted += ' ';
+      } else {
+        formatted += name[i];
+      }
+    }
+    return formatted;
+};
+
 // Compile and automatically prefix stylesheets
 gulp.task("app-styles", function() {
   return styleTask("styles", ["**/*.css"]);
@@ -221,17 +255,9 @@ gulp.task("roster-styles", function() {
 gulp.task("resize-profiles", function() {
   var merged = merge();
   for (var i = 1; i <= 3; i++) {
-    merged.add(gulp.src(["app/roster/*/profile.jpg"])
-      .pipe($.imageResize({
-        width: 100 * i,
-        height: 100 * i,
-        crop: true,
-        upscale: false
-      }))
-      .pipe($.rename({ suffix: "-" + i + "x" }))
-      .pipe(minifyImage())
-      .pipe(gulp.dest(".tmp/roster/"))
-      .pipe(gulp.dest("dist/roster/")));
+    merged.add(resizeProfileTask(i, "app/roster/*/profile.jpg", "roster"));
+    merged.add(resizeProfileTask(
+      i, "app/images/default-profile.jpg", "images"));
   }
   return merged.pipe($.size({title: "resize-profiles"}));
 });
@@ -242,6 +268,7 @@ gulp.task("resize-images", function() {
     merged.add(gulp.src([
         "app/**/*.{png,jpg,jpeg}",
         "!app/roster/*/profile.jpg",
+        "!app/images/default-profile.jpg",
         "!app/images/touch/**/*"
       ])
       .pipe(resizeAndRename(1 / i))
@@ -250,6 +277,65 @@ gulp.task("resize-images", function() {
       .pipe(gulp.dest("dist/")));
   }
   return merged.pipe($.size({title: "resize-images"}));
+});
+
+// Create a file at app/elements/responsive-img/image-index.js which declares
+// a variable in the global scope called IMAGE_INDEX.  The variable holds
+// metadata about the available sizes/scales of each image.
+gulp.task("index-image-resolutions", function(done) {
+  var regex = /^\.tmp(.*)-(\d+[wx])(\.[a-zA-Z1-9]+)$/;
+  var images = {};
+
+  var imageProcessingThreads = 0;
+  var loopFinished = false;
+
+  glob.sync(".tmp/**/*.{png,jpg,jpeg}").forEach(function(fileName) {
+    var matchData = regex.exec(fileName);
+    if (matchData) {
+      var imageName = matchData[1] + matchData[3];
+      var imageWidth = matchData[2];
+      if (!images.hasOwnProperty(imageName)) {
+        images[imageName] = { resolutions: [], aspectRatio: "" };
+      }
+      images[imageName].resolutions.push(imageWidth);
+
+      imageProcessingThreads++;
+      gm(fileName).size(function(err, size) {
+        var aspectRatio = reduceFraction(size.width, size.height);
+        aspectRatio = { width: aspectRatio[0], height: aspectRatio[1] };
+        images[imageName].aspectRatio = aspectRatio;
+        imageProcessingDone();
+      });
+    }
+  });
+
+  loopFinished = true;
+
+  var imageProcessingDone = function() {
+    if (--imageProcessingThreads || !loopFinished) {
+      return;
+    }
+
+    var string = "window.IMAGE_INDEX = " + stringifyObject(images, {
+        indent: "  ",
+        singleQuotes: false
+    }) + ";\n";
+
+    var src = stream.Readable({ objectMode: true });
+    src._read = function() {
+      this.push(new $.util.File({
+        cwd: "",
+        base: "",
+        path: "image-index.js",
+        contents: new Buffer(string)
+      }));
+      this.push(null);
+    };
+    src
+      .pipe(gulp.dest(".tmp/elements/responsive-img/"))
+      .pipe(gulp.dest("dist/elements/responsive-img/"));
+    done();
+  };
 });
 
 // Optimize images
@@ -315,32 +401,48 @@ gulp.task("html", function() {
     "dist");
 });
 
-// Generate roster.json based on the folders in app/roster
+// Generate roster-metadata.js based on the folders and files in app/roster
 gulp.task("generate-roster", function() {
-  var members = [];
-  glob.sync("app/roster/*")
-  .forEach(function(file) {
-    var member = path.basename(file, path.extname(file));
-    members.push(member);
+  var members = {};
+  glob.sync("app/roster/*").forEach(function(dir) {
+    var name = path.basename(dir);
+    var readFile = function(filename) {
+      try {
+        return fs.readFileSync(path.join(dir, filename)).toString();
+      } catch (e) {
+        return null;
+      }
+    };
+
+    members[name] = {
+      readableName: getReadableName(name),
+      blurb: readFile("blurb.txt"),
+      config: JSON.parse(readFile("config.json") || "{}")
+    };
+
+    if (!members[name].config.uri) {
+      members[name].config.uri = dir.match(/^app(.*)$/)[1];
+    }
   });
-  var string = stringifyObject(members, {
+
+  var string = "window.ROSTER_METADATA = " + stringifyObject(members, {
       indent: "  ",
       singleQuotes: false
-  });
+  }) + ";\n";
 
   var src = stream.Readable({ objectMode: true });
   src._read = function() {
     this.push(new $.util.File({
       cwd: "",
       base: "",
-      path: "roster.json",
+      path: "roster-metadata.js",
       contents: new Buffer(string)
     }));
     this.push(null);
   };
   return src
-    .pipe(gulp.dest(".tmp/roster/"))
-    .pipe(gulp.dest("dist/roster/"));
+    .pipe(gulp.dest(".tmp/elements/member-card/"))
+    .pipe(gulp.dest("dist/elements/member-card/"));
 });
 
 // Polybuild will take care of inlining HTML imports,
@@ -408,7 +510,7 @@ gulp.task("clean", function(cb) {
 gulp.task("serve", [
   "app-styles", "element-styles", "roster-styles",
   "optimize-images", "resize-profiles", "resize-images",
-  "generate-roster"
+  "index-image-resolutions", "generate-roster"
 ], function() {
   startBrowserSync(5000, [".tmp", "app"], {
     "/bower_components": "bower_components"
@@ -442,8 +544,9 @@ gulp.task("default", ["clean"], function(cb) {
   runSequence(
     ["copy", "app-styles"],
     ["element-styles", "roster-styles"],
-    ["optimize-images", "fonts", "html", "generate-roster"],
-    ["resize-profiles", "resize-images"],
+    ["optimize-images", "resize-profiles", "resize-images",
+     "fonts", "html", "generate-roster"],
+    "index-image-resolutions",
     "vulcanize", "rename-index", "remove-old-build-index", // "cache-config",
     cb);
 });
