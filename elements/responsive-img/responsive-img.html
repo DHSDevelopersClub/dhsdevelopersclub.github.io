@@ -1,0 +1,110 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<script src="image-index.js"></script>
+
+<script>
+(function() {
+  'use strict';
+
+  function getAbsolutePath(sRelPath) {
+    if (sRelPath[0] === "/") {
+      return sRelPath;
+    }
+    var nUpLn, sDir = "", sPath = location.pathname.replace(/[^\/]*$/, sRelPath.replace(/(\/|^)(?:\.?\/+)+/g, "$1"));
+    for (var nEnd, nStart = 0; nEnd = sPath.indexOf("/../", nStart), nEnd > -1; nStart = nEnd + nUpLn) {
+      nUpLn = /^\/(?:\.\.\/)*/.exec(sPath.slice(nEnd))[0].length;
+      sDir = (sDir + sPath.substring(nStart, nEnd)).replace(new RegExp("(?:\\\/+[^\\\/]*){0," + ((nUpLn - 1) / 3) + "}$"), "/");
+    }
+    return sDir + sPath.substr(nStart);
+  }
+
+  function getSrcset(uri, suffixes) {
+    var string = "";
+    for (var i = 0; i < suffixes.length; i++) {
+      string += uri.replace(/^(.+)(\.[A-Za-z0-9]+)$/,
+                            "$1-" + suffixes[i] + "$2");
+      string += " " + suffixes[i];
+      if (i !== suffixes.length - 1) {
+        string += ", "
+      }
+    }
+    return string;
+  }
+
+  Polymer({
+    is: 'responsive-img',
+    extends: 'img',
+
+    properties: {
+      baseSrc: {
+        type: String,
+        observer: "_baseSrcChanged"
+      },
+
+      maxWidth: String,
+      maxHeight: String
+    },
+
+    _baseSrcChanged: function(newBaseSrc) {
+      var absolutePath = getAbsolutePath(newBaseSrc);
+      if (IMAGE_INDEX.hasOwnProperty(absolutePath)) {
+        var imageMetadata = IMAGE_INDEX[absolutePath];
+        this.src = newBaseSrc;
+        this.srcset = getSrcset(newBaseSrc, imageMetadata.resolutions);
+
+        var re = /^(\d+)([vwhpx]+)$/;
+
+        var widthData, widthNum, widthUnit;
+        if (this.maxWidth) {
+          widthData = re.exec(this.maxWidth);
+          widthNum = Number(widthData[1]);
+          widthUnit = widthData[2];
+        }
+
+        var heightNum, heightData, heightUnit, ar, widthForHeight;
+        if (this.maxHeight) {
+          heightData = re.exec(this.maxHeight);
+          heightNum = Number(heightData[1]);
+          heightUnit = heightData[2];
+          ar = imageMetadata.aspectRatio;
+          widthForHeight = heightNum * ar.width / ar.height;
+        }
+
+        if (this.maxHeight && this.maxWidth &&
+            widthUnit === "vw" && heightUnit === "vh") {
+          var adjustedAr = [
+            ar.width * heightNum,
+            ar.height * widthNum
+          ].join("/");
+          this.sizes = "(max-aspect-ratio: " + adjustedAr + ") " +
+                       widthForHeight + "vh, " + this.maxWidth;
+        } else if (this.maxHeight && !this.maxWidth) {
+          this.sizes = String(widthForHeight) + heightUnit;
+        } else if (this.maxWidth && !this.maxHeight) {
+          this.sizes = this.maxWidth;
+        } else if (this.maxWidth && this.maxHeight) {
+          if (widthForHeight > widthNum) {
+            this.sizes = String(widthForHeight) + heightUnit;
+          } else {
+            this.sizes = this.maxWidth;
+          }
+        }
+      } else {
+        this.fire("image-not-found", {
+          path: newBaseSrc,
+          absolutePath: absolutePath
+        });
+      }
+    }
+  });
+})();
+</script>

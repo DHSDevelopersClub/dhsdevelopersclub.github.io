@@ -4,7 +4,8 @@ Copyright (C) 2015 Drake Developers Club.  All rights reserved.
 -->
 <!--
 Custom CSS Properties:
-  --card-background: The card background color or style.
+  --card-background: The card background color or style.  Defaults to white.
+  --card-image-color: Color to show while image is loading.  Defaults to #ddd.
 
 @author Alexander Otavka (zotavka@gmail.com)
 -->
@@ -43,6 +44,7 @@ Custom CSS Properties:
       height: 100px;
       border-radius: 50%;
       overflow: hidden;
+      background-color: var(--card-image-color, #ddd);
     }
 
     #image > ::content * {
@@ -92,10 +94,11 @@ Custom CSS Properties:
       properties: {
         defaultElevation: {
           type: Number,
-          value: 1
+          value: 0
         },
         hoveredElevation: {
-          type: Number
+          type: Number,
+          value: 2
         }
       },
 

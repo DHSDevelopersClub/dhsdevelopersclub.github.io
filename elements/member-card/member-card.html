@@ -9,6 +9,8 @@ Copyright (C) 2015 Drake Developers Club.  All rights reserved.
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../content-card/content-card.html">
+<link rel="import" href="../responsive-img/responsive-img.html">
+<script src="roster-metadata.js"></script>
 
 <dom-module id="member-card">
   <style>
@@ -19,29 +21,16 @@ Copyright (C) 2015 Drake Developers Club.  All rights reserved.
 
   <template>
     <a href="{{webpageURI}}">
-      <content-card default-elevation="0" hovered-elevation="2">
-        <img is="async-img"
+      <content-card>
+        <img is="responsive-img"
+          id="image"
           class="card-image"
-          main-src="{{profileImageURI}}"
-          alt-src="/images/default-profile.jpg">
+          base-src="{{profileImageURI}}"
+          on-image-not-found="_useDefaultProfile">
         <div class="card-title">{{readableName}}</div>
         <div class="card-text">{{blurb}}</div>
       </content-card>
     </a>
-
-    <iron-ajax
-      auto
-      url="{{blurbURI}}"
-      handle-as="text"
-      on-response="_handleBlurbResponse">
-    </iron-ajax>
-
-    <iron-ajax
-       auto
-       url="{{pageConfigFileURI}}"
-       handle-as="json"
-       last-response="{{_pageConfig}}">
-     </iron-ajax>
   </template>
 
   <script>
@@ -61,63 +50,45 @@ Copyright (C) 2015 Drake Developers Club.  All rights reserved.
           computed: '_getProfileImageURI(name)'
         },
 
-        blurbURI: {
-          type: String,
-          computed: '_getBlurbURI(name)'
-        },
-
-        pageConfigFileURI: {
-          type: String,
-          computed: '_pageConfigFileURI(name)'
-        },
-
-        _pageConfig: {
-          type: Object,
-          value: {}
-        },
-
         webpageURI: {
           type: String,
-          computed: '_getWebpageURI(name, _pageConfig)'
+          computed: '_getWebpageURI(name)'
         },
 
         blurb: {
           type: String,
-          readOnly: true,
-          value: 'A member of the Drake Developers Club.'
+          computed: "_getBlurb(name)"
         }
       },
 
       _getReadableName: function(name) {
-        var formatted = '';
-        for (var i = 0; i < name.length; i++) {
-          if (name[i] === '_') {
-            formatted += ' ';
-          } else {
-            formatted += name[i];
-          }
-        }
-        return formatted;
+        return (ROSTER_METADATA[name] && ROSTER_METADATA[name].readableName) ||
+               "Not Found";
       },
 
       _getProfileImageURI: function(name) {
         return '/roster/' + name + '/profile.jpg';
       },
 
-      _getBlurbURI: function(name) {
-        return '/roster/' + name + '/blurb.txt';
+      _getWebpageURI: function(name) {
+        return ROSTER_METADATA[name] && ROSTER_METADATA[name].config.uri;
       },
 
-      _getWebpageURI: function(name, _pageConfig) {
-        return (_pageConfig && _pageConfig.uri) || '/roster/' + name;
+      _getBlurb: function(name) {
+        if (ROSTER_METADATA[name]) {
+          var DEFAULT_BLURB = "A member of the Drake Developers Club.";
+          return ROSTER_METADATA[name].blurb || DEFAULT_BLURB;
+        } else {
+          return "Member of name '" + name + "' was not found.  Make sure " +
+                 "their name was spelled correctly.";
+        }
       },
 
-      _pageConfigFileURI: function(name) {
-        return '/roster/' + name + '/config.json';
-      },
-
-      _handleBlurbResponse: function(resp) {
-        this._setBlurb(resp.detail.response);
+      _useDefaultProfile: function(event) {
+        var DEFAULT_PROFILE = "/images/default-profile.jpg";
+        if (event.detail.absolutePath !== DEFAULT_PROFILE) {
+          this.$.image.baseSrc = DEFAULT_PROFILE;
+        }
       }
     });
   </script>
