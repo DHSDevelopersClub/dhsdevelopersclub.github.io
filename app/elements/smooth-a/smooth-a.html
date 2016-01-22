@@ -9,7 +9,20 @@ smooth-a.html
 
 An anchor element that improves hash scrolling.
 -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+  // Defer loading of velocity.js until the whole page has loaded.
+  function downloadJSAtOnload() {
+    var element = document.createElement("script");
+    element.src = "/bower_components/velocity/velocity.min.js";
+    document.body.appendChild(element);
+  }
+  if (window.addEventListener)
+    window.addEventListener("load", downloadJSAtOnload, false);
+  else if (window.attachEvent)
+    window.attachEvent("onload", downloadJSAtOnload);
+  else
+    window.onload = downloadJSAtOnload;
+</script>
 
 <dom-module id="smooth-a">
   <style>
@@ -24,30 +37,25 @@ An anchor element that improves hash scrolling.
 
   <script>
     (function() {
+      "use strict";
+
       var anchors = {};
 
-      function smoothScroll(scrollPos) {
-        $("body").animate({
-          scrollTop: scrollPos
-        }, 600);
-      }
-
-      function updateHash() {
-        var scrollTop = document.querySelector("body").scrollTop;
-        var maxScroll = 0;
-        var href = window.location.href.split("#");
-        var newHash;
-        var newHref = href[0];
-
-        for (var aName in anchors) {
-          if (anchors.hasOwnProperty(aName) && !anchors[aName].noHash) {
-            var aTop = anchors[aName].getTop();
-            if (aTop <= scrollTop && aTop >= maxScroll) {
-              newHash = aName;
-              maxScroll = aTop;
-            }
+      function getScrollerTop(scroller) {
+        var scrollTop = 0;
+        var scrollers = document.querySelector(scroller);
+        for (var i = 0; i < scrollers.length; i++) {
+          if (scrollers[i].scrollTop) {
+            scrollTop = scrollers[i].scrollTop;
+            break;
           }
         }
+        return scrollTop;
+      }
+
+      function setHash(newHash) {
+        var href = window.location.href.split("#");
+        var newHref = href[0];
 
         if (href[1] !== newHash) {
           if (newHash !== undefined) {
@@ -58,14 +66,20 @@ An anchor element that improves hash scrolling.
         }
       }
 
-      SmoothA = Polymer({
+      window.SmoothA = Polymer({
         is: "smooth-a",
+
         extends: "a",
+
         listeners: {
           tap: "goToTarget"
         },
+
         properties: {
-          noHash: Boolean
+          updatesHash: {
+            type: Boolean,
+            value: false
+          }
         },
 
         attached: function() {
@@ -75,6 +89,7 @@ An anchor element that improves hash scrolling.
 
           this.onclick = function() { return false; };
         },
+
         detached: function() {
           if (this.name) {
             delete anchors[this.name];
@@ -83,12 +98,22 @@ An anchor element that improves hash scrolling.
 
         goToTarget: function() {
           var href = this.href.split("#");
-          var target = anchors[href[1]];
+          var targetName = href[1];
+          var target = document.querySelectorAll(
+            "[name=" + targetName + "], [id=" + targetName + "]");
           if (href.length > 1 &&
               window.location.href.split("#")[0] === href[0] &&
-              target !== undefined) {
-            var targetTop = target.getTop();
-            smoothScroll(targetTop);
+              target) {
+            Velocity(target, "scroll", {
+              duration: 500,
+              offset: 1,
+              easing: "ease-in-out",
+              complete: function() {
+                if (this.updatesHash) {
+                  setHash(targetName);
+                }
+              }
+            });
           } else {
             window.location.href = this.href;
           }
@@ -106,7 +131,49 @@ An anchor element that improves hash scrolling.
         }
       });
 
-      SmoothA.updateHash = updateHash;
+      var hashUpdaters = {};
+
+      window.SmoothA.unbindHashUpdater = (function(scroller) {
+        if (scroller in hashUpdaters) {
+          var updater = hashUpdaters[scroller];
+          delete hashUpdaters[scroller];
+
+          var elements = document.querySelectorAll(scroller);
+          for (var i = 0; i < elements.length; i++) {
+            elements[i].removeEventListener("scroll", updater);
+          }
+        }
+      }).bind(window.SmoothA);
+
+      window.SmoothA.bindHashUpdater = (function(scroller) {
+        if (scroller in hashUpdaters) {
+          window.unbindHashUpdater(scroller);
+        }
+
+        var updater = function() {
+          var scrollTop = getScrollerTop(scroller || "html, body");
+          var maxScroll = 0;
+          var newHash;
+
+          for (var aName in anchors) {
+            if (anchors.hasOwnProperty(aName) && anchors[aName].updatesHash) {
+              var aTop = anchors[aName].getTop();
+              if (aTop <= scrollTop && aTop >= maxScroll) {
+                newHash = aName;
+                maxScroll = aTop;
+              }
+            }
+          }
+
+          setHash(newHash);
+        };
+        hashUpdaters[scroller] = updater;
+
+        var elements = document.querySelectorAll(scroller);
+        for (var i = 0; i < elements.length; i++) {
+          elements[i].addEventListener("scroll", updater);
+        }
+      }).bind(window.SmoothA);
     }());
   </script>
 </dom-module>

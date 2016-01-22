@@ -2,7 +2,7 @@
 @license
 Copyright (C) 2015 Alexander Otavka.  All rights reserved.
 -->
-<!-- 
+<!--
 smooth-a.html
 
 @author Alexander Otavka (zotavka@gmail.com)
@@ -82,8 +82,8 @@ An anchor element that improves hash scrolling.
           console.log("goToTarget");
           var href = this.href.split("#");
           var target = anchors[href[1]];
-          if (href.length > 1 && 
-              window.location.href.split("#")[0] === href[0] && 
+          if (href.length > 1 &&
+              window.location.href.split("#")[0] === href[0] &&
               target !== undefined) {
             var targetTop = target.getTop();
             console.log("targetTop: " + targetTop);
@@ -102,12 +102,12 @@ An anchor element that improves hash scrolling.
           if (obj.offsetParent) {
             do {
               curtop += obj.offsetTop;
-            } while (obj = obj.offsetParent);
+            } while (obj = obj.offsetParent); // jshint ignore:line
             return curtop;
           }
         }
       });
-      
+
       SmoothA.updateHash = updateHash;
     }());
   </script>

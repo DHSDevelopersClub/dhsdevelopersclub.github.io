@@ -9,6 +9,10 @@ Custom CSS Properties:
 
 @author Alexander Otavka (zotavka@gmail.com)
 -->
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../responsive-img/responsive-img.html">
+
 <dom-module id="fullbleed-image">
   <style>
     :host {
@@ -30,11 +34,7 @@ Custom CSS Properties:
     }
 
     #imageContent {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      @apply(--layout-fit);
       z-index: 2;
       text-align: center;
       cursor: default;
@@ -50,11 +50,15 @@ Custom CSS Properties:
       font-weight: 300;
       font-size: 2.8rem;
       text-shadow: 1px 1px 2px black;
+      padding: 30px;
     }
   </style>
 
   <template>
-    <img src="{{uri}}">
+    <img is="responsive-img"
+      base-src="{{src}}"
+      max-width="{{maxWidth}}"
+      max-height="{{maxHeight}}">
     <div id="imageContent">
       <div id="imageTitle">
         <content select=".image-title"></content>
@@ -68,7 +72,17 @@ Custom CSS Properties:
       is: 'fullbleed-image',
 
       properties: {
-        uri: String
+        src: String,
+
+        maxWidth: {
+          type: String,
+          value: "100vw"
+        },
+        
+        maxHeight: {
+          type: String,
+          value: "100vh"
+        }
       }
     });
   </script>
