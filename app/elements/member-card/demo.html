@@ -2,17 +2,26 @@
 
 <html>
 <head>
-  <title>User Card Test</title>
+  <title>Member Card Demo</title>
+
+  <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
   <link rel="import" href="member-card.html">
 
-  <style type="text/css">
+  <style is="custom-style">
     body {
       font-family: 'Helvetica', sans-serif;
+      background-color: white;
+    }
+
+    member-card[name=Duncan_Grubbs] {
+      --card-background: #bef;
     }
   </style>
 </head>
 <body>
-  <member-card name="Zander Otavka"></member-card>
-  <member-card name="Foo McBar"></member-card>
+  <span id="browser-sync-binding"></span>
+  <member-card name="Zander_Otavka"></member-card>
+  <member-card name="Duncan_Grubbs"></member-card>
+  <member-card name="Foo_O'Bar"></member-card>
 </body>
 </html>
