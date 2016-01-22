@@ -10,7 +10,7 @@ window.ROSTER_METADATA = {
     readableName: "Connor Heffernan",
     blurb: "I have little experience with Coding and am a History Nerd\n",
     config: {
-      uri: "NachosPug.github.io"
+      uri: "http://NachosPug.github.io"
     }
   },
   Duncan_Grubbs: {
@@ -78,9 +78,9 @@ window.ROSTER_METADATA = {
   },
   Miles_Krick: {
     readableName: "Miles Krick",
-    blurb: "I am new at coding and a Nintendo nerd.\n",
+    blurb: "I am new at coding and a Nintendo nerd. \"My Body is Ready.\"- Reggie\n",
     config: {
-      uri: "Pierocket.github.io"
+      uri: "http://Pierocket.github.io"
     }
   },
   Noah_Marty: {
