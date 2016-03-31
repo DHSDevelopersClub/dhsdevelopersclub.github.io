@@ -47,10 +47,13 @@ Custom CSS Properties:
   <script>
     Polymer({
       is: "nav-links",
+
       behaviors: [
         Polymer.IronOverlayBehavior
       ],
-      properties: {
+
+      ready: function () {
+        this._mediaChanged();
       },
 
       created: function() {
