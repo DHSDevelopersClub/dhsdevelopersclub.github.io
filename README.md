@@ -1,6 +1,6 @@
 # Drake Developers Club
 
-This is the repository for the Drake Developers Club website.  We are a club at Drake High School that focuses on spreading knowledge and passion for software development and coding.  Contact us at <leadership@dhsdevelopers.org>, or come to a meeting during lunch on Wednesdays in room 107.
+This is the repository for the Drake Developers Club website.  We are a club at Drake High School that focuses on spreading knowledge and passion for software development and coding.  Contact us at <leadership@dhsdevelopers.org>, or come to a meeting during lunch on Wednesdays in room 127.
 
 ## New Member Instructions
 
@@ -55,7 +55,7 @@ See [this article](https://help.github.com/desktop/guides/contributing/creating-
 #### Using Terminal/CMD
 Run `cd dhsdevelopersclub.github.io` to open the folder where your fork lives.  Then, run `git checkout -b my-webpage-start`.  This will create a new branch called `my-webpage-start` and "checkout" that branch.  When you have a branch checked out, changes you make will be saved to that branch.
 
-If you are confused about what a branch is, feel free to ask in #general in slack, someone will probably notice and explain it.  To be extra sure your question gets noticed, you can mention @zander.  He knows a lot about git and would be happy to help you understand it.  He is also the coolest README.md file writer in the whole world ;D.
+If you are confused about what a branch is, feel free to ask in #general in slack, someone will probably notice and explain it.  To be extra sure your question gets noticed, you can mention @zander.
 
 ### Step 5: Make Your Very Own Folder
 
