@@ -1,6 +1,6 @@
 # Drake Developers Club
 
-This is the repository for the Drake Developers Club website.  We are a club at Drake High School that focuses on spreading knowledge and passion for software development and coding.  Contact us at <leadership@dhsdevelopers.org>, or come to a meeting during lunch on Wednesdays in room 107.
+This is the repository for the Drake Developers Club website.  We are a club at Drake High School that focuses on spreading knowledge and passion for software development and coding.  Contact us at <leadership@dhsdevelopers.org>, or come to a meeting during lunch on Wednesdays in room 127.
 
 ## New Member Instructions
 
