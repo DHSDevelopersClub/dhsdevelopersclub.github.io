@@ -55,7 +55,7 @@ See [this article](https://help.github.com/desktop/guides/contributing/creating-
 #### Using Terminal/CMD
 Run `cd dhsdevelopersclub.github.io` to open the folder where your fork lives.  Then, run `git checkout -b my-webpage-start`.  This will create a new branch called `my-webpage-start` and "checkout" that branch.  When you have a branch checked out, changes you make will be saved to that branch.
 
-If you are confused about what a branch is, feel free to ask in #general in slack, someone will probably notice and explain it.  To be extra sure your question gets noticed, you can mention @zander.
+If you are confused about what a branch is, feel free to ask in #help in slack, someone will probably notice and explain it.  To be extra sure your question gets answered, you can include a mention to @channel.
 
 ### Step 5: Make Your Very Own Folder
 
@@ -160,7 +160,7 @@ If you've gotten this far, you've done most of the hard work already.  Making mo
 5. [Commit your changes.](#step-10-commit-your-changes)  You can make more than one commit before making a pull request.  If you are making a lot of changes, you should split them up into smaller commits.
 6. [Make a pull request.](#step-11-submit-a-pull-request)  Once you have opened the pull request, you can still make commits in that branch.  If you `git push` them, they will become part of the pull request as well.
 
-Try to not make too many pull requests; the website admins (Zander, Sebastian, and Max) have to manually test and deploy them.  It's much easier for them if you make a lot of changes on your fork, then bundle them up into one big pull request.  Thanks in advance.
+Try to not make too many pull requests; the website admins (Sebastian, and Max) have to manually test and deploy them.  It's much easier for them if you make a lot of changes on your fork, then bundle them up into one big pull request.  Thanks in advance.
 
 ### Step 14: Edit the README.md File
 
@@ -184,7 +184,7 @@ You can add a `config.json` to your folder in roster to redirect to a custom hom
 
 ## Adding Resource Cards to the Learn Page
 
-The Learn page is loaded from `app/pages/learn.html`.  If you know of any online tutorials, reference materials or other helpful resources for a specific language, you are more than welcome to add them.  If the language in question isn't listed, feel free to add a section for it before adding your resource.  The code in learn.html is pretty self-explanatory, but if you're confused, don't hesitate to message @zander on slack in #help.
+The Learn page is loaded from `app/pages/learn.html`.  If you know of any online tutorials, reference materials or other helpful resources for a specific language, you are more than welcome to add them.  If the language in question isn't listed, feel free to add a section for it before adding your resource.  The code in learn.html is pretty self-explanatory, but if you're confused, don't hesitate to message @channel on slack in #help.
 
 You can also add yourself as a resource, using a `<member-card>` element.  Again, there is example code in learn.html, but you can just insert `<member-card name="Your_Name"></member-card>` into the `<card-carousel>`.
 
