@@ -1,2 +1,0 @@
-Luke is a young programmer looking to further develop his knowledge in Java,
-web languages, and the command line.   

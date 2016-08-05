@@ -1,1 +1,0 @@
-Zander is the Vice President of the Club.  He is experienced in Java, Python, C++, and Web Languages.
