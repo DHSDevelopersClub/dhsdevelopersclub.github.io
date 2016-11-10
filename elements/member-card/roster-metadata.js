@@ -6,6 +6,20 @@ window.ROSTER_METADATA = {
       uri: "/roster/Abigail_Virgo"
     }
   },
+  Caleb_Krick: {
+    readableName: "Caleb Krick",
+    blurb: null,
+    config: {
+      uri: "/roster/Caleb_Krick"
+    }
+  },
+  Carson_Cox: {
+    readableName: "Carson Cox",
+    blurb: null,
+    config: {
+      uri: "/roster/Carson_Cox"
+    }
+  },
   Connor_Heffernan: {
     readableName: "Connor Heffernan",
     blurb: "I have little experience with Coding and am a History Nerd\n",
@@ -88,6 +102,20 @@ window.ROSTER_METADATA = {
     blurb: "Noah Marty is not very good a coding, but aspires to be better. What he lacks in skill, he makes up for in swag.\n",
     config: {
       uri: "/roster/Noah_Marty"
+    }
+  },
+  Reed_Martel: {
+    readableName: "Reed Martel",
+    blurb: null,
+    config: {
+      uri: "/roster/Reed_Martel"
+    }
+  },
+  Sasa_Pilchta: {
+    readableName: "Sasa Pilchta",
+    blurb: null,
+    config: {
+      uri: "/roster/Sasa_Pilchta"
     }
   },
   Sebastian_Boyd: {
