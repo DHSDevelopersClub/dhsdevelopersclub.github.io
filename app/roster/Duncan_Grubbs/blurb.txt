@@ -1,0 +1,2 @@
+Duncan is an aspiring programmer with knowledge in Java, Python
+and web languages.

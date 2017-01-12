@@ -1,0 +1,95 @@
+<!--
+@license
+Copyright (C) 2015 Drake Developers Club.  All rights reserved.
+-->
+<!--
+@author Alexander Otavka (zotavka@gmail.com)
+-->
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../content-card/content-card.html">
+<link rel="import" href="../responsive-img/responsive-img.html">
+<script src="roster-metadata.js"></script>
+
+<dom-module id="member-card">
+  <style>
+    :host {
+      display: inline-block;
+    }
+  </style>
+
+  <template>
+    <a href="{{webpageURI}}">
+      <content-card>
+        <img is="responsive-img"
+          id="image"
+          class="card-image"
+          base-src="{{profileImageURI}}"
+          on-image-not-found="_useDefaultProfile">
+        <div class="card-title">{{readableName}}</div>
+        <div class="card-text">{{blurb}}</div>
+      </content-card>
+    </a>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'member-card',
+
+      properties: {
+        name: String,
+
+        readableName: {
+          type: String,
+          computed: '_getReadableName(name)'
+        },
+
+        profileImageURI: {
+          type: String,
+          computed: '_getProfileImageURI(name)'
+        },
+
+        webpageURI: {
+          type: String,
+          computed: '_getWebpageURI(name)'
+        },
+
+        blurb: {
+          type: String,
+          computed: "_getBlurb(name)"
+        }
+      },
+
+      _getReadableName: function(name) {
+        return (ROSTER_METADATA[name] && ROSTER_METADATA[name].readableName) ||
+               "Not Found";
+      },
+
+      _getProfileImageURI: function(name) {
+        return '/roster/' + name + '/profile.jpg';
+      },
+
+      _getWebpageURI: function(name) {
+        return ROSTER_METADATA[name] && ROSTER_METADATA[name].config.uri;
+      },
+
+      _getBlurb: function(name) {
+        if (ROSTER_METADATA[name]) {
+          var DEFAULT_BLURB = "A member of the Drake Developers Club.";
+          return ROSTER_METADATA[name].blurb || DEFAULT_BLURB;
+        } else {
+          return "Member of name '" + name + "' was not found.  Make sure " +
+                 "their name was spelled correctly.";
+        }
+      },
+
+      _useDefaultProfile: function(event) {
+        var DEFAULT_PROFILE = "/images/default-profile.jpg";
+        if (event.detail.absolutePath !== DEFAULT_PROFILE) {
+          this.$.image.baseSrc = DEFAULT_PROFILE;
+        }
+      }
+    });
+  </script>
+</dom-module>
